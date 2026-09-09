@@ -1,88 +1,108 @@
 @import "tailwindcss";
 
+/* ============================================================
+   CareerPilot Design System
+   Philosophy:
+   - Neutral-first product UI
+   - One distinctive brand color
+   - Semantic colors only when they communicate meaning
+   - Works naturally in both light and dark themes
+   ============================================================ */
+
 :root {
-  /* ─────────────────────────────
+  /* ==========================================================
      Base
-  ───────────────────────────── */
+     ========================================================== */
 
-  --background: #f7f9fc;
-  --foreground: #101828;
+  --background: #f8fafc;
+  --foreground: #0f172a;
 
-  /* ─────────────────────────────
+  /* ==========================================================
      Brand
-     CareerPilot = direction + progress + opportunity
-  ───────────────────────────── */
+     CareerPilot = direction + clarity + progress
+     ========================================================== */
 
-  --primary: #3157d5;
-  --primary-hover: #2748b8;
+  --primary: #4f46e5;
+  --primary-hover: #4338ca;
   --primary-foreground: #ffffff;
 
-  --secondary: #101828;
-  --secondary-hover: #1d2939;
-  --secondary-foreground: #ffffff;
+  /* Used for dark/strong sections */
+  --secondary: #0f172a;
+  --secondary-hover: #1e293b;
+  --secondary-foreground: #f8fafc;
 
-  /* Intelligence / AI */
-  --ai: #6b5dd3;
-  --ai-hover: #594bbd;
+  /* ==========================================================
+     Semantic / Feature Colors
+
+     These should NOT dominate the interface.
+     They exist to communicate meaning.
+     ========================================================== */
+
+  /* AI / Intelligence */
+  --ai: #7c3aed;
+  --ai-hover: #6d28d9;
   --ai-foreground: #ffffff;
 
-  /* Career growth */
-  --growth: #168a7a;
-  --growth-hover: #117366;
+  /* Growth / Career progress */
+  --growth: #0f766e;
+  --growth-hover: #115e59;
   --growth-foreground: #ffffff;
 
-  /* Action / movement */
-  --accent: #e76f3c;
-  --accent-hover: #d45b2b;
+  /* Action / Movement */
+  --accent: #ea580c;
+  --accent-hover: #c2410c;
   --accent-foreground: #ffffff;
 
-  /* Opportunities / highlights */
-  --opportunity: #c99518;
-  --opportunity-foreground: #211900;
+  /* Opportunities / Highlights */
+  --opportunity: #b7791f;
+  --opportunity-foreground: #ffffff;
 
-  /* ─────────────────────────────
+  /* ==========================================================
      Surfaces
-  ───────────────────────────── */
+     ========================================================== */
 
   --surface: #ffffff;
-  --surface-hover: #f3f6fa;
-  --surface-muted: #eef2f7;
+  --surface-hover: #f8fafc;
+  --surface-muted: #f1f5f9;
 
-  /* ─────────────────────────────
+  /* ==========================================================
      Text
-  ───────────────────────────── */
+     ========================================================== */
 
-  --text-primary: #101828;
-  --text-secondary: #475467;
+  --text-primary: #0f172a;
+  --text-secondary: #475569;
 
-  --muted: #667085;
-  --muted-foreground: #98a2b3;
+  --muted: #64748b;
+  --muted-foreground: #94a3b8;
 
-  /* ─────────────────────────────
+  /* ==========================================================
      Borders
-  ───────────────────────────── */
+     ========================================================== */
 
-  --border: #e4e7ec;
-  --border-hover: #d0d5dd;
+  --border: #e2e8f0;
+  --border-hover: #cbd5e1;
 
-  /* ─────────────────────────────
+  /* ==========================================================
      Status
-  ───────────────────────────── */
+     ========================================================== */
 
-  --success: #12b76a;
-  --warning: #dc9b18;
-  --danger: #d92d20;
-  --info: #3157d5;
+  --success: #16a34a;
+  --warning: #d97706;
+  --danger: #dc2626;
+  --info: #4f46e5;
 }
 
-@theme inline {
-  /* ─────────────────────────────
-     Colors
-  ───────────────────────────── */
 
+/* ============================================================
+   Tailwind Theme
+   ============================================================ */
+
+@theme inline {
+  /* Base */
   --color-background: var(--background);
   --color-foreground: var(--foreground);
 
+  /* Brand */
   --color-primary: var(--primary);
   --color-primary-hover: var(--primary-hover);
   --color-primary-foreground: var(--primary-foreground);
@@ -91,6 +111,7 @@
   --color-secondary-hover: var(--secondary-hover);
   --color-secondary-foreground: var(--secondary-foreground);
 
+  /* Semantic */
   --color-ai: var(--ai);
   --color-ai-hover: var(--ai-hover);
   --color-ai-foreground: var(--ai-foreground);
@@ -106,99 +127,162 @@
   --color-opportunity: var(--opportunity);
   --color-opportunity-foreground: var(--opportunity-foreground);
 
+  /* Surfaces */
   --color-surface: var(--surface);
   --color-surface-hover: var(--surface-hover);
   --color-surface-muted: var(--surface-muted);
 
+  /* Text */
   --color-text-primary: var(--text-primary);
   --color-text-secondary: var(--text-secondary);
 
   --color-muted: var(--muted);
   --color-muted-foreground: var(--muted-foreground);
 
+  /* Borders */
   --color-border: var(--border);
   --color-border-hover: var(--border-hover);
 
+  /* Status */
   --color-success: var(--success);
   --color-warning: var(--warning);
   --color-danger: var(--danger);
   --color-info: var(--info);
 
-  /* ─────────────────────────────
-     Fonts
-  ───────────────────────────── */
-
+  /* Fonts */
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
 }
 
 
-/* ─────────────────────────────
+/* ============================================================
    Dark Theme
-   ───────────────────────────── */
+
+   Dark mode intentionally stays neutral.
+   We don't turn the entire UI purple/blue.
+   Brand color is reserved for interaction and emphasis.
+   ============================================================ */
 
 .dark {
-  --background: #0b1020;
-  --foreground: #f5f7fb;
+  /* Base */
+  --background: #09090b;
+  --foreground: #fafafa;
 
   /* Brand */
-  --primary: #6b8cff;
-  --primary-hover: #829dff;
+  --primary: #818cf8;
+  --primary-hover: #a5b4fc;
   --primary-foreground: #ffffff;
 
-  --secondary: #e8edf7;
+  --secondary: #f4f4f5;
   --secondary-hover: #ffffff;
-  --secondary-foreground: #0b1020;
+  --secondary-foreground: #09090b;
 
-  /* Intelligence / AI */
-  --ai: #9b8cf4;
-  --ai-hover: #b0a4ff;
+  /* Semantic */
+  --ai: #a78bfa;
+  --ai-hover: #c4b5fd;
   --ai-foreground: #ffffff;
 
-  /* Career growth */
-  --growth: #35b9a6;
-  --growth-hover: #4bcbb8;
-  --growth-foreground: #061c19;
+  --growth: #2dd4bf;
+  --growth-hover: #5eead4;
+  --growth-foreground: #042f2e;
 
-  /* Action / movement */
-  --accent: #f08a5b;
-  --accent-hover: #f49b73;
-  --accent-foreground: #261006;
+  --accent: #fb923c;
+  --accent-hover: #fdba74;
+  --accent-foreground: #431407;
 
-  /* Opportunities */
-  --opportunity: #e6b84a;
-  --opportunity-foreground: #241a04;
+  --opportunity: #fbbf24;
+  --opportunity-foreground: #422006;
 
   /* Surfaces */
-  --surface: #12192b;
-  --surface-hover: #192238;
-  --surface-muted: #151e31;
+  --surface: #111113;
+  --surface-hover: #18181b;
+  --surface-muted: #141416;
 
   /* Text */
-  --text-primary: #f5f7fb;
-  --text-secondary: #c5ccda;
+  --text-primary: #fafafa;
+  --text-secondary: #a1a1aa;
 
-  --muted: #98a2b3;
-  --muted-foreground: #667085;
+  --muted: #a1a1aa;
+  --muted-foreground: #71717a;
 
   /* Borders */
-  --border: #273149;
-  --border-hover: #34415e;
+  --border: #27272a;
+  --border-hover: #3f3f46;
 
   /* Status */
-  --success: #32d583;
-  --warning: #f2b94b;
-  --danger: #f97066;
-  --info: #6b8cff;
+  --success: #4ade80;
+  --warning: #fbbf24;
+  --danger: #f87171;
+  --info: #818cf8;
 }
 
 
-/* ─────────────────────────────
+/* ============================================================
    Global
-   ───────────────────────────── */
+   ============================================================ */
+
+html {
+  scroll-behavior: smooth;
+}
 
 body {
+  margin: 0;
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-geist-sans), Arial, Helvetica, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+
+/* ============================================================
+   Selection
+   ============================================================ */
+
+::selection {
+  background: var(--primary);
+  color: var(--primary-foreground);
+}
+
+
+/* ============================================================
+   Focus
+   ============================================================ */
+
+:focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: 2px;
+}
+
+
+/* ============================================================
+   Subtle CareerPilot grid
+   Used sparingly on marketing surfaces.
+   ============================================================ */
+
+.career-grid {
+  background-image:
+    linear-gradient(to right, color-mix(in srgb, var(--border) 45%, transparent) 1px, transparent 1px),
+    linear-gradient(to bottom, color-mix(in srgb, var(--border) 45%, transparent) 1px, transparent 1px);
+  background-size: 48px 48px;
+}
+
+
+/* ============================================================
+   Reduced Motion
+   ============================================================ */
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
 }
