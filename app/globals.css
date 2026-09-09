@@ -1,23 +1,201 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  /* ─────────────────────────────
+     Base
+  ───────────────────────────── */
+
+  --background: #f7f9fc;
+  --foreground: #101828;
+
+  /* ─────────────────────────────
+     Brand
+     CareerPilot = direction + progress + opportunity
+  ───────────────────────────── */
+
+  --primary: #3157d5;
+  --primary-hover: #2748b8;
+  --primary-foreground: #ffffff;
+
+  --secondary: #101828;
+  --secondary-hover: #1d2939;
+  --secondary-foreground: #ffffff;
+
+  /* Intelligence / AI */
+  --ai: #6b5dd3;
+  --ai-hover: #594bbd;
+  --ai-foreground: #ffffff;
+
+  /* Career growth */
+  --growth: #168a7a;
+  --growth-hover: #117366;
+  --growth-foreground: #ffffff;
+
+  /* Action / movement */
+  --accent: #e76f3c;
+  --accent-hover: #d45b2b;
+  --accent-foreground: #ffffff;
+
+  /* Opportunities / highlights */
+  --opportunity: #c99518;
+  --opportunity-foreground: #211900;
+
+  /* ─────────────────────────────
+     Surfaces
+  ───────────────────────────── */
+
+  --surface: #ffffff;
+  --surface-hover: #f3f6fa;
+  --surface-muted: #eef2f7;
+
+  /* ─────────────────────────────
+     Text
+  ───────────────────────────── */
+
+  --text-primary: #101828;
+  --text-secondary: #475467;
+
+  --muted: #667085;
+  --muted-foreground: #98a2b3;
+
+  /* ─────────────────────────────
+     Borders
+  ───────────────────────────── */
+
+  --border: #e4e7ec;
+  --border-hover: #d0d5dd;
+
+  /* ─────────────────────────────
+     Status
+  ───────────────────────────── */
+
+  --success: #12b76a;
+  --warning: #dc9b18;
+  --danger: #d92d20;
+  --info: #3157d5;
 }
 
 @theme inline {
+  /* ─────────────────────────────
+     Colors
+  ───────────────────────────── */
+
   --color-background: var(--background);
   --color-foreground: var(--foreground);
+
+  --color-primary: var(--primary);
+  --color-primary-hover: var(--primary-hover);
+  --color-primary-foreground: var(--primary-foreground);
+
+  --color-secondary: var(--secondary);
+  --color-secondary-hover: var(--secondary-hover);
+  --color-secondary-foreground: var(--secondary-foreground);
+
+  --color-ai: var(--ai);
+  --color-ai-hover: var(--ai-hover);
+  --color-ai-foreground: var(--ai-foreground);
+
+  --color-growth: var(--growth);
+  --color-growth-hover: var(--growth-hover);
+  --color-growth-foreground: var(--growth-foreground);
+
+  --color-accent: var(--accent);
+  --color-accent-hover: var(--accent-hover);
+  --color-accent-foreground: var(--accent-foreground);
+
+  --color-opportunity: var(--opportunity);
+  --color-opportunity-foreground: var(--opportunity-foreground);
+
+  --color-surface: var(--surface);
+  --color-surface-hover: var(--surface-hover);
+  --color-surface-muted: var(--surface-muted);
+
+  --color-text-primary: var(--text-primary);
+  --color-text-secondary: var(--text-secondary);
+
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+
+  --color-border: var(--border);
+  --color-border-hover: var(--border-hover);
+
+  --color-success: var(--success);
+  --color-warning: var(--warning);
+  --color-danger: var(--danger);
+  --color-info: var(--info);
+
+  /* ─────────────────────────────
+     Fonts
+  ───────────────────────────── */
+
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+
+/* ─────────────────────────────
+   Dark Theme
+   ───────────────────────────── */
+
+.dark {
+  --background: #0b1020;
+  --foreground: #f5f7fb;
+
+  /* Brand */
+  --primary: #6b8cff;
+  --primary-hover: #829dff;
+  --primary-foreground: #ffffff;
+
+  --secondary: #e8edf7;
+  --secondary-hover: #ffffff;
+  --secondary-foreground: #0b1020;
+
+  /* Intelligence / AI */
+  --ai: #9b8cf4;
+  --ai-hover: #b0a4ff;
+  --ai-foreground: #ffffff;
+
+  /* Career growth */
+  --growth: #35b9a6;
+  --growth-hover: #4bcbb8;
+  --growth-foreground: #061c19;
+
+  /* Action / movement */
+  --accent: #f08a5b;
+  --accent-hover: #f49b73;
+  --accent-foreground: #261006;
+
+  /* Opportunities */
+  --opportunity: #e6b84a;
+  --opportunity-foreground: #241a04;
+
+  /* Surfaces */
+  --surface: #12192b;
+  --surface-hover: #192238;
+  --surface-muted: #151e31;
+
+  /* Text */
+  --text-primary: #f5f7fb;
+  --text-secondary: #c5ccda;
+
+  --muted: #98a2b3;
+  --muted-foreground: #667085;
+
+  /* Borders */
+  --border: #273149;
+  --border-hover: #34415e;
+
+  /* Status */
+  --success: #32d583;
+  --warning: #f2b94b;
+  --danger: #f97066;
+  --info: #6b8cff;
 }
+
+
+/* ─────────────────────────────
+   Global
+   ───────────────────────────── */
 
 body {
   background: var(--background);
