@@ -1,5 +1,4 @@
-import React from "react";
-import Link from "next/link";
+import Hero from "@/components/landing/Hero/Hero";
 
 const features = [
   {
@@ -65,9 +64,7 @@ export default function LandingPage() {
   return (
     <main className="min-h-screen bg-background text-foreground">
 
-      {/* =====================================================
-          Hero
-          ===================================================== */}
+      <Hero/>
 
       <section className="relative overflow-hidden">
 
