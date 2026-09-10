@@ -2,11 +2,13 @@
 
 /* ============================================================
    CareerPilot Design System
+
    Philosophy:
-   - Neutral-first product UI
-   - One distinctive brand color
-   - Semantic colors only when they communicate meaning
-   - Works naturally in both light and dark themes
+   - Monochrome-first
+   - Premium and calm
+   - Brand = black / white
+   - Color communicates meaning
+   - Light and dark themes share the same visual language
    ============================================================ */
 
 :root {
@@ -14,28 +16,33 @@
      Base
      ========================================================== */
 
-  --background: #f8fafc;
-  --foreground: #0f172a;
+  --background: #fafafa;
+  --foreground: #111111;
 
   /* ==========================================================
      Brand
-     CareerPilot = direction + clarity + progress
+     
+     CareerPilot = clarity + direction + confidence
+     
+     Black is intentional.
+     It makes the product feel like a tool rather than
+     another colorful AI SaaS.
      ========================================================== */
 
-  --primary: #141212;
-  --primary-hover: #4338ca;
+  --primary: #111111;
+  --primary-hover: #2a2a2a;
   --primary-foreground: #ffffff;
 
-  /* Used for dark/strong sections */
-  --secondary: #0f172a;
-  --secondary-hover: #1e293b;
-  --secondary-foreground: #f8fafc;
+  --secondary: #18181b;
+  --secondary-hover: #27272a;
+  --secondary-foreground: #fafafa;
+
 
   /* ==========================================================
      Semantic / Feature Colors
 
-     These should NOT dominate the interface.
-     They exist to communicate meaning.
+     These are NOT brand colors.
+     They communicate meaning only.
      ========================================================== */
 
   /* AI / Intelligence */
@@ -57,30 +64,34 @@
   --opportunity: #b7791f;
   --opportunity-foreground: #ffffff;
 
+
   /* ==========================================================
      Surfaces
      ========================================================== */
 
   --surface: #ffffff;
-  --surface-hover: #f8fafc;
-  --surface-muted: #f1f5f9;
+  --surface-hover: #f7f7f7;
+  --surface-muted: #f4f4f5;
+
 
   /* ==========================================================
      Text
      ========================================================== */
 
-  --text-primary: #0f172a;
-  --text-secondary: #475569;
+  --text-primary: #111111;
+  --text-secondary: #525252;
 
-  --muted: #64748b;
-  --muted-foreground: #94a3b8;
+  --muted: #737373;
+  --muted-foreground: #a3a3a3;
+
 
   /* ==========================================================
      Borders
      ========================================================== */
 
-  --border: #e2e8f0;
-  --border-hover: #cbd5e1;
+  --border: #e5e5e5;
+  --border-hover: #d4d4d4;
+
 
   /* ==========================================================
      Status
@@ -89,7 +100,7 @@
   --success: #16a34a;
   --warning: #d97706;
   --danger: #dc2626;
-  --info: #4f46e5;
+  --info: #525252;
 }
 
 
@@ -99,10 +110,13 @@
 
 @theme inline {
   /* Base */
+
   --color-background: var(--background);
   --color-foreground: var(--foreground);
 
+
   /* Brand */
+
   --color-primary: var(--primary);
   --color-primary-hover: var(--primary-hover);
   --color-primary-foreground: var(--primary-foreground);
@@ -111,7 +125,9 @@
   --color-secondary-hover: var(--secondary-hover);
   --color-secondary-foreground: var(--secondary-foreground);
 
+
   /* Semantic */
+
   --color-ai: var(--ai);
   --color-ai-hover: var(--ai-hover);
   --color-ai-foreground: var(--ai-foreground);
@@ -127,93 +143,131 @@
   --color-opportunity: var(--opportunity);
   --color-opportunity-foreground: var(--opportunity-foreground);
 
+
   /* Surfaces */
+
   --color-surface: var(--surface);
   --color-surface-hover: var(--surface-hover);
   --color-surface-muted: var(--surface-muted);
 
+
   /* Text */
+
   --color-text-primary: var(--text-primary);
   --color-text-secondary: var(--text-secondary);
 
   --color-muted: var(--muted);
   --color-muted-foreground: var(--muted-foreground);
 
+
   /* Borders */
+
   --color-border: var(--border);
   --color-border-hover: var(--border-hover);
 
+
   /* Status */
+
   --color-success: var(--success);
   --color-warning: var(--warning);
   --color-danger: var(--danger);
   --color-info: var(--info);
 
+
   /* Fonts */
+
   --font-sans: var(--font-geist-sans);
+  --font-serif: var(--font-instrument-serif);
   --font-mono: var(--font-geist-mono);
 }
 
 
 /* ============================================================
    Dark Theme
-
-   Dark mode intentionally stays neutral.
-   We don't turn the entire UI purple/blue.
-   Brand color is reserved for interaction and emphasis.
    ============================================================ */
 
 .dark {
-  /* Base */
-  --background: #09090b;
+  /* ==========================================================
+     Base
+     ========================================================== */
+
+  --background: #0a0a0a;
   --foreground: #fafafa;
 
-  /* Brand */
-  --primary: #818cf8;
-  --primary-hover: #a5b4fc;
-  --primary-foreground: #ffffff;
 
-  --secondary: #f4f4f5;
-  --secondary-hover: #ffffff;
-  --secondary-foreground: #09090b;
+  /* ==========================================================
+     Brand
+     ========================================================== */
 
-  /* Semantic */
+  --primary: #fafafa;
+  --primary-hover: #e4e4e7;
+  --primary-foreground: #0a0a0a;
+
+  --secondary: #18181b;
+  --secondary-hover: #27272a;
+  --secondary-foreground: #fafafa;
+
+
+  /* ==========================================================
+     Semantic
+     ========================================================== */
+
+  /* AI */
   --ai: #a78bfa;
   --ai-hover: #c4b5fd;
   --ai-foreground: #ffffff;
 
+  /* Growth */
   --growth: #2dd4bf;
   --growth-hover: #5eead4;
   --growth-foreground: #042f2e;
 
+  /* Action */
   --accent: #fb923c;
   --accent-hover: #fdba74;
   --accent-foreground: #431407;
 
+  /* Opportunities */
   --opportunity: #fbbf24;
   --opportunity-foreground: #422006;
 
-  /* Surfaces */
-  --surface: #111113;
-  --surface-hover: #18181b;
-  --surface-muted: #141416;
 
-  /* Text */
+  /* ==========================================================
+     Surfaces
+     ========================================================== */
+
+  --surface: #111111;
+  --surface-hover: #18181b;
+  --surface-muted: #141414;
+
+
+  /* ==========================================================
+     Text
+     ========================================================== */
+
   --text-primary: #fafafa;
   --text-secondary: #a1a1aa;
 
   --muted: #a1a1aa;
   --muted-foreground: #71717a;
 
-  /* Borders */
+
+  /* ==========================================================
+     Borders
+     ========================================================== */
+
   --border: #27272a;
   --border-hover: #3f3f46;
 
-  /* Status */
+
+  /* ==========================================================
+     Status
+     ========================================================== */
+
   --success: #4ade80;
   --warning: #fbbf24;
   --danger: #f87171;
-  --info: #818cf8;
+  --info: #a1a1aa;
 }
 
 
@@ -229,7 +283,13 @@ body {
   margin: 0;
   background: var(--background);
   color: var(--foreground);
-  font-family: var(--font-geist-sans), Arial, Helvetica, sans-serif;
+
+  font-family:
+    var(--font-geist-sans),
+    Arial,
+    Helvetica,
+    sans-serif;
+
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
 }
@@ -256,14 +316,22 @@ body {
 
 
 /* ============================================================
-   Subtle CareerPilot grid
-   Used sparingly on marketing surfaces.
+   Subtle CareerPilot Grid
    ============================================================ */
 
 .career-grid {
   background-image:
-    linear-gradient(to right, color-mix(in srgb, var(--border) 45%, transparent) 1px, transparent 1px),
-    linear-gradient(to bottom, color-mix(in srgb, var(--border) 45%, transparent) 1px, transparent 1px);
+    linear-gradient(
+      to right,
+      color-mix(in srgb, var(--border) 45%, transparent) 1px,
+      transparent 1px
+    ),
+    linear-gradient(
+      to bottom,
+      color-mix(in srgb, var(--border) 45%, transparent) 1px,
+      transparent 1px
+    );
+
   background-size: 48px 48px;
 }
 

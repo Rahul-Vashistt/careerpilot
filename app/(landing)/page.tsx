@@ -64,7 +64,7 @@ export default function LandingPage() {
   return (
     <main className="min-h-screen bg-background text-foreground">
 
-      <Hero/>
+      <Hero />
 
       <section className="relative overflow-hidden">
 
