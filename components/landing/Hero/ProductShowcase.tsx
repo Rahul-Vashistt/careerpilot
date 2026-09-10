@@ -1,8 +1,7 @@
 export default function ProductShowcase() {
   return (
-    <section
-      id="product"
-      className="mx-auto max-w-7xl scroll-mt-20 px-6 pb-28 lg:px-8"
+    <div
+      className="scroll-mt-20 w-full"
     >
       <div className="overflow-hidden rounded-2xl border border-border bg-surface shadow-[0_30px_80px_-30px_rgba(0,0,0,0.25)]">
         {/* Browser header */}
@@ -107,7 +106,7 @@ export default function ProductShowcase() {
                     </p>
 
                     {index === 2 && (
-                      <span className="rounded-md bg-success/10 px-2 py-1 text-[10px] font-medium text-success">
+                      <span className="rounded-md bg-success/10 px-2 py-1 text-[10px] font-medium text-success 2xl:translate-x-0 translate-x-3 ">
                         +2 this month
                       </span>
                     )}
@@ -179,6 +178,6 @@ export default function ProductShowcase() {
           </div>
         </div>
       </div>
-    </section>
+    </div>
   );
 }

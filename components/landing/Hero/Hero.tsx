@@ -12,7 +12,7 @@ export default function Hero() {
 
       <div className="pointer-events-none absolute left-[42%] top-20 -z-10 h-125 w-125 -translate-x-1/2 rounded-full bg-primary/5 blur-3xl" />
 
-      <div className="mx-auto grid max-w-[90%] items-center gap-12 px-6 pb-24 pt-20 xl:grid-cols-[0.95fr_1.05fr] justify-center xl:px-8 xl:pb-32 xl:pt-28">
+      <div className="mx-auto grid max-w-[90%] items-center gap-12 px-6 pb-24 pt-20 xl:grid-cols-[0.90fr_1.10fr] justify-center xl:px-8 xl:pb-32 xl:pt-28">
         {/* Left */}
         <div className="max-w-2xl">
           {/* Eyebrow */}
@@ -36,7 +36,7 @@ export default function Hero() {
           {/* Description */}
           <p className="mt-7 max-w-xl text-lg leading-8 text-muted sm:text-xl">
             Discover opportunities, tailor your applications, track your
-            progress, and prepare for interviews — all from one intelligent
+            progress, and prepare for interviews — all from one
             career workspace.
           </p>
 
@@ -77,7 +77,7 @@ export default function Hero() {
         </div>
 
         {/* Right — Product */}
-        <div className="relative xl:translate-x-4 min-w-4xl">
+        <div className="relative xl:translate-x-4 min-w-0">
           <ProductShowcase />
         </div>
       </div>
