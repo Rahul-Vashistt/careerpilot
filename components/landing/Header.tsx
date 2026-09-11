@@ -1,33 +1,34 @@
-import Link from "next/link";
+const navItems = [
+  { label: "Problem", href: "#problem"},
+  { label: "Features", href: "#features" },
+  { label: "How it works", href: "#how-it-works" },
+];
 
-const Header = () => {
+export default function Header() {
+  
   return (
     <header className="sticky top-0 z-50 border-b border-border/70 bg-background/80 backdrop-blur-xl">
       <div className="mx-auto flex h-16 max-w-[96%] items-center justify-between px-6 lg:px-8">
-        <Link
-          href="/"
-          className="flex items-center gap-2 font-semibold tracking-tight"
+         <a
+      href="#"
+      className="flex items-center gap-2 font-semibold tracking-tight"
+    >
+      <span className="font-geist text-2xl font-bold tracking-tighter">
+        CareerPilot
+      </span>
+    </a>
+
+    <nav className="hidden items-center gap-7 text-sm text-muted md:flex">
+      {navItems.map((item) => (
+        <a
+          key={item.href}
+          href={item.href}
+          className="text-text-secondary hover:text-text-primary transition-all duration-100 hover:font-semibold hover:tracking-wide"
         >
-          <span className="flex h-7 w-7 items-center justify-center rounded-lg bg-primary text-xs font-bold text-primary-foreground">
-            C
-          </span>
-
-          <span>CareerPilot</span>
-        </Link>
-
-        <nav className="hidden items-center gap-7 text-sm text-muted md:flex">
-          <a href="#features" className="transition hover:text-foreground">
-            Features
-          </a>
-
-          <a href="#how-it-works" className="transition hover:text-foreground">
-            How it works
-          </a>
-
-          <a href="#product" className="transition hover:text-foreground">
-            Product
-          </a>
-        </nav>
+          {item.label}
+        </a>
+      ))}
+    </nav>
 
         <div className="flex items-center gap-3">
           <a
@@ -47,6 +48,4 @@ const Header = () => {
       </div>
     </header>
   );
-};
-
-export default Header;
+}

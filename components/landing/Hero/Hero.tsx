@@ -1,6 +1,7 @@
 import ProductShowcase from "./ProductShowcase";
 
 import { GoArrowRight } from "react-icons/go";
+import { FaGithub } from "react-icons/fa";
 
 import Link from "next/link";
 
@@ -36,18 +37,17 @@ export default function Hero() {
           {/* Description */}
           <p className="mt-7 max-w-xl text-lg leading-8 text-muted sm:text-xl">
             Discover opportunities, tailor your applications, track your
-            progress, and prepare for interviews — all from one
-            career workspace.
+            progress, and prepare for interviews — all from one career
+            workspace.
           </p>
 
-         {/* Actions */}
+          {/* Actions */}
           <div className="mt-9 flex flex-col flex-wrap items-center gap-3 lg:flex-row">
             <Link
               href="/sign-up"
               className="group inline-flex w-full items-center justify-center gap-1.5 rounded-md bg-primary px-5 py-3 text-center text-sm font-semibold text-primary-foreground shadow-sm transition-colors duration-300 hover:bg-primary-hover lg:w-auto lg:rounded-lg lg:py-3.5"
             >
               Get Started
-
               <span className="relative flex h-5 w-0 items-center overflow-hidden transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:w-5">
                 <GoArrowRight
                   className="
@@ -66,8 +66,11 @@ export default function Hero() {
               href="https://github.com/Rahul-Vashistt/careerpilot"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex w-full items-center justify-center rounded-md border border-border bg-surface px-5 py-3 text-center text-sm font-semibold text-foreground transition hover:border-border-hover hover:bg-surface-hover lg:w-auto lg:rounded-lg lg:py-3.5"
+              className="group inline-flex w-full items-center justify-center rounded-md border border-border bg-surface px-5 py-3 text-center text-sm font-semibold text-foreground transition hover:border-border-hover hover:bg-surface-hover lg:w-auto lg:rounded-lg lg:py-3.5"
             >
+              <span className="mr-0 flex w-0 -translate-x-2 overflow-hidden opacity-0 transition-all duration-300 group-hover:mr-2 group-hover:w-5 group-hover:translate-x-0 group-hover:opacity-100">
+                <FaGithub size={20} />
+              </span>
               View GitHub
             </a>
           </div>

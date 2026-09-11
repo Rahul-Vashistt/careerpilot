@@ -1,6 +1,7 @@
 export default function ProductShowcase() {
   return (
     <div
+      id="product"
       className="scroll-mt-20 w-full"
     >
       <div className="overflow-hidden rounded-2xl border border-border bg-surface shadow-[0_30px_80px_-30px_rgba(0,0,0,0.25)]">

@@ -5,7 +5,7 @@ export default function Features() {
     <>
       <section
         id="features"
-        className="scroll-mt-20 border-y border-border bg-surface"
+        className="scroll-mt-20 border-t border-border"
       >
         <div className="mx-auto max-w-7xl px-6 py-24 lg:px-8">
           <div className="max-w-2xl">
