@@ -37,7 +37,6 @@
   --secondary-hover: #27272a;
   --secondary-foreground: #fafafa;
 
-
   /* ==========================================================
      Semantic / Feature Colors
 
@@ -64,7 +63,6 @@
   --opportunity: #b7791f;
   --opportunity-foreground: #ffffff;
 
-
   /* ==========================================================
      Surfaces
      ========================================================== */
@@ -72,7 +70,6 @@
   --surface: #ffffff;
   --surface-hover: #f7f7f7;
   --surface-muted: #f4f4f5;
-
 
   /* ==========================================================
      Text
@@ -84,14 +81,12 @@
   --muted: #737373;
   --muted-foreground: #a3a3a3;
 
-
   /* ==========================================================
      Borders
      ========================================================== */
 
   --border: #e5e5e5;
   --border-hover: #d4d4d4;
-
 
   /* ==========================================================
      Status
@@ -101,8 +96,10 @@
   --warning: #d97706;
   --danger: #dc2626;
   --info: #525252;
-}
 
+  --disabled: #e5e5e5;
+  --disabled-foreground: #a3a3a3;
+}
 
 /* ============================================================
    Tailwind Theme
@@ -114,7 +111,6 @@
   --color-background: var(--background);
   --color-foreground: var(--foreground);
 
-
   /* Brand */
 
   --color-primary: var(--primary);
@@ -124,7 +120,6 @@
   --color-secondary: var(--secondary);
   --color-secondary-hover: var(--secondary-hover);
   --color-secondary-foreground: var(--secondary-foreground);
-
 
   /* Semantic */
 
@@ -143,13 +138,11 @@
   --color-opportunity: var(--opportunity);
   --color-opportunity-foreground: var(--opportunity-foreground);
 
-
   /* Surfaces */
 
   --color-surface: var(--surface);
   --color-surface-hover: var(--surface-hover);
   --color-surface-muted: var(--surface-muted);
-
 
   /* Text */
 
@@ -159,12 +152,10 @@
   --color-muted: var(--muted);
   --color-muted-foreground: var(--muted-foreground);
 
-
   /* Borders */
 
   --color-border: var(--border);
   --color-border-hover: var(--border-hover);
-
 
   /* Status */
 
@@ -173,6 +164,9 @@
   --color-danger: var(--danger);
   --color-info: var(--info);
 
+  /* disable */
+  --color-disabled: var(--disabled);
+  --color-disabled-foreground: var(--disabled-foreground);
 
   /* Fonts */
 
@@ -180,7 +174,6 @@
   --font-serif: var(--font-instrument-serif);
   --font-mono: var(--font-geist-mono);
 }
-
 
 /* ============================================================
    Dark Theme
@@ -194,7 +187,6 @@
   --background: #0a0a0a;
   --foreground: #fafafa;
 
-
   /* ==========================================================
      Brand
      ========================================================== */
@@ -206,7 +198,6 @@
   --secondary: #18181b;
   --secondary-hover: #27272a;
   --secondary-foreground: #fafafa;
-
 
   /* ==========================================================
      Semantic
@@ -231,7 +222,6 @@
   --opportunity: #fbbf24;
   --opportunity-foreground: #422006;
 
-
   /* ==========================================================
      Surfaces
      ========================================================== */
@@ -239,7 +229,6 @@
   --surface: #111111;
   --surface-hover: #18181b;
   --surface-muted: #141414;
-
 
   /* ==========================================================
      Text
@@ -251,14 +240,12 @@
   --muted: #a1a1aa;
   --muted-foreground: #71717a;
 
-
   /* ==========================================================
      Borders
      ========================================================== */
 
   --border: #27272a;
   --border-hover: #3f3f46;
-
 
   /* ==========================================================
      Status
@@ -268,8 +255,10 @@
   --warning: #fbbf24;
   --danger: #f87171;
   --info: #a1a1aa;
-}
 
+  --disabled: #27272a;
+  --disabled-foreground: #71717a;
+}
 
 /* ============================================================
    Global
@@ -284,16 +273,11 @@ body {
   background: var(--background);
   color: var(--foreground);
 
-  font-family:
-    var(--font-geist-sans),
-    Arial,
-    Helvetica,
-    sans-serif;
+  font-family: var(--font-geist-sans), Arial, Helvetica, sans-serif;
 
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
 }
-
 
 /* ============================================================
    Selection
@@ -303,14 +287,6 @@ body {
   background: var(--primary);
   color: var(--primary-foreground);
 }
-
-
-/* ============================================================
-   Focus
-   ============================================================ */
-
-
-
 
 /* ============================================================
    Subtle CareerPilot Grid
@@ -332,6 +308,15 @@ body {
   background-size: 48px 48px;
 }
 
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+  -webkit-text-fill-color: var(--text-primary);
+  -webkit-box-shadow: 0 0 0px 1000px var(--surface) inset;
+  box-shadow: 0 0 0px 1000px var(--surface) inset;
+  transition: background-color 5000s ease-in-out 0s;
+}
 
 /* ============================================================
    Reduced Motion
