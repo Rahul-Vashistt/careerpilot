@@ -31,56 +31,86 @@ function SignUp() {
   ];
 
   return (
-    <div className="min-h-screen flex bg-white">
-      {/* Left Side */}
-      <div className="hidden lg:flex w-1/2 min-h-screen bg-linear-to-br from-indigo-50 via-white to-indigo-200 px-12 py-10 flex-col">
-        {/* Logo */}
+    <div className="min-h-screen flex bg-background text-foreground">
+      <div
+        className="
+          hidden lg:flex
+          w-1/2 min-h-screen
+          px-12 py-10
+          flex-col
+          bg-linear-to-br
+          from-surface
+          via-surface-muted
+          to-border
+          dark:from-background
+          dark:via-surface
+          dark:to-surface-muted
+        "
+      >
         <div className="max-w-2xl mx-auto w-full">
-          <h1 className="text-2xl font-semibold tracking-tight text-gray-900 flex items-center">
+          <h1 className="text-2xl font-semibold tracking-tight text-text-primary flex items-center">
             <TbCircleLetterCFilled size={34} className="mr-1" />
             areerPilot
           </h1>
         </div>
 
-        {/* Main Content */}
         <div className="flex-1 max-w-2xl mx-auto w-full flex items-center">
           <div className="max-w-xl">
-            <span className="inline-flex items-center gap-2 mb-6 rounded-full bg-indigo-100 px-4 py-2 text-sm font-medium text-foreground">
-              <HiOutlineSparkles />
+            <span
+              className="
+                inline-flex items-center gap-2 mb-6
+                rounded-full
+                bg-surface
+                border border-border
+                px-4 py-2
+                text-sm font-medium
+                text-text-primary
+                shadow-sm
+              "
+            >
+              <HiOutlineSparkles className="text-primary" />
               Start your career journey
             </span>
 
-            {/* Heading */}
-            <h2 className="text-5xl font-instrument tracking-tight leading-[1.1] text-gray-900">
+            <h2 className="text-5xl font-instrument tracking-tight leading-[1.1] text-text-primary">
               Your next opportunity
             </h2>
 
-            <h2 className="mt-2 text-5xl font-semibold tracking-tight leading-[1.1] text-foreground">
+            <h2 className="mt-2 text-5xl font-semibold tracking-tight leading-[1.1] text-text-primary">
               starts here.
             </h2>
 
-            <p className="mt-6 text-lg leading-8 text-gray-600">
+            <p className="mt-6 text-lg leading-8 text-text-secondary">
               Create your CareerPilot account and bring your job search,
               applications, and career growth together in one place.
             </p>
 
-            {/* Features */}
             <div className="mt-10 space-y-6">
               {features.map((feature) => {
                 const Icon = feature.icon;
 
                 return (
                   <div key={feature.title} className="flex items-start gap-4">
-                    <div className="shrink-0 w-11 h-11 rounded-xl bg-indigo-100 border border-indigo-100 flex items-center justify-center shadow-sm">
-                      <Icon className="w-5 h-5 text-foreground" />
+                    <div
+                      className="
+                        shrink-0
+                        w-11 h-11
+                        rounded-xl
+                        bg-surface
+                        border border-border
+                        flex items-center justify-center
+                        shadow-sm
+                      "
+                    >
+                      <Icon className="w-5 h-5 text-text-primary" />
                     </div>
 
                     <div>
-                      <h3 className="text-base font-semibold text-gray-900">
+                      <h3 className="text-base font-semibold text-text-primary">
                         {feature.title}
                       </h3>
 
-                      <p className="mt-1 text-sm leading-6 text-gray-600">
+                      <p className="mt-1 text-sm leading-6 text-text-secondary">
                         {feature.description}
                       </p>
                     </div>
@@ -91,45 +121,43 @@ function SignUp() {
           </div>
         </div>
 
-        {/* Footer */}
         <div className="max-w-2xl mx-auto w-full">
-          <p className="text-sm text-gray-500">
+          <p className="text-sm text-muted">
             © 2026 CareerPilot. Build your career with confidence.
           </p>
         </div>
       </div>
 
-      {/* Right Side */}
-      <div className="w-full lg:w-1/2 min-h-screen flex items-center justify-center px-6 sm:px-12 py-10">
+      <div className="w-full lg:w-1/2 min-h-screen flex items-center justify-center px-6 sm:px-12 py-10 bg-background">
         <div className="w-full max-w-md">
-          {/* Logo */}
           <div className="flex items-center justify-center mb-9">
-            <TbCircleLetterCFilled size={32} />
-            <span className="text-xl font-semibold tracking-tight">
+            <TbCircleLetterCFilled
+              size={32}
+              className="text-text-primary"
+            />
+
+            <span className="text-xl font-semibold tracking-tight text-text-primary">
               areerPilot
             </span>
           </div>
 
-          {/* Heading */}
           <div className="mb-7">
-            <h1 className="text-3xl font-semibold tracking-tight text-gray-900">
+            <h1 className="text-3xl font-semibold tracking-tight text-text-primary">
               Create your account
             </h1>
 
-            <p className="mt-2 text-sm text-gray-500">
+            <p className="mt-2 text-sm text-text-secondary">
               Get started with CareerPilot in just a few steps.
             </p>
           </div>
 
-          {/* Form */}
           <form className="flex flex-col gap-4">
-            {/* Full Name */}
-            <label className="flex flex-col gap-2 text-sm font-medium text-gray-700">
+            <label className="flex flex-col gap-2 text-sm font-medium text-text-primary">
               Full name
 
               <div className="relative">
                 <FiUser
-                  className="absolute left-3 top-1/2 -translate-y-1/2 text-lg text-gray-800"
+                  className="absolute left-3 top-1/2 -translate-y-1/2 text-lg text-text-secondary"
                   aria-hidden="true"
                 />
 
@@ -138,18 +166,32 @@ function SignUp() {
                   name="name"
                   autoComplete="name"
                   placeholder="John Doe"
-                  className="w-full rounded-md border border-gray-300 bg-white py-2.5 pl-10 pr-4 text-sm text-gray-900 shadow-sm outline-none transition placeholder:text-gray-400"
+                  className="
+                    w-full
+                    rounded-md
+                    border border-border
+                    bg-surface
+                    py-2.5 pl-10 pr-4
+                    text-sm
+                    text-text-primary
+                    placeholder:text-muted-foreground
+                    shadow-sm
+                    outline-none
+                    transition
+                    focus:outline-none
+                    focus:ring-0
+                    focus:border-border-hover
+                  "
                 />
               </div>
             </label>
 
-            {/* Email */}
-            <label className="flex flex-col gap-2 text-sm font-medium text-gray-700">
+            <label className="flex flex-col gap-2 text-sm font-medium text-text-primary">
               Email address
 
               <div className="relative">
                 <CiMail
-                  className="absolute left-3 top-1/2 -translate-y-1/2 text-xl text-gray-800"
+                  className="absolute left-3 top-1/2 -translate-y-1/2 text-xl text-text-secondary"
                   aria-hidden="true"
                 />
 
@@ -158,18 +200,32 @@ function SignUp() {
                   name="email"
                   autoComplete="email"
                   placeholder="you@example.com"
-                  className="w-full rounded-md border border-gray-300 bg-white py-2.5 pl-10 pr-4 text-sm text-gray-900 shadow-sm outline-none transition placeholder:text-gray-400"
+                  className="
+                    w-full
+                    rounded-md
+                    border border-border
+                    bg-surface
+                    py-2.5 pl-10 pr-4
+                    text-sm
+                    text-text-primary
+                    placeholder:text-muted-foreground
+                    shadow-sm
+                    outline-none
+                    transition
+                    focus:outline-none
+                    focus:ring-0
+                    focus:border-border-hover
+                  "
                 />
               </div>
             </label>
 
-            {/* Password */}
-            <label className="flex flex-col gap-2 text-sm font-medium text-gray-700">
+            <label className="flex flex-col gap-2 text-sm font-medium text-text-primary">
               Password
 
               <div className="relative">
                 <FiLock
-                  className="absolute left-3 top-1/2 -translate-y-1/2 text-lg text-gray-500"
+                  className="absolute left-3 top-1/2 -translate-y-1/2 text-lg text-text-secondary"
                   aria-hidden="true"
                 />
 
@@ -178,12 +234,34 @@ function SignUp() {
                   name="password"
                   autoComplete="new-password"
                   placeholder="Create a password"
-                  className="w-full rounded-md border border-gray-300 bg-white py-2.5 pl-10 pr-10 text-sm text-gray-900 shadow-sm outline-none transition placeholder:text-gray-400"
+                  className="
+                    w-full
+                    rounded-md
+                    border border-border
+                    bg-surface
+                    py-2.5 pl-10 pr-10
+                    text-sm
+                    text-text-primary
+                    placeholder:text-muted-foreground
+                    shadow-sm
+                    outline-none
+                    transition
+                    focus:outline-none
+                    focus:ring-0
+                    focus:border-border-hover
+                  "
                 />
 
                 <button
                   type="button"
-                  className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 transition hover:text-gray-600"
+                  className="
+                    absolute right-3 top-1/2
+                    -translate-y-1/2
+                    text-muted
+                    transition
+                    hover:text-text-primary
+                    cursor-pointer
+                  "
                   aria-label="Show password"
                 >
                   <FiEye />
@@ -191,13 +269,12 @@ function SignUp() {
               </div>
             </label>
 
-            {/* Confirm Password */}
-            <label className="flex flex-col gap-2 text-sm font-medium text-gray-700">
+            <label className="flex flex-col gap-2 text-sm font-medium text-text-primary">
               Confirm password
 
               <div className="relative">
                 <FiLock
-                  className="absolute left-3 top-1/2 -translate-y-1/2 text-lg text-gray-500"
+                  className="absolute left-3 top-1/2 -translate-y-1/2 text-lg text-text-secondary"
                   aria-hidden="true"
                 />
 
@@ -206,12 +283,34 @@ function SignUp() {
                   name="confirmPassword"
                   autoComplete="new-password"
                   placeholder="Confirm your password"
-                  className="w-full rounded-md border border-gray-300 bg-white py-2.5 pl-10 pr-10 text-sm text-gray-900 shadow-sm outline-none transition placeholder:text-gray-400"
+                  className="
+                    w-full
+                    rounded-md
+                    border border-border
+                    bg-surface
+                    py-2.5 pl-10 pr-10
+                    text-sm
+                    text-text-primary
+                    placeholder:text-muted-foreground
+                    shadow-sm
+                    outline-none
+                    transition
+                    focus:outline-none
+                    focus:ring-0
+                    focus:border-border-hover
+                  "
                 />
 
                 <button
                   type="button"
-                  className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 transition hover:text-gray-600"
+                  className="
+                    absolute right-3 top-1/2
+                    -translate-y-1/2
+                    text-muted
+                    transition
+                    hover:text-text-primary
+                    cursor-pointer
+                  "
                   aria-label="Show password"
                 >
                   <FiEye />
@@ -219,26 +318,25 @@ function SignUp() {
               </div>
             </label>
 
-            {/* Terms */}
-            <label className="flex items-start gap-2 mt-1 text-sm text-gray-500 cursor-pointer">
+            <label className="flex items-start gap-2 mt-1 text-sm text-text-secondary cursor-pointer">
               <input
                 type="checkbox"
                 name="terms"
-                className="mt-0.5 h-4 w-4 rounded border-gray-300 accent-primary"
+                className="mt-0.5 h-4 w-4 rounded border-border accent-primary cursor-pointer"
               />
 
               <span>
                 I agree to the{" "}
                 <a
                   href="/terms"
-                  className="font-medium text-primary hover:underline"
+                  className="font-medium text-text-primary hover:underline"
                 >
                   Terms of Service
                 </a>{" "}
                 and{" "}
                 <a
                   href="/privacy"
-                  className="font-medium text-primary hover:underline"
+                  className="font-medium text-text-primary hover:underline"
                 >
                   Privacy Policy
                 </a>
@@ -246,10 +344,23 @@ function SignUp() {
               </span>
             </label>
 
-            {/* Create Account */}
             <button
               type="submit"
-              className="mt-2 flex w-full items-center justify-center gap-2 rounded-md bg-primary py-2.5 text-sm font-medium text-white shadow-sm transition hover:opacity-90 active:scale-[0.99] cursor-pointer"
+              className="
+                mt-2
+                flex w-full
+                items-center justify-center gap-2
+                rounded-md
+                bg-primary
+                py-2.5
+                text-sm font-medium
+                text-primary-foreground
+                shadow-sm
+                transition
+                hover:bg-primary-hover
+                active:scale-[0.99]
+                cursor-pointer
+              "
             >
               Create account
               <FiArrowRight />
@@ -257,26 +368,44 @@ function SignUp() {
           </form>
 
           <div className="my-6 flex items-center gap-4">
-            <div className="h-px flex-1 bg-gray-200" />
-            <span className="text-xs text-gray-400">OR</span>
-            <div className="h-px flex-1 bg-gray-200" />
+            <div className="h-px flex-1 bg-border" />
+
+            <span className="text-xs text-muted">
+              OR
+            </span>
+
+            <div className="h-px flex-1 bg-border" />
           </div>
 
-          {/* Google */}
           <button
             type="button"
-            className="flex w-full items-center justify-center gap-3 rounded-md border border-gray-300 bg-white py-2.5 text-sm font-medium text-gray-700 shadow-sm transition hover:bg-gray-50 cursor-pointer" 
+            className="
+              flex w-full
+              items-center justify-center gap-3
+              rounded-md
+              border border-border
+              bg-surface
+              py-2.5
+              text-sm font-medium
+              text-text-primary
+              shadow-sm
+              transition
+              hover:bg-surface-hover
+              cursor-pointer
+            "
           >
-            <span className="text-base font-bold">G</span>
+            <span className="text-base font-bold">
+              G
+            </span>
+
             Continue with Google
           </button>
 
-          {/* Sign In */}
-          <p className="mt-7 text-center text-sm text-gray-500">
+          <p className="mt-7 text-center text-sm text-muted">
             Already have an account?{" "}
             <a
               href="/sign-in"
-              className="font-medium text-primary hover:underline"
+              className="font-medium text-text-primary hover:underline"
             >
               Sign in
             </a>
