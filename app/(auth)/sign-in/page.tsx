@@ -30,37 +30,17 @@ function SignIn() {
   ];
 
   return (
-    <div className="min-h-screen flex bg-background text-foreground">
-    
-      <div
-        className="
-          hidden lg:flex
-          w-1/2 min-h-screen
-          px-12 py-10
-          flex-col
+    <div className="min-h-screen w-full flex items-center justify-center bg-background text-foreground px-4 sm:px-8 py-10 lg:py-12">
 
-          bg-linear-to-br
-          from-surface
-          via-surface-muted
-          to-border
-          
-          dark:from-background
-          dark:via-surface
-          dark:to-surface-muted
-        "
-      >
-      
-        <div className="max-w-2xl mx-auto w-full">
-          <h1 className="text-2xl font-semibold tracking-tight text-text-primary flex items-center">
-            <TbCircleLetterCFilled size={34} className="mr-1" />
-            areerPilot
-          </h1>
-        </div>
+      <div className="w-full max-w-6xl flex flex-col lg:flex-row items-center justify-center gap-8 lg:gap-10">
 
-    
-        <div className="flex-1 max-w-2xl mx-auto w-full flex items-center">
-          <div className="max-w-xl">
-           
+        <div className="hidden lg:flex lg:w-1/2 max-w-xl flex-col justify-between py-6 bg-background">
+          <div>
+            <h1 className="text-2xl font-semibold tracking-tight text-text-primary flex items-center mb-8">
+              <TbCircleLetterCFilled size={34} className="mr-1" />
+              areerPilot
+            </h1>
+
             <span
               className="
                 inline-flex items-center gap-2 mb-6
@@ -77,7 +57,6 @@ function SignIn() {
               Your career, on autopilot
             </span>
 
-          
             <h2 className="text-5xl font-instrument tracking-tight leading-[1.1] text-text-primary">
               Welcome back,
             </h2>
@@ -88,11 +67,10 @@ function SignIn() {
 
             <p className="mt-6 text-lg leading-8 text-text-secondary">
               Take control of your job search with tools designed to help you
-              stay organized, improve your profile, and move closer to your
-              next opportunity.
+              stay organized, improve your profile, and move closer to your next
+              opportunity.
             </p>
 
-          
             <div className="mt-10 space-y-6">
               {features.map((feature) => {
                 const Icon = feature.icon;
@@ -127,33 +105,20 @@ function SignIn() {
               })}
             </div>
           </div>
-        </div>
 
-     
-        <div className="max-w-2xl mx-auto w-full">
-          <p className="text-sm text-muted">
+          <p className="mt-10 text-sm text-muted">
             © 2026 CareerPilot. Build your career with confidence.
           </p>
         </div>
-      </div>
 
-     
- 
-    
-      <div className="w-full lg:w-1/2 min-h-screen flex items-center justify-center px-6 sm:px-12 py-10 bg-background">
-        <div className="w-full max-w-md">
-          <div className="flex items-center justify-center mb-10">
-            <TbCircleLetterCFilled
-              size={32}
-              className="text-text-primary"
-            />
-
+        <div className="w-full lg:w-1/2 max-w-lg py-6 bg-background">
+          <div className="flex items-center justify-center mb-8 lg:hidden">
+            <TbCircleLetterCFilled size={32} className="text-text-primary" />
             <span className="text-xl font-semibold tracking-tight text-text-primary">
               areerPilot
             </span>
           </div>
 
-         
           <div className="mb-8">
             <h1 className="text-3xl font-semibold tracking-tight text-text-primary">
               Sign in
@@ -164,12 +129,9 @@ function SignIn() {
             </p>
           </div>
 
-          {/* Form */}
           <form className="flex flex-col gap-5">
-            {/* Email */}
             <label className="flex flex-col gap-2 text-sm font-medium text-text-primary">
               Email address
-
               <div className="relative">
                 <CiMail
                   className="
@@ -177,6 +139,7 @@ function SignIn() {
                     -translate-y-1/2
                     text-xl
                     text-text-secondary
+                    pointer-events-none
                   "
                   aria-hidden="true"
                 />
@@ -198,7 +161,6 @@ function SignIn() {
                     shadow-sm
                     outline-none
                     transition
-
                     focus:outline-none
                     focus:ring-0
                     focus:border-border-hover
@@ -210,7 +172,6 @@ function SignIn() {
             {/* Password */}
             <label className="flex flex-col gap-2 text-sm font-medium text-text-primary">
               Password
-
               <div className="relative">
                 <FiLock
                   className="
@@ -218,6 +179,7 @@ function SignIn() {
                     -translate-y-1/2
                     text-lg
                     text-text-secondary
+                    pointer-events-none
                   "
                   aria-hidden="true"
                 />
@@ -239,7 +201,6 @@ function SignIn() {
                     shadow-sm
                     outline-none
                     transition
-
                     focus:outline-none
                     focus:ring-0
                     focus:border-border-hover
@@ -256,16 +217,15 @@ function SignIn() {
                     hover:text-text-primary
                     cursor-pointer
                   "
-                  aria-label="Show password"
+                  aria-label="Toggle password visibility"
                 >
                   <FiEye />
                 </button>
               </div>
             </label>
 
-           
             <div className="flex items-center justify-between">
-              <label className="flex items-center gap-2 text-sm text-text-secondary cursor-pointer">
+              <label className="flex items-center gap-2 text-sm text-text-secondary cursor-pointer select-none">
                 <input
                   type="checkbox"
                   name="remember"
@@ -277,7 +237,6 @@ function SignIn() {
                     cursor-pointer
                   "
                 />
-
                 Remember me
               </label>
 
@@ -317,18 +276,12 @@ function SignIn() {
             </button>
           </form>
 
-         
           <div className="my-7 flex items-center gap-4">
             <div className="h-px flex-1 bg-border" />
-
-            <span className="text-xs text-muted">
-              OR
-            </span>
-
+            <span className="text-xs text-muted">OR</span>
             <div className="h-px flex-1 bg-border" />
           </div>
 
-          {/* Google */}
           <button
             type="button"
             className="
@@ -346,14 +299,10 @@ function SignIn() {
               cursor-pointer
             "
           >
-            <span className="text-base font-bold">
-              G
-            </span>
-
+            <span className="text-base font-bold">G</span>
             Continue with Google
           </button>
 
-          {/* Sign Up */}
           <p className="mt-8 text-center text-sm text-muted">
             Don't have an account?{" "}
             <a
