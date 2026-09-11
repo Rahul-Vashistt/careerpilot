@@ -12,9 +12,9 @@ export default function Hero() {
 
       <div className="pointer-events-none absolute left-[42%] top-20 -z-10 h-125 w-125 -translate-x-1/2 rounded-full bg-primary/5 blur-3xl" />
 
-      <div className="mx-auto grid max-w-[90%] items-center gap-12 px-6 pb-24 pt-20 xl:grid-cols-[0.90fr_1.10fr] justify-center xl:px-8 xl:pb-32 xl:pt-28">
+      <div className="mx-auto grid max-w-[90%] items-center 2xl:gap-0 gap-10 px-6 pb-24 pt-20 xl:grid-cols-[0.95fr_1.05fr] justify-center xl:px-8 xl:pb-32 xl:pt-28">
         {/* Left */}
-        <div className="max-w-2xl">
+        <div className="max-w-2xl xl:mb-0 mb-20">
           {/* Eyebrow */}
           <div className="mb-7 inline-flex items-center gap-2 rounded-full border border-border bg-surface/80 px-3 py-1.5 text-sm text-muted shadow-sm backdrop-blur">
             <span className="h-1.5 w-1.5 rounded-full bg-success" />
@@ -22,7 +22,7 @@ export default function Hero() {
           </div>
 
           {/* Heading */}
-          <h1 className="text-5xl font-bold tracking-[-0.045em] text-foreground sm:text-6xl xl:text-[4.5rem] xl:leading-[0.98]">
+          <h1 className="text-5xl font-semibold tracking-[-0.045em] text-text-primary sm:text-6xl xl:text-[4.5rem] xl:leading-[0.98]">
             Your career has a direction.
             <span className="mt-2 block">
               Let{" "}
@@ -40,13 +40,14 @@ export default function Hero() {
             career workspace.
           </p>
 
-          {/* Actions */}
-          <div className="mt-9 flex flex-wrap items-center gap-3">
+         {/* Actions */}
+          <div className="mt-9 flex flex-col flex-wrap items-center gap-3 lg:flex-row">
             <Link
               href="/sign-up"
-              className="group inline-flex items-center gap-1.5 rounded-lg bg-primary px-5 py-3.5 text-sm font-semibold text-primary-foreground shadow-sm transition-colors duration-300 hover:bg-primary-hover"
+              className="group inline-flex w-full items-center justify-center gap-1.5 rounded-md bg-primary px-5 py-3 text-center text-sm font-semibold text-primary-foreground shadow-sm transition-colors duration-300 hover:bg-primary-hover lg:w-auto lg:rounded-lg lg:py-3.5"
             >
               Get Started
+
               <span className="relative flex h-5 w-0 items-center overflow-hidden transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:w-5">
                 <GoArrowRight
                   className="
@@ -65,7 +66,7 @@ export default function Hero() {
               href="https://github.com/Rahul-Vashistt/careerpilot"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center rounded-lg border border-border bg-surface px-5 py-3.5 text-sm font-semibold text-foreground transition hover:border-border-hover hover:bg-surface-hover"
+              className="inline-flex w-full items-center justify-center rounded-md border border-border bg-surface px-5 py-3 text-center text-sm font-semibold text-foreground transition hover:border-border-hover hover:bg-surface-hover lg:w-auto lg:rounded-lg lg:py-3.5"
             >
               View GitHub
             </a>
