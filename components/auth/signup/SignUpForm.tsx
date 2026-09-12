@@ -9,7 +9,6 @@ import {
   FiArrowRight,
   FiCheckCircle,
 } from "react-icons/fi";
-import { TbCircleLetterCFilled } from "react-icons/tb";
 import { CiMail } from "react-icons/ci";
 
 export default function SignUpForm() {

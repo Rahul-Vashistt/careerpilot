@@ -2,7 +2,6 @@
 
 import { useState } from "react";
 import { FiLock, FiEye, FiEyeOff, FiArrowRight } from "react-icons/fi";
-import { TbCircleLetterCFilled } from "react-icons/tb";
 import { CiMail } from "react-icons/ci";
 
 export default function SignInForm() {
