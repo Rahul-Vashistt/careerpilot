@@ -15,7 +15,7 @@ export default function ForgotPassword() {
     <div className="min-h-screen w-full flex items-center justify-center bg-background text-foreground px-4 sm:px-8 py-10 lg:py-12">
       <div className="w-full max-w-md">
         <div className="flex items-center justify-center mb-10">
-          <span className="text-2xl font-semibold tracking-tight text-text-primary">
+          <span className="text-2xl font-bold tracking-tighter text-text-primary font-geist">
             CareerPilot
           </span>
         </div>
@@ -28,12 +28,12 @@ export default function ForgotPassword() {
             </div>
 
             <h1 className="mt-5 text-2xl font-semibold tracking-tight text-text-primary">
-              Forgot your password?
+              Forgot your password ?
             </h1>
 
             <p className="mt-2 max-w-sm text-sm leading-6 text-text-secondary">
               No worries. Enter the email address associated with your account
-              and we'll help you reset your password.
+              and we&apos;ll help you reset your password.
             </p>
           </div>
 
