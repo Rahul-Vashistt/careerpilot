@@ -57,7 +57,7 @@ export default function SignInForm() {
                 name="email"
                 autoComplete="email"
                 placeholder="you@example.com"
-                className="w-full rounded-md border border-border bg-surface py-2.5 pl-10 pr-4 text-sm text-text-primary outline-none transition placeholder:text-muted-foreground focus:border-border-hover"
+                className="w-full rounded-md border border-border bg-surface py-2.5 pl-10 pr-4 text-sm text-text-primary outline-none transition duration-300 placeholder:text-muted-foreground hover:border-border-hover focus:border-border-hover focus:ring-2 ring-primary/10"
               />
             </div>
           </label>
@@ -77,7 +77,7 @@ export default function SignInForm() {
                 name="password"
                 autoComplete="current-password"
                 placeholder="Enter your password"
-                className="w-full rounded-md border border-border bg-surface py-2.5 pl-10 pr-10 text-sm text-text-primary outline-none transition placeholder:text-muted-foreground focus:border-border-hover"
+                className="w-full rounded-md border border-border bg-surface py-2.5 pl-10 pr-4 text-sm text-text-primary outline-none transition duration-300 placeholder:text-muted-foreground hover:border-border-hover focus:border-border-hover focus:ring-2 ring-primary/10"
               />
 
               <button
@@ -93,13 +93,30 @@ export default function SignInForm() {
 
           <div className="flex items-center justify-between">
             <label className="flex cursor-pointer select-none items-center gap-2 text-sm text-text-secondary">
-              <input
-                checked={rememberMe}
-                onChange={(e) => setRememberMe(e.target.checked)}
-                type="checkbox"
-                name="remember"
-                className="h-4 w-4 cursor-pointer rounded border-border accent-primary"
-              />
+              <span className="relative flex h-4 w-4 items-center justify-center">
+                <input
+                  checked={rememberMe}
+                  onChange={(e) => setRememberMe(e.target.checked)}
+                  type="checkbox"
+                  name="remember"
+                  className="peer absolute inset-0 h-4 w-4 cursor-pointer appearance-none rounded border border-border bg-surface transition-all duration-200 checked:border-primary checked:bg-primary focus:outline-none"
+                />
+
+                <svg
+                  viewBox="0 0 12 12"
+                  fill="none"
+                  className="pointer-events-none relative z-10 h-3 w-3 scale-50 opacity-0 transition-all duration-200 ease-out peer-checked:scale-100 peer-checked:opacity-100"
+                >
+                  <path
+                    d="M2.5 6L5 8.5L9.5 3.5"
+                    stroke="currentColor"
+                    strokeWidth="1.7"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    className="text-primary-foreground"
+                  />
+                </svg>
+              </span>
               Remember me
             </label>
 

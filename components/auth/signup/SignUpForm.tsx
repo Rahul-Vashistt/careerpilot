@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { useState } from "react";
 import {
   FiUser,
@@ -74,7 +75,7 @@ export default function SignUpForm() {
                 name="name"
                 autoComplete="name"
                 placeholder="John Doe"
-                className="w-full rounded-md border border-border bg-surface py-2.5 pl-10 pr-4 text-sm text-text-primary outline-none transition placeholder:text-muted-foreground focus:border-border-hover"
+                className="w-full rounded-md border border-border bg-surface py-2.5 pl-10 pr-4 text-sm text-text-primary outline-none transition placeholder:text-muted-foreground focus:border-border-hover duration-300 hover:border-border-hover focus:ring-2 ring-primary/10"
               />
             </div>
           </label>
@@ -93,7 +94,7 @@ export default function SignUpForm() {
                 name="email"
                 autoComplete="email"
                 placeholder="you@example.com"
-                className="w-full rounded-md border border-border bg-surface py-2.5 pl-10 pr-4 text-sm text-text-primary outline-none transition placeholder:text-muted-foreground focus:border-border-hover"
+                className="w-full rounded-md border border-border bg-surface py-2.5 pl-10 pr-4 text-sm text-text-primary outline-none transition placeholder:text-muted-foreground focus:border-border-hover duration-300 hover:border-border-hover focus:ring-2 ring-primary/10"
               />
             </div>
           </label>
@@ -112,7 +113,7 @@ export default function SignUpForm() {
                 name="password"
                 autoComplete="new-password"
                 placeholder="Create a password"
-                className="w-full rounded-md border border-border bg-surface py-2.5 pl-10 pr-10 text-sm text-text-primary outline-none transition placeholder:text-muted-foreground focus:border-border-hover"
+                className="w-full rounded-md border border-border bg-surface py-2.5 pl-10 pr-10 text-sm text-text-primary outline-none transition placeholder:text-muted-foreground focus:border-border-hover duration-300 hover:border-border-hover focus:ring-2 ring-primary/10"
               />
               <button
                 onClick={() => setShowPassword((prev) => !prev)}
@@ -142,29 +143,47 @@ export default function SignUpForm() {
             </div>
           </label>
 
-          <label className="mt-1 flex cursor-pointer select-none items-start gap-2 text-sm text-text-secondary">
-            <input
-              checked={termsAccepted}
-              onChange={(e) => setTermsAccepted(e.target.checked)}
-              type="checkbox"
-              name="terms"
-              className="mt-0.5 h-4 w-4 cursor-pointer rounded border-border accent-primary"
-            />
+          <label className="mt-5 flex cursor-pointer select-none items-start gap-2 text-sm text-text-secondary">
+            <span className="relative mt-0.5 flex h-4 w-4 shrink-0 items-center justify-center">
+              <input
+                checked={termsAccepted}
+                onChange={(e) => setTermsAccepted(e.target.checked)}
+                type="checkbox"
+                name="terms"
+                className="peer absolute inset-0 h-4 w-4 cursor-pointer appearance-none rounded border border-border bg-surface transition-all duration-200 checked:border-primary checked:bg-primary focus:outline-none"
+              />
+
+              <svg
+                viewBox="0 0 12 12"
+                fill="none"
+                className="pointer-events-none relative z-10 h-3 w-3 scale-50 opacity-0 transition-all duration-200 ease-out peer-checked:scale-100 peer-checked:opacity-100"
+              >
+                <path
+                  d="M2.5 6L5 8.5L9.5 3.5"
+                  stroke="currentColor"
+                  strokeWidth="1.7"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  className="text-primary-foreground"
+                />
+              </svg>
+            </span>
+
             <span>
               I agree to the{" "}
-              <a
+              <Link
                 href="/terms"
                 className="font-medium text-text-primary hover:underline"
               >
                 Terms of Service
-              </a>{" "}
+              </Link>{" "}
               and{" "}
-              <a
+              <Link
                 href="/privacy"
                 className="font-medium text-text-primary hover:underline"
               >
                 Privacy Policy
-              </a>
+              </Link>
               .
             </span>
           </label>
