@@ -1,9 +1,14 @@
+"use client";
+
+import { motion } from "motion/react";
+
 import ProductShowcase from "./ProductShowcase";
 
 import { GoArrowRight } from "react-icons/go";
 import { FaGithub } from "react-icons/fa";
 
 import Link from "next/link";
+import MagneticText from "@/components/Animation/TextAnimation";
 
 export default function Hero() {
   return (
@@ -17,32 +22,117 @@ export default function Hero() {
         {/* Left */}
         <div className="max-w-2xl xl:mb-0 mb-20">
           {/* Eyebrow */}
-          <div className="mb-7 inline-flex items-center gap-2 rounded-full border border-border bg-surface/80 px-3 py-1.5 text-sm text-muted shadow-sm backdrop-blur">
-            <span className="h-1.5 w-1.5 rounded-full bg-success" />
+          <motion.div
+            initial={{
+              opacity: 0,
+              filter: "blur(8px)",
+              y: 15,
+            }}
+            animate={{
+              opacity: 1,
+              filter: "blur(0px)",
+              y: 0,
+            }}
+            transition={{
+              duration: 0.7,
+              ease: [0.22, 1, 0.36, 1],
+            }}
+            className="mb-7 inline-flex items-center gap-2 rounded-full border border-border bg-surface/80 px-3 py-1.5 text-sm text-muted shadow-sm backdrop-blur"
+          >
+            <motion.span
+              initial={{
+                opacity: 0,
+                filter: "blur(8px)",
+                y: 15,
+              }}
+              animate={{
+                opacity: 1,
+                filter: "blur(0px)",
+                y: 0,
+              }}
+              transition={{
+                duration: 0.7,
+                ease: [0.22, 1, 0.36, 1],
+              }}
+
+              className="h-1.5 w-1.5 rounded-full bg-success"
+            />
             One workspace for your career
-          </div>
+          </motion.div>
 
           {/* Heading */}
-          <h1 className="text-5xl font-semibold tracking-[-0.045em] text-text-primary sm:text-6xl xl:text-[4.5rem] xl:leading-[0.98]">
+          <motion.h1
+            initial={{
+              opacity: 0,
+              filter: "blur(12px)",
+              y: 30,
+            }}
+            animate={{
+              opacity: 1,
+              filter: "blur(0px)",
+              y: 0,
+            }}
+            transition={{
+              duration: 0.9,
+              delay: 0.12,
+              ease: [0.22, 1, 0.36, 1],
+            }}
+            className="text-5xl font-semibold tracking-[-0.045em] text-text-primary sm:text-6xl xl:text-[4.5rem] xl:leading-[0.98]"
+          >
             Your career has a direction.
             <span className="mt-2 block">
               Let{" "}
-              <span className="font-serif font-normal text-[1.05em] italic text-primary">
-                CareerPilot
-              </span>{" "}
+              <MagneticText
+                text="CareerPilot"
+                className="font-serif font-normal text-[1.05em] italic text-primary cursor-default"
+              />{" "}
               guide it.
             </span>
-          </h1>
+          </motion.h1>
 
           {/* Description */}
-          <p className="mt-7 max-w-xl text-lg leading-8 text-muted sm:text-xl">
+          <motion.p
+            initial={{
+              opacity: 0,
+              filter: "blur(8px)",
+              y: 20,
+            }}
+            animate={{
+              opacity: 1,
+              filter: "blur(0px)",
+              y: 0,
+            }}
+            transition={{
+              duration: 0.8,
+              delay: 0.28,
+              ease: [0.22, 1, 0.36, 1],
+            }}
+            className="mt-7 max-w-xl text-lg leading-8 text-muted sm:text-xl"
+          >
             Discover opportunities, tailor your applications, track your
             progress, and prepare for interviews — all from one career
             workspace.
-          </p>
+          </motion.p>
 
           {/* Actions */}
-          <div className="mt-9 flex flex-col flex-wrap items-center gap-3 lg:flex-row">
+          <motion.div
+            initial={{
+              opacity: 0,
+              filter: "blur(8px)",
+              y: 18,
+            }}
+            animate={{
+              opacity: 1,
+              filter: "blur(0px)",
+              y: 0,
+            }}
+            transition={{
+              duration: 0.75,
+              delay: 0.42,
+              ease: [0.22, 1, 0.36, 1],
+            }}
+            className="mt-9 flex flex-col flex-wrap items-center gap-3 lg:flex-row"
+          >
             <Link
               href="/sign-up"
               className="group inline-flex w-full items-center justify-center gap-1.5 rounded-md bg-primary px-5 py-3 text-center text-sm font-semibold text-primary-foreground shadow-sm transition-colors duration-300 hover:bg-primary-hover lg:w-auto lg:rounded-lg lg:py-3.5"
@@ -73,17 +163,54 @@ export default function Hero() {
               </span>
               View GitHub
             </a>
-          </div>
+          </motion.div>
 
-          <p className="mt-4 text-xs text-muted-foreground">
+          {/* Tagline */}
+          <motion.p
+            initial={{
+              opacity: 0,
+              filter: "blur(6px)",
+              y: 10,
+            }}
+            animate={{
+              opacity: 1,
+              filter: "blur(0px)",
+              y: 0,
+            }}
+            transition={{
+              duration: 0.6,
+              delay: 0.58,
+              ease: "easeOut",
+            }}
+            className="mt-4 text-xs text-muted-foreground"
+          >
             From first application to next opportunity.
-          </p>
+          </motion.p>
         </div>
 
         {/* Right — Product */}
-        <div className="relative xl:translate-x-4 min-w-0">
+        <motion.div
+          initial={{
+            opacity: 0,
+            filter: "blur(14px)",
+            scale: 0.97,
+            x: 25,
+          }}
+          animate={{
+            opacity: 1,
+            filter: "blur(0px)",
+            scale: 1,
+            x: 0,
+          }}
+          transition={{
+            duration: 1.2,
+            delay: 0.35,
+            ease: [0.22, 1, 0.36, 1],
+          }}
+          className="relative xl:translate-x-4 min-w-0"
+        >
           <ProductShowcase />
-        </div>
+        </motion.div>
       </div>
     </section>
   );

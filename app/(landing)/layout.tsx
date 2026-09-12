@@ -1,18 +1,19 @@
-import Header from "@/components/landing/Header";
+"use client";
 
-export default function landingLayout({
+import ThemeToggle from "@/components/Theme/ThemeToggle";
+
+export default function LandingLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
-    
-    
+  return (
+    <>
+      <main>{children}</main>
 
-  return(
-    <div className="flex flex-col">
-      <Header/>
-             
-        <main>{children}</main>
-    </div>
-  )
+      <div className="fixed bottom-8 right-5 z-50">
+        <ThemeToggle />
+      </div>
+    </>
+  );
 }

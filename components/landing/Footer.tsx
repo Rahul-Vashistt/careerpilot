@@ -116,13 +116,13 @@ export default function Footer() {
         {/* Bottom */}
         <div className="flex flex-col gap-4 border-t border-border py-6 text-xs text-muted-foreground sm:flex-row sm:items-center sm:justify-between">
           <p>
-            © {new Date().getFullYear()} Rahul Vashistt. All rights reserved.
+            © {new Date().getFullYear()} CareerPilot. All rights reserved.
           </p>
 
           <div className="flex items-center gap-1">
             <span>Built with</span>
             <FaHeart size={10} className="mx-1" />
-            <span>React & Tailwind CSS</span>
+            <span>Next & Tailwind CSS</span>
           </div>
 
           <a

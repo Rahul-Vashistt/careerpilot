@@ -1,16 +1,5 @@
 @import "tailwindcss";
 
-/* ============================================================
-   CareerPilot Design System
-
-   Philosophy:
-   - Monochrome-first
-   - Premium and calm
-   - Brand = black / white
-   - Color communicates meaning
-   - Light and dark themes share the same visual language
-   ============================================================ */
-
 :root {
   /* ==========================================================
      Base
@@ -21,12 +10,6 @@
 
   /* ==========================================================
      Brand
-     
-     CareerPilot = clarity + direction + confidence
-     
-     Black is intentional.
-     It makes the product feel like a tool rather than
-     another colorful AI SaaS.
      ========================================================== */
 
   --primary: #111111;
@@ -37,12 +20,8 @@
   --secondary-hover: #27272a;
   --secondary-foreground: #fafafa;
 
-
   /* ==========================================================
-     Semantic / Feature Colors
-
-     These are NOT brand colors.
-     They communicate meaning only.
+     Feature Colors
      ========================================================== */
 
   /* AI / Intelligence */
@@ -64,7 +43,6 @@
   --opportunity: #b7791f;
   --opportunity-foreground: #ffffff;
 
-
   /* ==========================================================
      Surfaces
      ========================================================== */
@@ -72,7 +50,6 @@
   --surface: #ffffff;
   --surface-hover: #f7f7f7;
   --surface-muted: #f4f4f5;
-
 
   /* ==========================================================
      Text
@@ -84,14 +61,12 @@
   --muted: #737373;
   --muted-foreground: #a3a3a3;
 
-
   /* ==========================================================
      Borders
      ========================================================== */
 
   --border: #d4d4d4;
   --border-hover: #bcbcbc;
-
 
   /* ==========================================================
      Status
@@ -103,17 +78,11 @@
   --info: #525252;
 }
 
-
-/* ============================================================
-   Tailwind Theme
-   ============================================================ */
-
 @theme inline {
   /* Base */
 
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-
 
   /* Brand */
 
@@ -124,7 +93,6 @@
   --color-secondary: var(--secondary);
   --color-secondary-hover: var(--secondary-hover);
   --color-secondary-foreground: var(--secondary-foreground);
-
 
   /* Semantic */
 
@@ -143,13 +111,11 @@
   --color-opportunity: var(--opportunity);
   --color-opportunity-foreground: var(--opportunity-foreground);
 
-
   /* Surfaces */
 
   --color-surface: var(--surface);
   --color-surface-hover: var(--surface-hover);
   --color-surface-muted: var(--surface-muted);
-
 
   /* Text */
 
@@ -159,12 +125,10 @@
   --color-muted: var(--muted);
   --color-muted-foreground: var(--muted-foreground);
 
-
   /* Borders */
 
   --color-border: var(--border);
   --color-border-hover: var(--border-hover);
-
 
   /* Status */
 
@@ -173,15 +137,13 @@
   --color-danger: var(--danger);
   --color-info: var(--info);
 
-
   /* Fonts */
 
   --font-geist: var(--font-geist-sans);
   --font-serif: var(--font-instrument-serif);
   --font-mono: var(--font-geist-mono);
-  --font-sans: var(--font-poppins)
+  --font-sans: var(--font-poppins);
 }
-
 
 /* ============================================================
    Dark Theme
@@ -195,7 +157,6 @@
   --background: #0a0a0a;
   --foreground: #fafafa;
 
-
   /* ==========================================================
      Brand
      ========================================================== */
@@ -207,7 +168,6 @@
   --secondary: #18181b;
   --secondary-hover: #27272a;
   --secondary-foreground: #fafafa;
-
 
   /* ==========================================================
      Semantic
@@ -232,7 +192,6 @@
   --opportunity: #fbbf24;
   --opportunity-foreground: #422006;
 
-
   /* ==========================================================
      Surfaces
      ========================================================== */
@@ -240,7 +199,6 @@
   --surface: #111111;
   --surface-hover: #18181b;
   --surface-muted: #141414;
-
 
   /* ==========================================================
      Text
@@ -252,14 +210,12 @@
   --muted: #a1a1aa;
   --muted-foreground: #71717a;
 
-
   /* ==========================================================
      Borders
      ========================================================== */
 
   --border: #27272a;
   --border-hover: #3f3f46;
-
 
   /* ==========================================================
      Status
@@ -271,13 +227,13 @@
   --info: #a1a1aa;
 }
 
-
-/* ============================================================
-   Global
-   ============================================================ */
-
 html {
+  color-scheme: light;
   scroll-behavior: smooth;
+}
+
+html.dark {
+  color-scheme: dark;
 }
 
 body {
@@ -285,40 +241,21 @@ body {
   background: var(--background);
   color: var(--foreground);
 
-  font-family:
-    var(--font-sans),
-    Arial,
-    Helvetica,
-    sans-serif;
+  font-family: var(--font-sans), Arial, Helvetica, sans-serif;
 
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
 }
-
-
-/* ============================================================
-   Selection
-   ============================================================ */
 
 ::selection {
   background: var(--primary);
   color: var(--primary-foreground);
 }
 
-
-/* ============================================================
-   Focus
-   ============================================================ */
-
 :focus-visible {
   outline: 2px solid var(--primary);
   outline-offset: 2px;
 }
-
-
-/* ============================================================
-   Subtle CareerPilot Grid
-   ============================================================ */
 
 .career-grid {
   background-image:
@@ -336,11 +273,6 @@ body {
   background-size: 48px 48px;
 }
 
-
-/* ============================================================
-   Reduced Motion
-   ============================================================ */
-
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
@@ -354,4 +286,10 @@ body {
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
   }
+}
+
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation: none;
+  mix-blend-mode: normal;
 }
