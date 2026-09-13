@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 import {
   FiUser,
@@ -11,9 +12,10 @@ import {
   FiCheckCircle,
 } from "react-icons/fi";
 import { CiMail } from "react-icons/ci";
+import { useSignup } from "@/features/hooks";
 
 export default function SignUpForm() {
-  const [username, setUsername] = useState("");
+  const [fullName, setFullName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [termsAccepted, setTermsAccepted] = useState(false);
@@ -27,16 +29,31 @@ export default function SignUpForm() {
   const isPasswordValid = hasMinLength && hasSymbol && hasUppercase;
 
   const isFormValid =
-    username.trim().length > 0 &&
+    fullName.trim().length > 0 &&
     email.trim().length > 0 &&
     isEmailValid &&
     isPasswordValid &&
     termsAccepted;
 
+  const router = useRouter();
+  const signupMutation = useSignup();
+
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+
     if (isFormValid) {
-      return;
+      signupMutation.mutate(
+        {
+          name: fullName,
+          email,
+          password,
+        },
+        {
+          onSuccess: () => {
+            router.push("/sign-in");
+          },
+        },
+      );
     }
   };
 
@@ -69,8 +86,8 @@ export default function SignUpForm() {
                 aria-hidden="true"
               />
               <input
-                value={username}
-                onChange={(e) => setUsername(e.target.value)}
+                value={fullName}
+                onChange={(e) => setFullName(e.target.value)}
                 type="text"
                 name="name"
                 autoComplete="name"
