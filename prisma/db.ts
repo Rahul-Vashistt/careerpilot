@@ -1,9 +1,10 @@
-import 'dotenv/config';
-import postgres from '@prisma/orm-postgres/runtime';
-import type { Contract } from './schema.d';
-import contractJson from './schema.json' with { type: 'json' };
+import { PrismaClient } from "./generated/client";
+import { PrismaPg } from "@prisma/adapter-pg";
 
-export const db = postgres<Contract>({
-  contractJson,
-  url: process.env['DATABASE_URL']!,
+const adapter = new PrismaPg({
+  connectionString: process.env.DATABASE_URL!,
+});
+
+export const db = new PrismaClient({
+  adapter,
 });

@@ -1,11 +1,20 @@
-// use prisma-next
-
-model User {
-  id        String      @id     @default(cuid(2))
-  email     String      @unique
-  username  String
-  name      String?
-  createdAt TimestamptzString   @default(now())
-  updatedAt temporal.updatedAtString()
+generator client {
+  provider = "prisma-client"
+  output   = "./generated"
 }
 
+datasource db {
+  provider = "postgresql"
+}
+
+model User {
+  id                      String    @id @default(cuid())
+  name                    String
+  email                   String    @unique
+  passwordHash            String
+  userVerified            Boolean   @default(false)
+  verificationTokenHash   String?
+  verificationTokenExpiry DateTime?
+  createdAt               DateTime  @default(now())
+  updatedAt               DateTime  @updatedAt
+}
