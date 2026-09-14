@@ -9,6 +9,8 @@ export default function handleError(error: unknown) {
     );
   }
 
+  console.error(error);
+
   return NextResponse.json(
     { message: "Internal server error" },
     { status: 500 },

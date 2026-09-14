@@ -1,4 +1,5 @@
 import { api } from "@/lib/api/axios";
+import axios from "axios";
 
 interface SignupData {
   name: string;
@@ -7,7 +8,18 @@ interface SignupData {
 }
 
 export const signup = async (data: SignupData) => {
-  const res = await api.post("/auth/signup", data);
+  try {
+    const res = await api.post("/auth/signup", data);
 
-  return res.data;
+    return res.data;
+  } catch (err) {
+    if (axios.isAxiosError(err)) {
+      throw new Error(
+        err.response?.data?.message ||
+          "Something went wrong. Please try again.",
+      );
+    }
+
+    throw new Error("Something went wrong. Please try again.");
+  }
 };
