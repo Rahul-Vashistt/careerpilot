@@ -11,6 +11,7 @@ import { useState } from "react";
 
 export default function SkillsStep() {
   const [selectedSkill, setSelectedSkill] = useState<string[]>(["JavaScript"]);
+  const [inputSkill, setInputSkill] = useState("");
 
   const handleSkillToggle = (skillName: string) => {
     setSelectedSkill((prev) =>
@@ -47,6 +48,9 @@ export default function SkillsStep() {
           />
 
           <input
+            name="inputSkill"
+            value={inputSkill}
+            onChange={(e) => setInputSkill(e.target.value)}
             type="text"
             placeholder="Search skills..."
             className="h-12 w-full rounded-xl border border-border bg-surface pl-11 pr-4 text-sm text-text-primary shadow-sm outline-none transition-all placeholder:text-muted/70 hover:border-border-hover focus:border-primary/40 focus:ring-4 focus:ring-primary/5"
@@ -152,7 +156,7 @@ export default function SkillsStep() {
         </p>
 
         {/* Navigation */}
-        <div className="mt-8 flex items-center justify-between border-t border-border pt-6">
+        <div className="mt-8 flex items-center justify-between">
           <button
             type="button"
             className="flex cursor-pointer items-center gap-2 rounded-xl border border-border bg-surface px-5 py-2.5 text-sm font-medium text-text-primary transition-colors hover:border-border-hover hover:bg-surface-hover"
