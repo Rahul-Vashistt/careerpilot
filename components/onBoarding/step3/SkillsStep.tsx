@@ -11,7 +11,12 @@ import {
 } from "react-icons/fi";
 import { skills } from "./skillsOption";
 
-export default function SkillsStep() {
+type Props = {
+  onNext : () => void;
+  onBack : () => void
+}
+
+export default function SkillsStep({onNext,onBack} : Props) {
   const [selectedSkills, setSelectedSkills] = useState<string[]>([]);
   const [inputSkill, setInputSkill] = useState("");
   const [searchResults, setSearchResults] = useState<(typeof skills)[number][]>(
@@ -225,6 +230,7 @@ export default function SkillsStep() {
 
         <div className="mt-8 flex items-center justify-between">
           <button
+          onClick={onBack}
             type="button"
             className="flex cursor-pointer items-center gap-2 rounded-xl border border-border bg-surface px-5 py-2.5 text-sm font-medium text-text-primary transition-colors hover:border-border-hover hover:bg-surface-hover active:scale-[0.98]"
           >
@@ -233,6 +239,7 @@ export default function SkillsStep() {
           </button>
 
           <button
+          onClick={onNext}
             type="button"
             className="flex cursor-pointer items-center gap-2 rounded-xl bg-primary px-6 py-2.5 text-sm font-semibold text-primary-foreground shadow-sm transition-all hover:bg-primary-hover active:scale-[0.98]"
           >

@@ -25,7 +25,10 @@ export default function OnBoarding() {
           />
         )}
         {currentStep === 3 && (
-          <SkillsStep/>
+          <SkillsStep
+            onNext={() => setCurrentStep(4)}
+            onBack={() => setCurrentStep(2)}
+          />
         )}
       </main>
     </div>
