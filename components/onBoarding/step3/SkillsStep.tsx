@@ -10,25 +10,36 @@ import {
   FiArrowRight,
 } from "react-icons/fi";
 import { skills } from "./skillsOption";
+import StepHeader from "../StepHeader";
 
 type Props = {
-  onNext : () => void;
-  onBack : () => void
-}
+  onNext: () => void;
+  onBack: () => void;
+};
 
-export default function SkillsStep({onNext,onBack} : Props) {
+export default function SkillsStep({ onNext, onBack }: Props) {
   const [selectedSkills, setSelectedSkills] = useState<string[]>([]);
   const [inputSkill, setInputSkill] = useState("");
   const [searchResults, setSearchResults] = useState<(typeof skills)[number][]>(
     [],
   );
+  const [limitError, setLimitError] = useState("");
 
   const handleSkillToggle = (skillName: string) => {
-    setSelectedSkills((prev) =>
-      prev.includes(skillName)
-        ? prev.filter((skill) => skill !== skillName)
-        : [...prev, skillName],
-    );
+    setSelectedSkills((prev) => {
+      if (prev.includes(skillName)) {
+        setLimitError("");
+        return prev.filter((skill) => skill !== skillName);
+      }
+
+      if (prev.length >= 15) {
+        setLimitError("Maximum skill limit reached");
+        return prev;
+      }
+
+      setLimitError("");
+      return [...prev, skillName];
+    });
   };
 
   const handleSearch = (value: string) => {
@@ -47,34 +58,29 @@ export default function SkillsStep({onNext,onBack} : Props) {
   };
 
   const clearSearch = () => {
+    setLimitError("");
     setInputSkill("");
     setSearchResults([]);
   };
 
-  const popularSkills = skills.filter((skill) =>
-    ["Programming", "Frontend", "Design", "AI / ML"].includes(skill.category),
-  ).slice(0, 30);
+  const popularSkills = skills
+    .filter((skill) =>
+      ["Programming", "Frontend", "Design", "AI / ML"].includes(skill.category),
+    )
+    .slice(0, 30);
 
   return (
     <div className="flex min-h-[90vh] items-center justify-center px-4 py-10 sm:px-6">
-      <div className="w-full max-w-4xl">
-        <div className="mb-8 flex flex-col items-center text-center">
-          <span className="mb-3 rounded-full border border-border bg-surface px-3 py-1 text-[11px] font-semibold uppercase tracking-widest text-muted">
-            Step 3 of 6
-          </span>
-
-          <h1 className="text-3xl font-bold tracking-tight text-text-primary sm:text-4xl">
-            What do you already know?
-          </h1>
-
-          <p className="mt-2.5 max-w-md text-sm leading-relaxed text-muted">
-            Pick the skills you&apos;ve got down. We&apos;ll tune your CareerPilot track
-            around them.
-          </p>
-        </div>
+      <div className="w-full max-w-4xl space-y-4 p-2">
+        <StepHeader
+          currentStep={3}
+          title="What do you already know?"
+          description="Pick the skills you've got down. We'll tune your
+            CareerPilot track around them."
+        />
 
         {/* Search Bar */}
-        <div className="relative mb-6">
+        <div className="relative mb-6 mt-6">
           <FiSearch
             size={18}
             className="pointer-events-none absolute left-4 top-1/2 -translate-y-1/2 text-muted"
@@ -186,16 +192,25 @@ export default function SkillsStep({onNext,onBack} : Props) {
               <span className="text-sm font-semibold text-text-primary">
                 Selected skills
               </span>
+
               <span className="flex h-5 min-w-5 items-center justify-center rounded-full bg-surface-muted px-1.5 text-[11px] font-semibold text-muted">
                 {selectedSkills.length}
               </span>
+
+              <span className="text-xs text-muted/60">/ 15 max</span>
+              {limitError && (
+                <span className="text-xs text-danger">{limitError}</span>
+              )}
             </div>
 
             {selectedSkills.length > 0 && (
               <button
                 type="button"
-                onClick={() => setSelectedSkills([])}
-                className="text-xs font-medium text-muted transition-colors hover:text-danger"
+                onClick={() => {
+                  setSelectedSkills([]);
+                  setLimitError("");
+                }}
+                className="text-xs font-medium text-muted transition-colors hover:text-danger cursor-pointer"
               >
                 Clear all
               </button>
@@ -230,18 +245,18 @@ export default function SkillsStep({onNext,onBack} : Props) {
 
         <div className="mt-8 flex items-center justify-between">
           <button
-          onClick={onBack}
+            onClick={onBack}
             type="button"
-            className="flex cursor-pointer items-center gap-2 rounded-xl border border-border bg-surface px-5 py-2.5 text-sm font-medium text-text-primary transition-colors hover:border-border-hover hover:bg-surface-hover active:scale-[0.98]"
+            className="flex cursor-pointer items-center gap-2 rounded-xl border border-border bg-surface px-5 py-3 text-sm font-medium text-text-primary transition-colors hover:border-border-hover hover:bg-surface-hover active:scale-[0.98]"
           >
             <FiArrowLeft size={16} />
             Back
           </button>
 
           <button
-          onClick={onNext}
+            onClick={onNext}
             type="button"
-            className="flex cursor-pointer items-center gap-2 rounded-xl bg-primary px-6 py-2.5 text-sm font-semibold text-primary-foreground shadow-sm transition-all hover:bg-primary-hover active:scale-[0.98]"
+            className="flex cursor-pointer items-center gap-2 rounded-xl bg-primary px-6 py-3 text-sm font-semibold text-primary-foreground shadow-sm transition-all hover:bg-primary-hover active:scale-[0.98]"
           >
             Continue
             <FiArrowRight size={16} />

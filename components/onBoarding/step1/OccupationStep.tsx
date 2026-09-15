@@ -3,33 +3,28 @@
 import { useState } from "react";
 import { PiCheck } from "react-icons/pi";
 import { occupationOptions } from "./occuptationOptions";
+import { FiArrowRight } from "react-icons/fi";
+
+import StepHeader from "../StepHeader";
 
 type Props = {
-    onNext : ()=> void;
-}
+  onNext: () => void;
+};
 
-export default function OccupationStep({onNext} : Props) {
+export default function OccupationStep({ onNext }: Props) {
   const [selectedOccupation, setSelectedOccupation] = useState<string | null>(
     "Student",
   );
   return (
     <div className="flex min-h-[90vh] items-center justify-center p-8 sm:p-0">
       <div className="flex w-full max-w-2xl flex-col items-center gap-6">
-        {/* Heading */}
-        <div className="flex flex-col items-center justify-center space-y-4">
-          <p className="inline-flex text-xs font-semibold uppercase tracking-[0.18em] text-text-primary">
-            Step 1 of 6
-          </p>
 
-          <h1 className="text-center font-geist text-4xl font-bold text-text-primary">
-            First, tell us about yourself
-          </h1>
-
-          <p className="max-w-xl text-center text-sm text-muted">
-            This helps us personalize your experience and create the right
-            career roadmap for you.
-          </p>
-        </div>
+        <StepHeader
+          currentStep={1}
+          title="First, tell us about yourself"
+          description="This helps us personalize your experience and create the right
+            career roadmap for you."
+        />
 
         {/* Occupation Map */}
         <div className="grid w-full grid-cols-1 gap-6 sm:grid-cols-2">
@@ -78,22 +73,17 @@ export default function OccupationStep({onNext} : Props) {
         </div>
 
         {/* Buttons */}
-        <div className="mt-8 flex w-full justify-between gap-8">
-          <button
-            type="button"
-            disabled
-            className="cursor-not-allowed rounded-lg border border-disabled px-8 py-3 text-sm font-semibold text-disabled-foreground"
-          >
-            Back
-          </button>
-
+        <div className="mt-8 flex w-full justify-center gap-8 ">
           <button
             type="button"
             disabled={!selectedOccupation}
             onClick={onNext}
-            className="rounded-lg bg-primary px-8 py-3 text-sm font-semibold text-primary-foreground transition hover:bg-primary-hover disabled:cursor-not-allowed disabled:bg-disabled disabled:text-disabled-foreground"
+            className="group flex w-full items-center justify-center gap-2 rounded-lg bg-primary py-3 text-sm font-semibold text-primary-foreground transition-all duration-300 hover:bg-primary-hover disabled:cursor-not-allowed disabled:bg-disabled disabled:text-disabled-foreground cursor-pointer"
           >
             Continue
+            <span className="inline-flex -translate-x-2 items-center text-base opacity-0 transition-all duration-300 ease-out group-hover:translate-x-1 group-hover:opacity-100">
+              <FiArrowRight />
+            </span>
           </button>
         </div>
       </div>

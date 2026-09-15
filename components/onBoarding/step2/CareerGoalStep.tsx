@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { PiCheck } from "react-icons/pi";
 import { careerGoalOptions } from "./careerGoalOptions";
+import StepHeader from "../StepHeader";
 
 type Props = {
   onNext: () => void;
@@ -15,20 +16,12 @@ export default function CareerGoalStep({ onNext, onBack }: Props) {
   return (
     <div className="flex min-h-[90vh] items-center justify-center p-8 sm:p-0">
       <div className="flex w-full max-w-4xl p-4 flex-col items-center gap-6">
-        {/* Heading */}
-        <div className="flex flex-col items-center justify-center space-y-4">
-          <p className="inline-flex text-xs font-semibold uppercase tracking-[0.18em] text-text-primary">
-            Step 2 of 6
-          </p>
-
-          <h1 className="text-center font-geist text-4xl font-bold text-text-primary">
-            What do you want to become?
-          </h1>
-
-          <p className="max-w-xl text-center text-sm text-muted">
-            Choose the career path you&apos;re most interested in pursuing.
-          </p>
-        </div>
+   
+        <StepHeader
+          currentStep={2}
+          title="What do you want to become?"
+          description="Choose the career path you&apos;re most interested in pursuing."
+        />
 
         {/* Career Options */}
         <div className="grid w-full grid-cols-1 gap-4 sm:grid-cols-3">
@@ -47,7 +40,6 @@ export default function CareerGoalStep({ onNext, onBack }: Props) {
                     : "border-border bg-surface hover:border-border-hover hover:bg-surface-hover"
                 }`}
               >
-
                 <div
                   className={`absolute right-4 top-4 flex h-4 w-4 items-center justify-center rounded-full border-2 ${
                     isSelected
@@ -56,10 +48,7 @@ export default function CareerGoalStep({ onNext, onBack }: Props) {
                   }`}
                 >
                   {isSelected && (
-                    <PiCheck
-                      size={10}
-                      className="text-primary-foreground"
-                    />
+                    <PiCheck size={10} className="text-primary-foreground" />
                   )}
                 </div>
 
@@ -82,7 +71,7 @@ export default function CareerGoalStep({ onNext, onBack }: Props) {
           <button
             type="button"
             onClick={onBack}
-            className="rounded-lg border border-border px-8 py-3 text-sm font-semibold text-text-primary transition hover:border-border-hover hover:bg-surface-hover"
+            className="rounded-lg border border-border px-8 py-3 text-sm font-semibold text-text-primary transition hover:border-border-hover hover:bg-surface-hover cursor-pointer"
           >
             Back
           </button>
@@ -91,7 +80,7 @@ export default function CareerGoalStep({ onNext, onBack }: Props) {
             type="button"
             disabled={!selectedCareer}
             onClick={onNext}
-            className="rounded-lg bg-primary px-8 py-3 text-sm font-semibold text-primary-foreground transition hover:bg-primary-hover disabled:cursor-not-allowed disabled:bg-disabled disabled:text-disabled-foreground"
+            className="rounded-lg bg-primary px-8 py-3 text-sm font-semibold text-primary-foreground transition hover:bg-primary-hover disabled:cursor-not-allowed disabled:bg-disabled disabled:text-disabled-foreground cursor-pointer"
           >
             Continue
           </button>
