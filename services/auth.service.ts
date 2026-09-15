@@ -1,4 +1,4 @@
-import { hashPassword } from "@/lib/auth/Password";
+import { hashPassword } from "@/lib/auth/password";
 import AppError from "@/lib/errors/AppError";
 import { db } from "@/prisma/db";
 
