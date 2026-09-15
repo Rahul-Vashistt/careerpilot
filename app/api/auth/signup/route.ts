@@ -5,6 +5,9 @@ import handleError from "@/lib/errors/handleError";
 
 import AppError from "@/lib/errors/AppError";
 import { registerUser } from "@/services/auth.service";
+import { createAccessToken } from "@/lib/auth/tokens";
+import { setAuthCookies } from "@/lib/auth/cookies";
+import { createRefreshTokenSession } from "@/services/refresh-token.service";
 
 export async function POST(req: Request) {
   try {
@@ -20,6 +23,14 @@ export async function POST(req: Request) {
     }
 
     const user = await registerUser({ name, email, password });
+
+    const accessToken = await createAccessToken(user.id);
+    const { refreshToken, expiresAt } = await createRefreshTokenSession(
+      user.id,
+      false,
+    );
+
+    await setAuthCookies(accessToken, refreshToken, expiresAt);
 
     return NextResponse.json(
       {

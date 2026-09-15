@@ -3,10 +3,10 @@ import { cookies } from "next/headers";
 const ACCESS_TOKEN_COOKIE = "access_token";
 const REFRESH_TOKEN_COOKIE = "refresh_token";
 
-export const sethAuthCookies = async (
+export const setAuthCookies = async (
   accessToken: string,
   refreshToken: string,
-  days: number,
+  refreshTokenExpiresAt: Date,
 ) => {
   const cookieStore = await cookies();
 
@@ -15,7 +15,7 @@ export const sethAuthCookies = async (
     secure: process.env.NODE_ENV === "production",
     sameSite: "lax",
     path: "/",
-    maxAge: 60 * 60 * 24 * days,
+    maxAge: 60 * 15,
   });
 
   cookieStore.set(REFRESH_TOKEN_COOKIE, refreshToken, {
@@ -23,7 +23,7 @@ export const sethAuthCookies = async (
     secure: process.env.NODE_ENV === "production",
     sameSite: "lax",
     path: "/",
-    maxAge: 60 * 60 * 24 * days,
+    maxAge: Math.floor((refreshTokenExpiresAt.getTime() - Date.now()) / 1000),
   });
 };
 

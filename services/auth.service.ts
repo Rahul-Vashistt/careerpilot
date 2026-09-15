@@ -32,6 +32,7 @@ export const registerUser = async ({
   });
 
   return {
+    id: user.id,
     name: user.name,
     userVerified: user.userVerified,
   };
