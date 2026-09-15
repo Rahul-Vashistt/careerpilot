@@ -47,12 +47,12 @@ export default function SkillsStep() {
   };
 
   const popularSkills = skills.filter((skill) =>
-    ["Programming", "Frontend", "Design"].includes(skill.category),
-  );
+    ["Programming", "Frontend", "Design", "AI / ML"].includes(skill.category),
+  ).slice(0, 30);
 
   return (
     <div className="flex min-h-[90vh] items-center justify-center px-4 py-10 sm:px-6">
-      <div className="w-full max-w-2xl">
+      <div className="w-full max-w-4xl">
         <div className="mb-8 flex flex-col items-center text-center">
           <span className="mb-3 rounded-full border border-border bg-surface px-3 py-1 text-[11px] font-semibold uppercase tracking-widest text-muted">
             Step 3 of 6
@@ -63,7 +63,7 @@ export default function SkillsStep() {
           </h1>
 
           <p className="mt-2.5 max-w-md text-sm leading-relaxed text-muted">
-            Pick the skills you've got down. We'll tune your CareerPilot track
+            Pick the skills you&apos;ve got down. We&apos;ll tune your CareerPilot track
             around them.
           </p>
         </div>
@@ -141,7 +141,7 @@ export default function SkillsStep() {
           <span className="text-xs text-muted/70">Select all that apply</span>
         </div>
 
-        <div className="grid grid-cols-3 gap-2 sm:grid-cols-4 md:grid-cols-5">
+        <div className="grid grid-cols-3 gap-2 sm:grid-cols-4 md:grid-cols-6">
           {popularSkills.map((skill) => {
             const isSelected = selectedSkills.includes(skill.name);
 
