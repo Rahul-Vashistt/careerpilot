@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import {
   FiAlertCircle,
   FiArrowRight,
@@ -21,11 +21,18 @@ export default function SignUpForm() {
   const [password, setPassword] = useState("");
   const [termsAccepted, setTermsAccepted] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const [error, setError] = useState("");
+
+  const emailRef = useRef<HTMLInputElement>(null);
+  const passwordRef = useRef<HTMLInputElement>(null);
 
   const router = useRouter();
-  const signupMutation = useSignup();
+
+  const {
+    mutate: signup,
+    isPending,
+    error,
+    isError,
+  } = useSignup();
 
   const hasMinLength = password.length >= 8;
   const hasSymbol = /[!@#$%^&*]/.test(password);
@@ -42,39 +49,49 @@ export default function SignUpForm() {
     isPasswordValid &&
     termsAccepted;
 
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+  const handleFullNameKeyDown = (
+    e: React.KeyboardEvent<HTMLInputElement>,
+  ) => {
+    if (e.key !== "Enter") return;
+
     e.preventDefault();
 
-    if (!isFormValid || isSubmitting) {
-      return;
-    }
+    emailRef.current?.focus();
+  };
 
-    setIsSubmitting(true);
-    setError("");
+  const handleEmailKeyDown = (
+    e: React.KeyboardEvent<HTMLInputElement>,
+  ) => {
+    if (e.key !== "Enter") return;
 
-    try {
-      await signupMutation.mutateAsync({
-        name: fullName,
+    e.preventDefault();
+
+    passwordRef.current?.focus();
+  };
+
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
+    if (!isFormValid || isPending) return;
+
+    signup(
+      {
+        name: fullName.trim(),
         email: email.trim(),
         password,
-      });
+      },
+      {
+        onSuccess: () => {
+          setFullName("");
+          setEmail("");
+          setPassword("");
+          setTermsAccepted(false);
+          setShowPassword(false);
 
-      setFullName("");
-      setEmail("");
-      setPassword("");
-      setTermsAccepted(false);
-      setShowPassword(false);
-
-      router.push("/onboarding");
-    } catch (err) {
-      if (err instanceof Error) {
-        setError(err.message);
-      } else {
-        setError("Something went wrong. Please try again.");
-      }
-    } finally {
-      setIsSubmitting(false);
-    }
+          router.push("/onboarding");
+        },
+      },
+    );
   };
 
   return (
@@ -103,17 +120,21 @@ export default function SignUpForm() {
           className="flex flex-col gap-4"
           noValidate
         >
-          {error && (
+          {isError && (
             <div
               role="alert"
-              className="flex items-start gap-3 rounded-md border border-border bg-danger/10 px-4 py-3 text-sm text-text-secondary"
+              className="flex items-center gap-3 rounded-md border border-border bg-danger/10 px-4 py-3 text-sm text-danger"
             >
               <FiAlertCircle
                 aria-hidden="true"
-                className="mt-0.5 h-5 w-5 shrink-0 text-text-primary"
+                className="mt-0.5 h-5 w-5 shrink-0 text-danger"
               />
 
-              <p>{error}</p>
+              <p>
+                {error instanceof Error
+                  ? error.message
+                  : "Something went wrong. Please try again."}
+              </p>
             </div>
           )}
 
@@ -128,11 +149,13 @@ export default function SignUpForm() {
               <input
                 value={fullName}
                 onChange={(e) => setFullName(e.target.value)}
+                onKeyDown={handleFullNameKeyDown}
                 type="text"
                 name="name"
                 autoComplete="name"
                 placeholder="John Doe"
-                className="w-full rounded-md border border-border bg-surface py-2.5 pl-10 pr-4 text-sm text-text-primary outline-none transition duration-300 placeholder:text-muted-foreground hover:border-border-hover focus:border-border-hover focus:ring-2 focus:ring-primary/10"
+                disabled={isPending}
+                className="w-full rounded-md border border-border bg-surface py-2.5 pl-10 pr-4 text-sm text-text-primary outline-none transition duration-300 placeholder:text-muted-foreground hover:border-border-hover focus:border-border-hover focus:ring-2 focus:ring-primary/10 disabled:cursor-not-allowed disabled:opacity-60"
               />
             </div>
           </label>
@@ -146,13 +169,16 @@ export default function SignUpForm() {
               />
 
               <input
+                ref={emailRef}
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
+                onKeyDown={handleEmailKeyDown}
                 type="email"
                 name="email"
                 autoComplete="email"
                 placeholder="you@example.com"
-                className="w-full rounded-md border border-border bg-surface py-2.5 pl-10 pr-4 text-sm text-text-primary outline-none transition duration-300 placeholder:text-muted-foreground hover:border-border-hover focus:border-border-hover focus:ring-2 focus:ring-primary/10"
+                disabled={isPending}
+                className="w-full rounded-md border border-border bg-surface py-2.5 pl-10 pr-4 text-sm text-text-primary outline-none transition duration-300 placeholder:text-muted-foreground hover:border-border-hover focus:border-border-hover focus:ring-2 focus:ring-primary/10 disabled:cursor-not-allowed disabled:opacity-60"
               />
             </div>
           </label>
@@ -166,24 +192,28 @@ export default function SignUpForm() {
               />
 
               <input
+                ref={passwordRef}
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 type={showPassword ? "text" : "password"}
                 name="password"
                 autoComplete="new-password"
                 placeholder="Create a password"
-                className="w-full rounded-md border border-border bg-surface py-2.5 pl-10 pr-10 text-sm text-text-primary outline-none transition duration-300 placeholder:text-muted-foreground hover:border-border-hover focus:border-border-hover focus:ring-2 focus:ring-primary/10"
+                disabled={isPending}
+                className="w-full rounded-md border border-border bg-surface py-2.5 pl-10 pr-10 text-sm text-text-primary outline-none transition duration-300 placeholder:text-muted-foreground hover:border-border-hover focus:border-border-hover focus:ring-2 focus:ring-primary/10 disabled:cursor-not-allowed disabled:opacity-60"
               />
 
               <button
                 type="button"
                 onClick={() => setShowPassword((prev) => !prev)}
-                className="absolute right-3 top-1/2 -translate-y-1/2 cursor-pointer text-muted transition hover:text-text-primary"
+                disabled={isPending}
+                className="absolute right-3 top-1/2 -translate-y-1/2 cursor-pointer text-muted transition hover:text-text-primary disabled:cursor-not-allowed"
                 aria-label={showPassword ? "Hide password" : "Show password"}
               >
                 {showPassword ? <FiEye /> : <FiEyeOff />}
               </button>
             </div>
+
             <div className="flex flex-wrap gap-x-4 gap-y-2 text-xs text-muted">
               <span
                 className={`flex items-center gap-1.5 ${
@@ -218,7 +248,8 @@ export default function SignUpForm() {
                 onChange={(e) => setTermsAccepted(e.target.checked)}
                 type="checkbox"
                 name="terms"
-                className="peer absolute inset-0 h-4 w-4 cursor-pointer appearance-none rounded border border-border bg-surface transition-all duration-200 checked:border-primary checked:bg-primary focus:outline-none"
+                disabled={isPending}
+                className="peer absolute inset-0 h-4 w-4 cursor-pointer appearance-none rounded border border-border bg-surface transition-all duration-200 checked:border-primary checked:bg-primary focus:outline-none disabled:cursor-not-allowed"
               />
 
               <svg
@@ -258,23 +289,30 @@ export default function SignUpForm() {
 
           <button
             type="submit"
-            disabled={!isFormValid || isSubmitting}
+            disabled={!isFormValid || isPending}
             className={`group mt-2 flex w-full items-center justify-center gap-2 rounded-md py-2.5 text-sm font-medium shadow-sm transition-all duration-300 ${
-              isFormValid && !isSubmitting
+              isFormValid && !isPending
                 ? "cursor-pointer bg-primary text-primary-foreground hover:bg-primary-hover active:scale-[0.99]"
                 : "cursor-not-allowed bg-disabled text-disabled-foreground"
             }`}
           >
-            {isSubmitting ? "Creating account..." : "Create account"}
+            {isPending ? (
+              <>
+                <span className="h-4 w-4 animate-spin rounded-full border-2 border-current border-t-transparent" />
+                Creating account...
+              </>
+            ) : (
+              <>
+                Create account
 
-            {!isSubmitting && (
-              <span
-                className={`text-md -translate-x-4 opacity-0 transition-all duration-300 ease-out group-hover:translate-x-0 ${
-                  isFormValid ? "group-hover:opacity-100" : ""
-                }`}
-              >
-                <FiArrowRight />
-              </span>
+                <span
+                  className={`text-md -translate-x-4 opacity-0 transition-all duration-300 ease-out group-hover:translate-x-0 ${
+                    isFormValid ? "group-hover:opacity-100" : ""
+                  }`}
+                >
+                  <FiArrowRight />
+                </span>
+              </>
             )}
           </button>
         </form>
@@ -289,7 +327,8 @@ export default function SignUpForm() {
 
         <button
           type="button"
-          className="flex w-full cursor-pointer items-center justify-center gap-3 rounded-md border border-border bg-surface py-2.5 text-sm font-medium text-text-primary shadow-sm transition hover:bg-surface-hover"
+          disabled={isPending}
+          className="flex w-full cursor-pointer items-center justify-center gap-3 rounded-md border border-border bg-surface py-2.5 text-sm font-medium text-text-primary shadow-sm transition hover:bg-surface-hover disabled:cursor-not-allowed disabled:opacity-60"
         >
           <span className="text-base font-bold">G</span>
           Continue with Google

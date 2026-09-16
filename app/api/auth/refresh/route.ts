@@ -33,6 +33,6 @@ export async function POST(req: Request) {
       },
     );
   } catch (err) {
-    handleError(err);
+    return handleError(err);
   }
 }

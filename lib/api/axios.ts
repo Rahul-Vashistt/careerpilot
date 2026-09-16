@@ -1,6 +1,4 @@
-import axios, {
-  type InternalAxiosRequestConfig,
-} from "axios";
+import axios, { type InternalAxiosRequestConfig } from "axios";
 
 type RetryableRequestConfig = InternalAxiosRequestConfig & {
   _retry?: boolean;
@@ -15,18 +13,21 @@ export const api = axios.create({
 });
 
 api.interceptors.response.use(
-  (response) => {
-    return response;
-  },
+  (response) => response,
 
   async (error) => {
-    const originalRequest =
-      error.config as RetryableRequestConfig;
+    const originalRequest = error.config as RetryableRequestConfig;
+
+    const isAuthRoute =
+      originalRequest.url === "/auth/signin" ||
+      originalRequest.url === "/auth/signup" ||
+      originalRequest.url === "/auth/refresh" ||
+      originalRequest.url === "/auth/logout";
 
     if (
       error.response?.status === 401 &&
       !originalRequest._retry &&
-      originalRequest.url !== "/auth/refresh"
+      !isAuthRoute
     ) {
       originalRequest._retry = true;
 

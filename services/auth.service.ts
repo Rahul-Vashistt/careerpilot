@@ -1,4 +1,4 @@
-import { hashPassword } from "@/lib/auth/password";
+import { comparePassword, hashPassword } from "@/lib/auth/password";
 import AppError from "@/lib/errors/AppError";
 import { db } from "@/prisma/db";
 
@@ -7,6 +7,8 @@ interface RegisterUserProps {
   email: string;
   password: string;
 }
+
+type LoginUserProps = Omit<RegisterUserProps, "name">;
 
 export const registerUser = async ({
   name,
@@ -30,6 +32,30 @@ export const registerUser = async ({
       passwordHash: hashedPassword,
     },
   });
+
+  return {
+    id: user.id,
+    name: user.name,
+    userVerified: user.userVerified,
+  };
+};
+
+export const loginUser = async ({ email, password }: LoginUserProps) => {
+  const user = await db.user.findUnique({
+    where: {
+      email,
+    },
+  });
+
+  if (!user) {
+    throw new AppError("Email doesn't exist. Please create an account", 401);
+  }
+
+  const isPasswordValid = await comparePassword(user.passwordHash, password);
+
+  if (!isPasswordValid) {
+    throw new AppError("Invalid email and password", 401);
+  }
 
   return {
     id: user.id,
