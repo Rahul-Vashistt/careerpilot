@@ -18,12 +18,15 @@ export default function OccupationStep({ onNext }: Props) {
   return (
     <div className="flex min-h-[90vh] items-center justify-center p-8 sm:p-0">
       <div className="flex w-full max-w-2xl flex-col items-center gap-6">
-
         <StepHeader
           currentStep={1}
           title="First, tell us about yourself"
-          description="This helps us personalize your experience and create the right
-            career roadmap for you."
+          description={
+            <>
+              This helps us personalize your experience and <br /> create the
+              right career roadmap for you.
+            </>
+          }
         />
 
         {/* Occupation Map */}
@@ -37,7 +40,7 @@ export default function OccupationStep({ onNext }: Props) {
                 key={career.title}
                 type="button"
                 onClick={() => setSelectedOccupation(career.title)}
-                className={`relative flex flex-col space-y-2 rounded-lg border-2 p-6 text-left transition ${
+                className={`relative flex flex-col space-y-2 rounded-lg border-2 p-6 text-left cursor-pointer transition ${
                   isSelected
                     ? "border-primary bg-surface-muted"
                     : "border-border bg-surface hover:border-border-hover hover:bg-surface-hover"

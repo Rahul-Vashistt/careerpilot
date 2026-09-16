@@ -4,6 +4,8 @@ import { useState } from "react";
 import { PiCheck } from "react-icons/pi";
 import { careerGoalOptions } from "./careerGoalOptions";
 import StepHeader from "../StepHeader";
+import { FiArrowRight } from "react-icons/fi";
+import StepNavigation from "../StepNavigation";
 
 type Props = {
   onNext: () => void;
@@ -11,16 +13,17 @@ type Props = {
 };
 
 export default function CareerGoalStep({ onNext, onBack }: Props) {
-  const [selectedCareer, setSelectedCareer] = useState<string | null>(null);
+  const [selectedCareer, setSelectedCareer] = useState<string | null>("Frontend Developer");
 
   return (
     <div className="flex min-h-[90vh] items-center justify-center p-8 sm:p-0">
       <div className="flex w-full max-w-4xl p-4 flex-col items-center gap-6">
-   
         <StepHeader
           currentStep={2}
           title="What do you want to become?"
-          description="Choose the career path you&apos;re most interested in pursuing."
+          description={
+            <>Choose the career path you're most interested in pursuing.</>
+          }
         />
 
         {/* Career Options */}
@@ -34,7 +37,7 @@ export default function CareerGoalStep({ onNext, onBack }: Props) {
                 key={career.title}
                 type="button"
                 onClick={() => setSelectedCareer(career.title)}
-                className={`relative flex gap-4 flex-col rounded-lg border-2 p-3 text-left transition ${
+                className={`relative flex gap-4 flex-col rounded-lg border-2 p-3 text-left cursor-pointer transition ${
                   isSelected
                     ? "border-primary bg-surface-muted"
                     : "border-border bg-surface hover:border-border-hover hover:bg-surface-hover"
@@ -67,24 +70,7 @@ export default function CareerGoalStep({ onNext, onBack }: Props) {
         </div>
 
         {/* Buttons */}
-        <div className="mt-8 flex w-full justify-between gap-8">
-          <button
-            type="button"
-            onClick={onBack}
-            className="rounded-lg border border-border px-8 py-3 text-sm font-semibold text-text-primary transition hover:border-border-hover hover:bg-surface-hover cursor-pointer"
-          >
-            Back
-          </button>
-
-          <button
-            type="button"
-            disabled={!selectedCareer}
-            onClick={onNext}
-            className="rounded-lg bg-primary px-8 py-3 text-sm font-semibold text-primary-foreground transition hover:bg-primary-hover disabled:cursor-not-allowed disabled:bg-disabled disabled:text-disabled-foreground cursor-pointer"
-          >
-            Continue
-          </button>
-        </div>
+        <StepNavigation onNext={onNext} onBack={onBack} />
       </div>
     </div>
   );

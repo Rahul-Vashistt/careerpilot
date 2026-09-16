@@ -5,6 +5,7 @@ import { PiCheck } from "react-icons/pi";
 import { FiArrowLeft, FiArrowRight } from "react-icons/fi";
 import { goalOptions } from "./goalOptions";
 import StepHeader from "../StepHeader";
+import StepNavigation from "../StepNavigation";
 
 type Props = {
   onNext: () => void;
@@ -13,7 +14,7 @@ type Props = {
 
 export default function GoalStep({ onNext, onBack }: Props) {
   const [selectedGoal, setSelectedGoal] = useState<string | null>(
-    "Get an Internship",
+    "",
   );
 
   return (
@@ -79,28 +80,7 @@ export default function GoalStep({ onNext, onBack }: Props) {
         </div>
 
         {/* Buttons */}
-        <div className="mt-8 flex w-full items-center justify-between gap-8">
-          <button
-            type="button"
-            onClick={onBack}
-            className="group flex items-center gap-2 rounded-lg border border-border bg-surface px-6 py-3 text-sm font-semibold text-text-primary transition-all duration-300 hover:border-border-hover hover:bg-surface-hover cursor-pointer"
-          >
-            <FiArrowLeft className="transition-transform duration-300 group-hover:-translate-x-1" />
-            Back
-          </button>
-
-          <button
-            type="button"
-            disabled={!selectedGoal}
-            onClick={onNext}
-            className="group flex items-center text-center justify-center gap-2 rounded-lg bg-primary py-3 px-8 text-sm font-semibold text-primary-foreground transition-all duration-300 hover:bg-primary-hover disabled:cursor-not-allowed disabled:bg-disabled disabled:text-disabled-foreground cursor-pointer"
-          >
-            Continue
-            <span className="inline-flex -translate-x-2 items-center text-base opacity-0 transition-all duration-300 ease-out group-hover:translate-x-1 group-hover:opacity-100 ">
-              <FiArrowRight />
-            </span>
-          </button>
-        </div>
+        <StepNavigation onNext={onNext} onBack={onBack}/>
       </div>
     </div>
   );

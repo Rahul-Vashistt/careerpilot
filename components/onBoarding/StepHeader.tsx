@@ -1,7 +1,7 @@
 type Props = {
   currentStep: number;
   title: string;
-  description: string;
+  description: React.ReactNode;
 };
 
 export default function StepHeader({ currentStep, title, description }: Props) {

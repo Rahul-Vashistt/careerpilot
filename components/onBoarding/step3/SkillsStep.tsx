@@ -11,6 +11,7 @@ import {
 } from "react-icons/fi";
 import { skills } from "./skillsOption";
 import StepHeader from "../StepHeader";
+import StepNavigation from "../StepNavigation";
 
 type Props = {
   onNext: () => void;
@@ -75,8 +76,13 @@ export default function SkillsStep({ onNext, onBack }: Props) {
         <StepHeader
           currentStep={3}
           title="What do you already know?"
-          description="Pick the skills you've got down. We'll tune your
-            CareerPilot track around them."
+          description={
+            <>
+              Select the skills and technologies you are familiar with.
+              <br />
+              This helps us personalize your experience"
+            </>
+          }
         />
 
         {/* Search Bar */}
@@ -243,25 +249,8 @@ export default function SkillsStep({ onNext, onBack }: Props) {
           You can always add or swap these later in settings.
         </p>
 
-        <div className="mt-8 flex items-center justify-between">
-          <button
-            onClick={onBack}
-            type="button"
-            className="flex cursor-pointer items-center gap-2 rounded-xl border border-border bg-surface px-5 py-3 text-sm font-medium text-text-primary transition-colors hover:border-border-hover hover:bg-surface-hover active:scale-[0.98]"
-          >
-            <FiArrowLeft size={16} />
-            Back
-          </button>
-
-          <button
-            onClick={onNext}
-            type="button"
-            className="flex cursor-pointer items-center gap-2 rounded-xl bg-primary px-6 py-3 text-sm font-semibold text-primary-foreground shadow-sm transition-all hover:bg-primary-hover active:scale-[0.98]"
-          >
-            Continue
-            <FiArrowRight size={16} />
-          </button>
-        </div>
+        <StepNavigation onNext={onNext} onBack={onBack}/>
+        
       </div>
     </div>
   );

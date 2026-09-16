@@ -6,6 +6,8 @@ import OccupationStep from "@/components/onBoarding/step1/OccupationStep";
 import CareerGoalStep from "@/components/onBoarding/step2/CareerGoalStep";
 import SkillsStep from "@/components/onBoarding/step3/SkillsStep";
 import GoalStep from "@/components/onBoarding/step4/GoalStep";
+import TimeStep from "@/components/onBoarding/step5/TimeStep";
+import TimelineStep from "@/components/onBoarding/step6/TimelineStep";
 
 export default function OnBoarding() {
   const [currentStep, setCurrentStep] = useState(1);
@@ -35,6 +37,18 @@ export default function OnBoarding() {
           <GoalStep
             onNext={() => setCurrentStep(5)}
             onBack={() => setCurrentStep(3)}
+          />
+        )}
+        {currentStep === 5 && (
+          <TimeStep
+            onNext={() => setCurrentStep(6)}
+            onBack={() => setCurrentStep(4)}
+          />
+        )}
+        {currentStep === 6 && (
+          <TimelineStep
+            onNext={() => setCurrentStep(7)}
+            onBack={() => setCurrentStep(5)}
           />
         )}
       </main>
