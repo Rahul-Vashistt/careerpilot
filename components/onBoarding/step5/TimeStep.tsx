@@ -13,7 +13,11 @@ type Props = {
 };
 
 export default function TimeStep({ onNext, onBack }: Props) {
-  const [selectedTime, setSelectedTime] = useState<string | null>("4–7 hrs/week");
+  const [selectedTime, setSelectedTime] = useState<string | null>("");
+
+  const handleSelectedTime = (time : string)=>{
+    setSelectedTime((prev) => (prev === time ? "" : time))
+  }
 
   return (
     <div className="flex min-h-[90vh] items-center justify-center p-8 sm:p-0">
@@ -40,7 +44,7 @@ export default function TimeStep({ onNext, onBack }: Props) {
               <button
                 key={time.title}
                 type="button"
-                onClick={() => setSelectedTime(time.title)}
+                onClick={() => handleSelectedTime(time.title)}
                 className={`relative flex min-h-33 flex-col space-y-3 rounded-lg border-2 p-5 text-left cursor-pointer transition ${
                   isSelected
                     ? "border-primary bg-surface-muted"
@@ -70,7 +74,6 @@ export default function TimeStep({ onNext, onBack }: Props) {
                   }
                 />
 
-                {/* Content */}
                 <div className="space-y-1">
                   <h2 className="font-semibold text-text-primary">
                     {time.title}
@@ -89,7 +92,7 @@ export default function TimeStep({ onNext, onBack }: Props) {
         <StepNavigation
           onNext={onNext}
           onBack={onBack}
-          disabled={!selectedTime}
+          nextLabel={selectedTime ? "Continue" : "Skip"}
         />
       </div>
     </div>

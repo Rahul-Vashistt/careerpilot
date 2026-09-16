@@ -13,21 +13,22 @@ type Props = {
 };
 
 export default function GoalStep({ onNext, onBack }: Props) {
-  const [selectedGoal, setSelectedGoal] = useState<string | null>(
-    "",
-  );
+  const [selectedGoal, setSelectedGoal] = useState<string | null>("");
+
+  const handleSelectGoal = (goal: string) => {
+    setSelectedGoal((prev) => (prev === goal ? "" : goal));
+  };
 
   return (
     <div className="flex min-h-[90vh] items-center justify-center p-8 sm:p-0">
       <div className="flex w-full max-w-4xl flex-col items-center gap-6">
-        
         <StepHeader
           currentStep={4}
           title="What's your main goal?"
           description="Choose the career path you're most interested in pursuing.Choose what you want to achieve right now.
             You can always update this later."
         />
-     
+
         {/* Goal Options */}
         <div className="grid w-full grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {goalOptions.map((goal) => {
@@ -38,7 +39,7 @@ export default function GoalStep({ onNext, onBack }: Props) {
               <button
                 key={goal.title}
                 type="button"
-                onClick={() => setSelectedGoal(goal.title)}
+                onClick={() => handleSelectGoal(goal.title)}
                 className={`relative flex min-h-41.25 flex-col space-y-3 rounded-lg border-2 p-6 text-left cursor-pointer transition ${
                   isSelected
                     ? "border-primary bg-surface-muted"
@@ -80,7 +81,11 @@ export default function GoalStep({ onNext, onBack }: Props) {
         </div>
 
         {/* Buttons */}
-        <StepNavigation onNext={onNext} onBack={onBack}/>
+        <StepNavigation
+          onNext={onNext}
+          onBack={onBack}
+          nextLabel={selectedGoal ? "Continue" : "Skip"}
+        />
       </div>
     </div>
   );

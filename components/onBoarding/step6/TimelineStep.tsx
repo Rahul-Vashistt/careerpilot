@@ -49,7 +49,6 @@ export default function TimelineStep({ onNext, onBack }: Props) {
                     : "border-border bg-surface hover:border-border-hover hover:bg-surface-hover"
                 }`}
               >
-               
                 <div
                   className={`absolute right-4 top-4 flex h-4 w-4 items-center justify-center rounded-full border-2 ${
                     isSelected
@@ -58,18 +57,13 @@ export default function TimelineStep({ onNext, onBack }: Props) {
                   }`}
                 >
                   {isSelected && (
-                    <PiCheck
-                      size={10}
-                      className="text-primary-foreground"
-                    />
+                    <PiCheck size={10} className="text-primary-foreground" />
                   )}
                 </div>
 
                 <Icon
                   size={24}
-                  className={
-                    isSelected ? "text-text-primary" : "text-muted"
-                  }
+                  className={isSelected ? "text-text-primary" : "text-muted"}
                 />
 
                 <div className="space-y-1">
@@ -91,6 +85,7 @@ export default function TimelineStep({ onNext, onBack }: Props) {
           onNext={onNext}
           onBack={onBack}
           disabled={!selectedTimeline}
+          nextLabel="Submit"
         />
       </div>
     </div>

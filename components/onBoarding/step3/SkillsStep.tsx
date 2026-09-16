@@ -249,8 +249,11 @@ export default function SkillsStep({ onNext, onBack }: Props) {
           You can always add or swap these later in settings.
         </p>
 
-        <StepNavigation onNext={onNext} onBack={onBack}/>
-        
+        <StepNavigation
+          onNext={onNext}
+          onBack={onBack}
+          nextLabel={selectedSkills.length === 0 ? "Skip" : "Continue"}
+        />
       </div>
     </div>
   );

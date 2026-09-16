@@ -9,8 +9,25 @@ import GoalStep from "@/components/onBoarding/step4/GoalStep";
 import TimeStep from "@/components/onBoarding/step5/TimeStep";
 import TimelineStep from "@/components/onBoarding/step6/TimelineStep";
 
+export type onBoardingProps = {
+  occupation: string | null;
+  careerGoal: string | null;
+  skills: string[];
+  mainGoal: string | null;
+  weeklyTime: string | null;
+  timeline: string | null;
+};
+
 export default function OnBoarding() {
   const [currentStep, setCurrentStep] = useState(1);
+  const [onBoardingData, setOnBoardingData] = useState<onBoardingProps>({
+    occupation: null,
+    careerGoal: null,
+    skills: [],
+    mainGoal: null,
+    weeklyTime: null,
+    timeline: null,
+  });
 
   return (
     <div className="flex min-h-screen flex-col">
@@ -18,7 +35,13 @@ export default function OnBoarding() {
 
       <main className="flex-1">
         {currentStep === 1 && (
-          <OccupationStep onNext={() => setCurrentStep(2)} />
+          <OccupationStep
+            occupation={onBoardingData.occupation}
+            setOccupation={(occupation) =>
+              setOnBoardingData((prev) => ({ ...prev, occupation }))
+            }
+            onNext={() => setCurrentStep(2)}
+          />
         )}
 
         {currentStep === 2 && (
