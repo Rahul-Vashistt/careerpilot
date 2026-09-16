@@ -1,23 +1,29 @@
 "use client";
 
-import { useState } from "react";
 import { PiCheck } from "react-icons/pi";
 
 import StepHeader from "../StepHeader";
 import StepNavigation from "../StepNavigation";
 import { timeOptions } from "./timeOptions";
 
+import type { onBoardingProps } from "@/app/onboarding/page";
+
 type Props = {
   onNext: () => void;
   onBack: () => void;
+  weeklyTime: onBoardingProps["weeklyTime"];
+  setWeeklyTime: (weeklyTime: string) => void;
 };
 
-export default function TimeStep({ onNext, onBack }: Props) {
-  const [selectedTime, setSelectedTime] = useState<string | null>("");
-
-  const handleSelectedTime = (time : string)=>{
-    setSelectedTime((prev) => (prev === time ? "" : time))
-  }
+export default function TimeStep({
+  onNext,
+  onBack,
+  weeklyTime,
+  setWeeklyTime,
+}: Props) {
+  const handleSelectedTime = (time: string) => {
+    setWeeklyTime(weeklyTime === time ? "" : time);
+  };
 
   return (
     <div className="flex min-h-[90vh] items-center justify-center p-8 sm:p-0">
@@ -38,20 +44,19 @@ export default function TimeStep({ onNext, onBack }: Props) {
         <div className="grid w-full grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
           {timeOptions.map((time) => {
             const Icon = time.icon;
-            const isSelected = selectedTime === time.title;
+            const isSelected = weeklyTime === time.title;
 
             return (
               <button
                 key={time.title}
                 type="button"
                 onClick={() => handleSelectedTime(time.title)}
-                className={`relative flex min-h-33 flex-col space-y-3 rounded-lg border-2 p-5 text-left cursor-pointer transition ${
+                className={`relative flex min-h-33 cursor-pointer flex-col space-y-3 rounded-lg border-2 p-5 text-left transition ${
                   isSelected
                     ? "border-primary bg-surface-muted"
                     : "border-border bg-surface hover:border-border-hover hover:bg-surface-hover"
                 }`}
               >
-          
                 <div
                   className={`absolute right-4 top-4 flex h-4 w-4 items-center justify-center rounded-full border-2 ${
                     isSelected
@@ -88,11 +93,11 @@ export default function TimeStep({ onNext, onBack }: Props) {
           })}
         </div>
 
-        {/* buttons */}
+        {/* Buttons */}
         <StepNavigation
           onNext={onNext}
           onBack={onBack}
-          nextLabel={selectedTime ? "Continue" : "Skip"}
+          nextLabel={weeklyTime ? "Continue" : "Skip"}
         />
       </div>
     </div>

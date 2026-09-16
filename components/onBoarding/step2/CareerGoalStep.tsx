@@ -1,19 +1,25 @@
 "use client";
 
-import { useState } from "react";
 import { PiCheck } from "react-icons/pi";
 import { careerGoalOptions } from "./careerGoalOptions";
 import StepHeader from "../StepHeader";
-import { FiArrowRight } from "react-icons/fi";
 import StepNavigation from "../StepNavigation";
+
+import type { onBoardingProps } from "@/app/onboarding/page";
 
 type Props = {
   onNext: () => void;
   onBack: () => void;
+  careerGoal : onBoardingProps["careerGoal"]
+  setCareerGoal : (careerGoal : string) => void
 };
 
-export default function CareerGoalStep({ onNext, onBack }: Props) {
-  const [selectedCareer, setSelectedCareer] = useState<string | null>("Frontend Developer");
+export default function CareerGoalStep({
+  onNext,
+  onBack,
+  careerGoal,
+  setCareerGoal,
+}: Props) {
 
   return (
     <div className="flex min-h-[90vh] items-center justify-center p-8 sm:p-0">
@@ -30,13 +36,13 @@ export default function CareerGoalStep({ onNext, onBack }: Props) {
         <div className="grid w-full grid-cols-1 gap-4 sm:grid-cols-3">
           {careerGoalOptions.map((career) => {
             const Icon = career.icon;
-            const isSelected = selectedCareer === career.title;
+            const isSelected = careerGoal === career.title;
 
             return (
               <button
                 key={career.title}
                 type="button"
-                onClick={() => setSelectedCareer(career.title)}
+                onClick={() => setCareerGoal(career.title)}
                 className={`relative flex gap-4 flex-col rounded-lg border-2 p-3 text-left cursor-pointer transition ${
                   isSelected
                     ? "border-primary bg-surface-muted"

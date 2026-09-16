@@ -20,13 +20,14 @@ export type onBoardingProps = {
 
 export default function OnBoarding() {
   const [currentStep, setCurrentStep] = useState(1);
+
   const [onBoardingData, setOnBoardingData] = useState<onBoardingProps>({
-    occupation: null,
-    careerGoal: null,
+    occupation: "Student",
+    careerGoal: "Frontend Developer",
     skills: [],
     mainGoal: null,
     weeklyTime: null,
-    timeline: null,
+    timeline: "I'm flexible",
   });
 
   return (
@@ -38,7 +39,10 @@ export default function OnBoarding() {
           <OccupationStep
             occupation={onBoardingData.occupation}
             setOccupation={(occupation) =>
-              setOnBoardingData((prev) => ({ ...prev, occupation }))
+              setOnBoardingData((prev) => ({
+                ...prev,
+                occupation,
+              }))
             }
             onNext={() => setCurrentStep(2)}
           />
@@ -48,30 +52,69 @@ export default function OnBoarding() {
           <CareerGoalStep
             onNext={() => setCurrentStep(3)}
             onBack={() => setCurrentStep(1)}
+            careerGoal={onBoardingData.careerGoal}
+            setCareerGoal={(careerGoal) =>
+              setOnBoardingData((prev) => ({
+                ...prev,
+                careerGoal,
+              }))
+            }
           />
         )}
+
         {currentStep === 3 && (
           <SkillsStep
             onNext={() => setCurrentStep(4)}
             onBack={() => setCurrentStep(2)}
+            skills={onBoardingData.skills}
+            setSkills={(skills) =>
+              setOnBoardingData((prev) => ({
+                ...prev,
+                skills,
+              }))
+            }
           />
         )}
+
         {currentStep === 4 && (
           <GoalStep
             onNext={() => setCurrentStep(5)}
             onBack={() => setCurrentStep(3)}
+            mainGoal={onBoardingData.mainGoal}
+            setMainGoal={(mainGoal) =>
+              setOnBoardingData((prev) => ({
+                ...prev,
+                mainGoal,
+              }))
+            }
           />
         )}
+
         {currentStep === 5 && (
           <TimeStep
             onNext={() => setCurrentStep(6)}
             onBack={() => setCurrentStep(4)}
+            weeklyTime={onBoardingData.weeklyTime}
+            setWeeklyTime={(weeklyTime) =>
+              setOnBoardingData((prev) => ({
+                ...prev,
+                weeklyTime,
+              }))
+            }
           />
         )}
+
         {currentStep === 6 && (
           <TimelineStep
             onNext={() => setCurrentStep(7)}
             onBack={() => setCurrentStep(5)}
+            timeline={onBoardingData.timeline}
+            setTimeline={(timeline) =>
+              setOnBoardingData((prev) => ({
+                ...prev,
+                timeline,
+              }))
+            }
           />
         )}
       </main>

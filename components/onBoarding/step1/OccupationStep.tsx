@@ -1,6 +1,5 @@
 "use client";
 
-import { useState } from "react";
 import { PiCheck } from "react-icons/pi";
 import { occupationOptions } from "./occuptationOptions";
 import { FiArrowRight } from "react-icons/fi";

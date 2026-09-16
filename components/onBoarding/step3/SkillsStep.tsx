@@ -6,55 +6,62 @@ import {
   FiPlus,
   FiCheck,
   FiX,
-  FiArrowLeft,
-  FiArrowRight,
 } from "react-icons/fi";
 import { skills } from "./skillsOption";
 import StepHeader from "../StepHeader";
 import StepNavigation from "../StepNavigation";
 
+import type { onBoardingProps } from "@/app/onboarding/page";
+
 type Props = {
   onNext: () => void;
   onBack: () => void;
+  skills: onBoardingProps["skills"];
+  setSkills: (skills: string[]) => void;
 };
 
-export default function SkillsStep({ onNext, onBack }: Props) {
-  const [selectedSkills, setSelectedSkills] = useState<string[]>([]);
+export default function SkillsStep({
+  onNext,
+  onBack,
+  skills: selectedSkills,
+  setSkills,
+}: Props) {
   const [inputSkill, setInputSkill] = useState("");
-  const [searchResults, setSearchResults] = useState<(typeof skills)[number][]>(
-    [],
-  );
+  const [searchResults, setSearchResults] = useState<
+    (typeof skills)[number][]
+  >([]);
   const [limitError, setLimitError] = useState("");
 
   const handleSkillToggle = (skillName: string) => {
-    setSelectedSkills((prev) => {
-      if (prev.includes(skillName)) {
-        setLimitError("");
-        return prev.filter((skill) => skill !== skillName);
-      }
-
-      if (prev.length >= 15) {
-        setLimitError("Maximum skill limit reached");
-        return prev;
-      }
-
+    if (selectedSkills.includes(skillName)) {
+      setSkills(selectedSkills.filter((skill) => skill !== skillName));
       setLimitError("");
-      return [...prev, skillName];
-    });
+      return;
+    }
+
+    if (selectedSkills.length >= 15) {
+      setLimitError("Maximum skill limit reached");
+      return;
+    }
+
+    setLimitError("");
+    setSkills([...selectedSkills, skillName]);
   };
 
   const handleSearch = (value: string) => {
     setInputSkill(value);
 
     const query = value.trim().toLowerCase();
+
     if (!query) {
       setSearchResults([]);
       return;
     }
 
     const filtered = skills.filter((skill) =>
-      skill.name.toLowerCase().includes(query.toLowerCase()),
+      skill.name.toLowerCase().includes(query),
     );
+
     setSearchResults(filtered.slice(0, 5));
   };
 
@@ -66,7 +73,9 @@ export default function SkillsStep({ onNext, onBack }: Props) {
 
   const popularSkills = skills
     .filter((skill) =>
-      ["Programming", "Frontend", "Design", "AI / ML"].includes(skill.category),
+      ["Programming", "Frontend", "Design", "AI / ML"].includes(
+        skill.category,
+      ),
     )
     .slice(0, 30);
 
@@ -135,7 +144,10 @@ export default function SkillsStep({ onNext, onBack }: Props) {
                       <span>{skill.name}</span>
 
                       {isSelected ? (
-                        <FiCheck size={15} className="text-text-primary" />
+                        <FiCheck
+                          size={15}
+                          className="text-text-primary"
+                        />
                       ) : (
                         <FiPlus
                           size={15}
@@ -155,7 +167,10 @@ export default function SkillsStep({ onNext, onBack }: Props) {
           <p className="text-xs font-semibold uppercase tracking-wider text-muted">
             Popular skills
           </p>
-          <span className="text-xs text-muted/70">Select all that apply</span>
+
+          <span className="text-xs text-muted/70">
+            Select all that apply
+          </span>
         </div>
 
         <div className="grid grid-cols-3 gap-2 sm:grid-cols-4 md:grid-cols-6">
@@ -184,7 +199,11 @@ export default function SkillsStep({ onNext, onBack }: Props) {
                       : "bg-surface-muted text-muted group-hover:bg-border group-hover:text-text-primary"
                   }`}
                 >
-                  {isSelected ? <FiCheck size={12} /> : <FiPlus size={12} />}
+                  {isSelected ? (
+                    <FiCheck size={12} />
+                  ) : (
+                    <FiPlus size={12} />
+                  )}
                 </span>
               </button>
             );
@@ -203,9 +222,14 @@ export default function SkillsStep({ onNext, onBack }: Props) {
                 {selectedSkills.length}
               </span>
 
-              <span className="text-xs text-muted/60">/ 15 max</span>
+              <span className="text-xs text-muted/60">
+                / 15 max
+              </span>
+
               {limitError && (
-                <span className="text-xs text-danger">{limitError}</span>
+                <span className="text-xs text-danger">
+                  {limitError}
+                </span>
               )}
             </div>
 
@@ -213,10 +237,10 @@ export default function SkillsStep({ onNext, onBack }: Props) {
               <button
                 type="button"
                 onClick={() => {
-                  setSelectedSkills([]);
+                  setSkills([]);
                   setLimitError("");
                 }}
-                className="text-xs font-medium text-muted transition-colors hover:text-danger cursor-pointer"
+                className="cursor-pointer text-xs font-medium text-muted transition-colors hover:text-danger"
               >
                 Clear all
               </button>
@@ -233,6 +257,7 @@ export default function SkillsStep({ onNext, onBack }: Props) {
                   className="group inline-flex items-center gap-1.5 rounded-full border border-border bg-surface-muted py-1 pl-3 pr-2 text-xs font-medium text-text-primary transition-colors hover:border-danger/40 hover:text-danger"
                 >
                   <span>{skill}</span>
+
                   <FiX
                     size={13}
                     className="text-muted transition-colors group-hover:text-danger"
@@ -241,7 +266,9 @@ export default function SkillsStep({ onNext, onBack }: Props) {
               ))}
             </div>
           ) : (
-            <p className="text-xs text-muted/70">No skills selected yet.</p>
+            <p className="text-xs text-muted/70">
+              No skills selected yet.
+            </p>
           )}
         </div>
 
@@ -252,7 +279,9 @@ export default function SkillsStep({ onNext, onBack }: Props) {
         <StepNavigation
           onNext={onNext}
           onBack={onBack}
-          nextLabel={selectedSkills.length === 0 ? "Skip" : "Continue"}
+          nextLabel={
+            selectedSkills.length === 0 ? "Skip" : "Continue"
+          }
         />
       </div>
     </div>

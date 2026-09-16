@@ -1,22 +1,26 @@
 "use client";
 
-import { useState } from "react";
 import { PiCheck } from "react-icons/pi";
 
 import StepHeader from "../StepHeader";
 import StepNavigation from "../StepNavigation";
 import { timelineOptions } from "./timelineOptions";
 
+import type { onBoardingProps } from "@/app/onboarding/page";
+
 type Props = {
   onNext: () => void;
   onBack: () => void;
+  timeline: onBoardingProps["timeline"];
+  setTimeline: (timeline: string) => void;
 };
 
-export default function TimelineStep({ onNext, onBack }: Props) {
-  const [selectedTimeline, setSelectedTimeline] = useState<string | null>(
-    "Within 3 months",
-  );
-
+export default function TimelineStep({
+  onNext,
+  onBack,
+  timeline,
+  setTimeline,
+}: Props) {
   return (
     <div className="flex min-h-[90vh] items-center justify-center p-8 sm:p-0">
       <div className="flex w-full max-w-2xl flex-col items-center gap-6">
@@ -34,16 +38,16 @@ export default function TimelineStep({ onNext, onBack }: Props) {
 
         {/* Options */}
         <div className="grid w-full grid-cols-1 gap-4 sm:grid-cols-2">
-          {timelineOptions.map((timeline) => {
-            const Icon = timeline.icon;
-            const isSelected = selectedTimeline === timeline.title;
+          {timelineOptions.map((timelineOption) => {
+            const Icon = timelineOption.icon;
+            const isSelected = timeline === timelineOption.title;
 
             return (
               <button
-                key={timeline.title}
+                key={timelineOption.title}
                 type="button"
-                onClick={() => setSelectedTimeline(timeline.title)}
-                className={`relative flex min-h-27 flex-col space-y-3 rounded-lg border-2 p-5 text-left cursor-pointer transition ${
+                onClick={() => setTimeline(timelineOption.title)}
+                className={`relative flex min-h-27 cursor-pointer flex-col space-y-3 rounded-lg border-2 p-5 text-left transition ${
                   isSelected
                     ? "border-primary bg-surface-muted"
                     : "border-border bg-surface hover:border-border-hover hover:bg-surface-hover"
@@ -57,22 +61,27 @@ export default function TimelineStep({ onNext, onBack }: Props) {
                   }`}
                 >
                   {isSelected && (
-                    <PiCheck size={10} className="text-primary-foreground" />
+                    <PiCheck
+                      size={10}
+                      className="text-primary-foreground"
+                    />
                   )}
                 </div>
 
                 <Icon
                   size={24}
-                  className={isSelected ? "text-text-primary" : "text-muted"}
+                  className={
+                    isSelected ? "text-text-primary" : "text-muted"
+                  }
                 />
 
                 <div className="space-y-1">
                   <h2 className="font-semibold text-text-primary">
-                    {timeline.title}
+                    {timelineOption.title}
                   </h2>
 
                   <p className="text-sm leading-5 text-text-secondary">
-                    {timeline.description}
+                    {timelineOption.description}
                   </p>
                 </div>
               </button>
@@ -80,11 +89,11 @@ export default function TimelineStep({ onNext, onBack }: Props) {
           })}
         </div>
 
-        {/* buttons */}
+        {/* Buttons */}
         <StepNavigation
           onNext={onNext}
           onBack={onBack}
-          disabled={!selectedTimeline}
+          disabled={!timeline}
           nextLabel="Submit"
         />
       </div>

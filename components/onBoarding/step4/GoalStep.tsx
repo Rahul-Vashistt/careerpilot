@@ -1,22 +1,27 @@
 "use client";
 
-import { useState } from "react";
 import { PiCheck } from "react-icons/pi";
-import { FiArrowLeft, FiArrowRight } from "react-icons/fi";
 import { goalOptions } from "./goalOptions";
 import StepHeader from "../StepHeader";
 import StepNavigation from "../StepNavigation";
 
+import type { onBoardingProps } from "@/app/onboarding/page";
+
 type Props = {
   onNext: () => void;
   onBack: () => void;
+  mainGoal: onBoardingProps["mainGoal"];
+  setMainGoal: (mainGoal: string) => void;
 };
 
-export default function GoalStep({ onNext, onBack }: Props) {
-  const [selectedGoal, setSelectedGoal] = useState<string | null>("");
-
+export default function GoalStep({
+  onNext,
+  onBack,
+  mainGoal,
+  setMainGoal,
+}: Props) {
   const handleSelectGoal = (goal: string) => {
-    setSelectedGoal((prev) => (prev === goal ? "" : goal));
+    setMainGoal(mainGoal === goal ? "" : goal);
   };
 
   return (
@@ -25,22 +30,27 @@ export default function GoalStep({ onNext, onBack }: Props) {
         <StepHeader
           currentStep={4}
           title="What's your main goal?"
-          description="Choose the career path you're most interested in pursuing.Choose what you want to achieve right now.
-            You can always update this later."
+          description={
+            <>
+              Choose what you want to achieve right now.
+              <br />
+              You can always update this later.
+            </>
+          }
         />
 
         {/* Goal Options */}
         <div className="grid w-full grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {goalOptions.map((goal) => {
             const Icon = goal.icon;
-            const isSelected = selectedGoal === goal.title;
+            const isSelected = mainGoal === goal.title;
 
             return (
               <button
                 key={goal.title}
                 type="button"
                 onClick={() => handleSelectGoal(goal.title)}
-                className={`relative flex min-h-41.25 flex-col space-y-3 rounded-lg border-2 p-6 text-left cursor-pointer transition ${
+                className={`relative flex min-h-41.25 cursor-pointer flex-col space-y-3 rounded-lg border-2 p-6 text-left transition ${
                   isSelected
                     ? "border-primary bg-surface-muted"
                     : "border-border bg-surface hover:border-border-hover hover:bg-surface-hover"
@@ -55,14 +65,19 @@ export default function GoalStep({ onNext, onBack }: Props) {
                   }`}
                 >
                   {isSelected && (
-                    <PiCheck size={13} className="text-primary-foreground" />
+                    <PiCheck
+                      size={13}
+                      className="text-primary-foreground"
+                    />
                   )}
                 </div>
 
                 {/* Icon */}
                 <Icon
                   size={30}
-                  className={isSelected ? "text-text-primary" : "text-muted"}
+                  className={
+                    isSelected ? "text-text-primary" : "text-muted"
+                  }
                 />
 
                 {/* Content */}
@@ -84,7 +99,7 @@ export default function GoalStep({ onNext, onBack }: Props) {
         <StepNavigation
           onNext={onNext}
           onBack={onBack}
-          nextLabel={selectedGoal ? "Continue" : "Skip"}
+          nextLabel={mainGoal ? "Continue" : "Skip"}
         />
       </div>
     </div>
