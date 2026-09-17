@@ -66,7 +66,6 @@ export default function CareerGoalStep({
                   className={isSelected ? "text-text-primary" : "text-muted"}
                 />
 
-                {/* Title */}
                 <h2 className="pr-5 font-semibold text-text-primary">
                   {career.title}
                 </h2>

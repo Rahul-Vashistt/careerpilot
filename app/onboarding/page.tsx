@@ -30,6 +30,19 @@ export default function OnBoarding() {
     timeline: "I'm flexible",
   });
 
+  const submitOnBoardingData = () => {
+    if (
+      !onBoardingData.occupation?.trim() ||
+      !onBoardingData.careerGoal?.trim() ||
+      !onBoardingData.timeline
+    ) {
+      return;
+    }
+
+    console.log("Data submitted");
+    console.log(onBoardingData);
+  };
+
   return (
     <div className="flex min-h-screen flex-col">
       <Header currentStep={currentStep} />
@@ -106,7 +119,7 @@ export default function OnBoarding() {
 
         {currentStep === 6 && (
           <TimelineStep
-            onNext={() => setCurrentStep(7)}
+            onSubmit={() => submitOnBoardingData()}
             onBack={() => setCurrentStep(5)}
             timeline={onBoardingData.timeline}
             setTimeline={(timeline) =>

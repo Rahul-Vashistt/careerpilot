@@ -56,7 +56,6 @@ export default function GoalStep({
                     : "border-border bg-surface hover:border-border-hover hover:bg-surface-hover"
                 }`}
               >
-                {/* Check */}
                 <div
                   className={`absolute right-4 top-4 flex h-5 w-5 items-center justify-center rounded-full border-2 ${
                     isSelected
@@ -72,7 +71,6 @@ export default function GoalStep({
                   )}
                 </div>
 
-                {/* Icon */}
                 <Icon
                   size={30}
                   className={
@@ -80,7 +78,6 @@ export default function GoalStep({
                   }
                 />
 
-                {/* Content */}
                 <div className="space-y-1">
                   <h2 className="font-semibold text-text-primary">
                     {goal.title}

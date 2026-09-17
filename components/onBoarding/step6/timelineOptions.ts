@@ -2,6 +2,11 @@ import { FiCalendar } from "react-icons/fi";
 
 export const timelineOptions = [
   {
+    title: "I'm flexible",
+    description: "I'm open to the best timeline for my progress.",
+    icon: FiCalendar,
+  },
+  {
     title: "Within 3 months",
     description: "Quick progress, stay motivated with short-term goals.",
     icon: FiCalendar,
@@ -16,9 +21,5 @@ export const timelineOptions = [
     description: "Build skills, gain experience, reach your goal.",
     icon: FiCalendar,
   },
-  {
-    title: "I'm flexible",
-    description: "I'm open to the best timeline for my progress.",
-    icon: FiCalendar,
-  },
+  
 ];

@@ -9,14 +9,14 @@ import { timelineOptions } from "./timelineOptions";
 import type { onBoardingProps } from "@/app/onboarding/page";
 
 type Props = {
-  onNext: () => void;
+  onSubmit: () => void;
   onBack: () => void;
   timeline: onBoardingProps["timeline"];
   setTimeline: (timeline: string) => void;
 };
 
 export default function TimelineStep({
-  onNext,
+  onSubmit,
   onBack,
   timeline,
   setTimeline,
@@ -61,18 +61,13 @@ export default function TimelineStep({
                   }`}
                 >
                   {isSelected && (
-                    <PiCheck
-                      size={10}
-                      className="text-primary-foreground"
-                    />
+                    <PiCheck size={10} className="text-primary-foreground" />
                   )}
                 </div>
 
                 <Icon
                   size={24}
-                  className={
-                    isSelected ? "text-text-primary" : "text-muted"
-                  }
+                  className={isSelected ? "text-text-primary" : "text-muted"}
                 />
 
                 <div className="space-y-1">
@@ -90,10 +85,10 @@ export default function TimelineStep({
         </div>
 
         {/* Buttons */}
+
         <StepNavigation
-          onNext={onNext}
           onBack={onBack}
-          disabled={!timeline}
+          onSubmit={onSubmit}
           nextLabel="Submit"
         />
       </div>

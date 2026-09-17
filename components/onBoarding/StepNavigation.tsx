@@ -1,8 +1,9 @@
 import { FiArrowLeft, FiArrowRight } from "react-icons/fi";
 
 type Props = {
-  onNext: () => void;
+  onNext?: () => void;
   onBack?: () => void;
+  onSubmit?: () => void;
   disabled?: boolean;
   nextLabel?: string;
 };
@@ -10,6 +11,7 @@ type Props = {
 export default function StepNavigation({
   onNext,
   onBack,
+  onSubmit,
   disabled = false,
   nextLabel = "Continue",
 }: Props) {
@@ -24,7 +26,6 @@ export default function StepNavigation({
           <span className="flex w-0 overflow-hidden opacity-0 transition-all duration-300 ease-out group-hover:mr-2 group-hover:w-4 group-hover:opacity-100">
             <FiArrowLeft className="shrink-0" />
           </span>
-
           Back
         </button>
       ) : (
@@ -34,7 +35,7 @@ export default function StepNavigation({
       <button
         type="button"
         disabled={disabled}
-        onClick={onNext}
+        onClick={onSubmit ?? onNext}
         className="group flex cursor-pointer items-center justify-center rounded-lg bg-primary px-8 py-3 text-sm font-semibold text-primary-foreground transition-all duration-300 hover:bg-primary-hover disabled:cursor-not-allowed disabled:bg-disabled disabled:text-disabled-foreground"
       >
         {nextLabel}
