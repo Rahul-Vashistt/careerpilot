@@ -13,7 +13,8 @@ import {
   FiUser,
 } from "react-icons/fi";
 import { CiMail } from "react-icons/ci";
-import { useSignup } from "@/features/hooks";
+import { authClient } from "@/lib/auth/auth-client";
+import { FaGithub, FaGoogle } from "react-icons/fa";
 
 export default function SignUpForm() {
   const [fullName, setFullName] = useState("");
@@ -22,17 +23,13 @@ export default function SignUpForm() {
   const [termsAccepted, setTermsAccepted] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
 
+  const [isPending, setIsPending] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+
   const emailRef = useRef<HTMLInputElement>(null);
   const passwordRef = useRef<HTMLInputElement>(null);
 
   const router = useRouter();
-
-  const {
-    mutate: signup,
-    isPending,
-    error,
-    isError,
-  } = useSignup();
 
   const hasMinLength = password.length >= 8;
   const hasSymbol = /[!@#$%^&*]/.test(password);
@@ -49,9 +46,7 @@ export default function SignUpForm() {
     isPasswordValid &&
     termsAccepted;
 
-  const handleFullNameKeyDown = (
-    e: React.KeyboardEvent<HTMLInputElement>,
-  ) => {
+  const handleFullNameKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key !== "Enter") return;
 
     e.preventDefault();
@@ -59,9 +54,7 @@ export default function SignUpForm() {
     emailRef.current?.focus();
   };
 
-  const handleEmailKeyDown = (
-    e: React.KeyboardEvent<HTMLInputElement>,
-  ) => {
+  const handleEmailKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key !== "Enter") return;
 
     e.preventDefault();
@@ -69,29 +62,34 @@ export default function SignUpForm() {
     passwordRef.current?.focus();
   };
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     if (!isFormValid || isPending) return;
 
-    signup(
-      {
-        name: fullName.trim(),
-        email: email.trim(),
-        password,
-      },
-      {
-        onSuccess: () => {
-          setFullName("");
-          setEmail("");
-          setPassword("");
-          setTermsAccepted(false);
-          setShowPassword(false);
+    setIsPending(true);
+    setError(null);
 
-          router.push("/onboarding");
-        },
-      },
-    );
+    const { data, error } = await authClient.signUp.email({
+      name: fullName.trim(),
+      email: email.trim(),
+      password,
+      callbackURL: "/onboarding",
+    });
+
+    if (error) {
+      setError(error.message ?? "Something went wrong. Please try again");
+      setIsPending(false);
+      return;
+    }
+
+    setFullName("");
+    setEmail("");
+    setPassword("");
+    setTermsAccepted(false);
+    setShowPassword(false);
+
+    router.push("/onboarding");
   };
 
   return (
@@ -120,7 +118,7 @@ export default function SignUpForm() {
           className="flex flex-col gap-4"
           noValidate
         >
-          {isError && (
+          {error && (
             <div
               role="alert"
               className="flex items-center gap-3 rounded-md border border-border bg-danger/10 px-4 py-3 text-sm text-danger"
@@ -130,11 +128,7 @@ export default function SignUpForm() {
                 className="mt-0.5 h-5 w-5 shrink-0 text-danger"
               />
 
-              <p>
-                {error instanceof Error
-                  ? error.message
-                  : "Something went wrong. Please try again."}
-              </p>
+              <p>{error}</p>
             </div>
           )}
 
@@ -213,7 +207,6 @@ export default function SignUpForm() {
                 {showPassword ? <FiEye /> : <FiEyeOff />}
               </button>
             </div>
-
             <div className="flex flex-wrap gap-x-4 gap-y-2 text-xs text-muted">
               <span
                 className={`flex items-center gap-1.5 ${
@@ -304,7 +297,6 @@ export default function SignUpForm() {
             ) : (
               <>
                 Create account
-
                 <span
                   className={`text-md -translate-x-4 opacity-0 transition-all duration-300 ease-out group-hover:translate-x-0 ${
                     isFormValid ? "group-hover:opacity-100" : ""
@@ -325,14 +317,47 @@ export default function SignUpForm() {
           <div className="h-px flex-1 bg-border" />
         </div>
 
-        <button
-          type="button"
-          disabled={isPending}
-          className="flex w-full cursor-pointer items-center justify-center gap-3 rounded-md border border-border bg-surface py-2.5 text-sm font-medium text-text-primary shadow-sm transition hover:bg-surface-hover disabled:cursor-not-allowed disabled:opacity-60"
-        >
-          <span className="text-base font-bold">G</span>
-          Continue with Google
-        </button>
+        <div className="space-y-3">
+          <button
+            type="button"
+            disabled={isPending}
+            onClick={async () => {
+              setError(null);
+              setIsPending(true);
+
+              await authClient.signIn.social({
+                provider: "google",
+                callbackURL: "/onboarding",
+              });
+            }}
+            className="flex w-full cursor-pointer items-center justify-center gap-3 rounded-md border border-border bg-surface py-2.5 text-sm font-medium text-text-primary shadow-sm transition hover:bg-surface-hover disabled:cursor-not-allowed disabled:opacity-60"
+          >
+            <span className="text-base font-bold">
+              <FaGoogle />
+            </span>
+            Continue with Google
+          </button>
+
+          <button
+            type="button"
+            disabled={isPending}
+            onClick={async () => {
+              setError(null);
+              setIsPending(true);
+
+              await authClient.signIn.social({
+                provider: "github",
+                callbackURL: "/onboarding",
+              });
+            }}
+            className="flex w-full cursor-pointer items-center justify-center gap-3 rounded-md border border-border bg-surface py-2.5 text-sm font-medium text-text-primary shadow-sm transition hover:bg-surface-hover disabled:cursor-not-allowed disabled:opacity-60"
+          >
+            <span className="text-base font-bold">
+              <FaGithub />
+            </span>
+            Continue with GitHub
+          </button>
+        </div>
 
         <p className="mt-7 text-center text-sm text-muted">
           Already have an account?{" "}

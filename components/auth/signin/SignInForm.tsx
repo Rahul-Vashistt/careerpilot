@@ -1,15 +1,15 @@
 "use client";
 
 import { useRef, useState } from "react";
-import { useRouter } from "next/navigation";
+import Link from "next/link";
 
-import { FiLock, FiEye, FiEyeOff, FiArrowRight } from "react-icons/fi";
+import { FiLock, FiEye, FiEyeOff, FiArrowRight, FiAlertCircle } from "react-icons/fi";
 import { CiMail } from "react-icons/ci";
 
-import { useSignin } from "@/features/hooks";
+import { authClient } from "@/lib/auth/auth-client";
+import { FaGithub, FaGoogle } from "react-icons/fa";
 
 export default function SignInForm() {
-  const router = useRouter();
 
   const passwordRef = useRef<HTMLInputElement>(null);
 
@@ -18,33 +18,40 @@ export default function SignInForm() {
   const [rememberMe, setRememberMe] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
 
-  const { mutate: signin, isPending, error, isError } = useSignin();
+  const [isPending, setIsPending] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
   const isEmailValid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
   const isFormValid = isEmailValid && password.trim().length > 0;
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     if (!isFormValid || isPending) return;
 
-    signin(
-      {
-        email: email.trim(),
-        password,
-        rememberMe,
-      },
-      {
-        onSuccess: () => {
-          router.push("/onboarding");
-        },
-      },
-    );
+    setError(null);
+    setIsPending(true);
+
+    const { data, error } = await authClient.signIn.email({
+      email: email.trim(),
+      password,
+      rememberMe,
+      callbackURL: "/onboarding",
+    });
+
+    if (error) {
+      setError(error.message ?? "Something went wrong.Please try again");
+      setIsPending(false);
+      return;
+    }
+
+    setEmail("");
+    setPassword("");
+    setRememberMe(false);
+    setShowPassword(false);
   };
 
-  const handleEmailKeyDown = (
-    e: React.KeyboardEvent<HTMLInputElement>,
-  ) => {
+  const handleEmailKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key !== "Enter") return;
 
     e.preventDefault();
@@ -75,7 +82,6 @@ export default function SignInForm() {
         <form onSubmit={handleSubmit} className="flex flex-col gap-5">
           <label className="flex flex-col gap-2 text-sm font-medium text-text-primary">
             Email address
-
             <div className="relative">
               <CiMail
                 className="pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 text-xl text-text-secondary"
@@ -98,7 +104,6 @@ export default function SignInForm() {
 
           <label className="flex flex-col gap-2 text-sm font-medium text-text-primary">
             Password
-
             <div className="relative">
               <FiLock
                 className="pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 text-lg text-text-secondary"
@@ -122,9 +127,7 @@ export default function SignInForm() {
                 onClick={() => setShowPassword((prev) => !prev)}
                 disabled={isPending}
                 className="absolute right-3 top-1/2 -translate-y-1/2 cursor-pointer text-muted transition hover:text-text-primary disabled:cursor-not-allowed"
-                aria-label={
-                  showPassword ? "Hide password" : "Show password"
-                }
+                aria-label={showPassword ? "Hide password" : "Show password"}
               >
                 {showPassword ? <FiEye /> : <FiEyeOff />}
               </button>
@@ -158,24 +161,29 @@ export default function SignInForm() {
                   />
                 </svg>
               </span>
-
               Remember me
             </label>
 
-            <a
+            <Link
               href="/forgot-password"
               className="text-sm font-medium text-text-primary hover:underline"
             >
               Forgot password?
-            </a>
+            </Link>
           </div>
 
-          {isError && (
-            <p role="alert" className="text-sm text-danger">
-              {error instanceof Error
-                ? error.message
-                : "Something went wrong. Please try again."}
-            </p>
+          {error && (
+            <div
+              role="alert"
+              className="flex items-center gap-3 rounded-md border border-border bg-danger/10 px-4 py-3 text-sm text-danger"
+            >
+              <FiAlertCircle
+                aria-hidden="true"
+                className="mt-0.5 h-5 w-5 shrink-0 text-danger"
+              />
+
+              <p>{error}</p>
+            </div>
           )}
 
           <button
@@ -195,7 +203,6 @@ export default function SignInForm() {
             ) : (
               <>
                 Continue
-
                 {isFormValid && (
                   <span className="-translate-x-4 text-md opacity-0 transition-all duration-300 ease-out group-hover:translate-x-0 group-hover:opacity-100">
                     <FiArrowRight />
@@ -214,23 +221,56 @@ export default function SignInForm() {
           <div className="h-px flex-1 bg-border" />
         </div>
 
-        <button
-          type="button"
-          disabled={isPending}
-          className="flex w-full cursor-pointer items-center justify-center gap-3 rounded-md border border-border bg-surface py-2.5 text-sm font-medium text-text-primary shadow-sm transition hover:bg-surface-hover disabled:cursor-not-allowed disabled:opacity-60"
-        >
-          <span className="text-base font-bold">G</span>
-          Continue with Google
-        </button>
+        <div className="space-y-3">
+          <button
+            type="button"
+            disabled={isPending}
+            onClick={async () => {
+              setError(null);
+              setIsPending(true);
+
+              await authClient.signIn.social({
+                provider: "google",
+                callbackURL: "/onboarding"
+              })
+            }}
+            className="flex w-full cursor-pointer items-center justify-center gap-3 rounded-md border border-border bg-surface py-2.5 text-sm font-medium text-text-primary shadow-sm transition hover:bg-surface-hover disabled:cursor-not-allowed disabled:opacity-60"
+          >
+            <span className="text-base font-bold">
+              <FaGoogle />
+            </span>
+            Continue with Google
+          </button>
+
+          <button
+            type="button"
+            disabled={isPending}
+            onClick={async () => {
+              setError(null);
+              setIsPending(true);
+
+              await authClient.signIn.social({
+                provider: "github",
+                callbackURL: "/onboarding"
+              })
+            }}
+            className="flex w-full cursor-pointer items-center justify-center gap-3 rounded-md border border-border bg-surface py-2.5 text-sm font-medium text-text-primary shadow-sm transition hover:bg-surface-hover disabled:cursor-not-allowed disabled:opacity-60"
+          >
+            <span className="text-base font-bold">
+              <FaGithub />
+            </span>
+            Continue with GitHub
+          </button>
+        </div>
 
         <p className="mt-8 text-center text-sm text-muted">
           Don&apos;t have an account?{" "}
-          <a
+          <Link
             href="/sign-up"
             className="cursor-pointer font-medium text-text-primary hover:underline"
           >
             Create an account
-          </a>
+          </Link>
         </p>
       </div>
     </section>
