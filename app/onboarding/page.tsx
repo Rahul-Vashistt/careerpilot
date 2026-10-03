@@ -1,6 +1,8 @@
 "use client";
 
 import { useState } from "react";
+import { useRouter } from "next/navigation";
+
 import Header from "@/components/onBoarding/Header";
 import OccupationStep from "@/components/onBoarding/step1/OccupationStep";
 import CareerGoalStep from "@/components/onBoarding/step2/CareerGoalStep";
@@ -20,6 +22,7 @@ export type onBoardingProps = {
 
 export default function OnBoarding() {
   const [currentStep, setCurrentStep] = useState(1);
+  const router = useRouter();
 
   const [onBoardingData, setOnBoardingData] = useState<onBoardingProps>({
     occupation: "Student",
@@ -38,9 +41,9 @@ export default function OnBoarding() {
     ) {
       return;
     }
-
     console.log("Data submitted");
     console.log(onBoardingData);
+    router.push("/dashboard");
   };
 
   return (

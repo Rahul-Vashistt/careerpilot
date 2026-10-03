@@ -4,7 +4,6 @@ type Props = {
   currentStep: number;
 };
 
-
 export default function Header({currentStep} : Props) {
 
   return (
