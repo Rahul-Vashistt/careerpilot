@@ -13,7 +13,7 @@ import {
   PiSquaresFour,
 } from "react-icons/pi";
 
-export const careerGoalOptions = [
+export const targetRoleOptions = [
   {
     icon: PiGlobe,
     title: "Frontend Developer",

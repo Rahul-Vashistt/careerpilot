@@ -88,7 +88,7 @@ export default function OccupationStep({
             className="group flex w-full items-center justify-center gap-2 rounded-lg bg-primary py-3 text-sm font-semibold text-primary-foreground transition-all duration-300 hover:bg-primary-hover disabled:cursor-not-allowed disabled:bg-disabled disabled:text-disabled-foreground cursor-pointer"
           >
             Continue
-            <span className="inline-flex -translate-x-2 items-center text-base opacity-0 transition-all duration-300 ease-out group-hover:translate-x-1 group-hover:opacity-100">
+            <span className="inline-flex -translate-x-1.5 items-center text-base opacity-0 transition-all duration-300 ease-out group-hover:translate-x-1 group-hover:opacity-100">
               <FiArrowRight />
             </span>
           </button>

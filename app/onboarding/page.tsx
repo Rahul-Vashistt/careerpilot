@@ -5,7 +5,7 @@ import { useRouter } from "next/navigation";
 
 import Header from "@/components/onBoarding/Header";
 import OccupationStep from "@/components/onBoarding/step1/OccupationStep";
-import CareerGoalStep from "@/components/onBoarding/step2/CareerGoalStep";
+import TargetRoleStep from "@/components/onBoarding/step2/TargetRoleStep";
 import SkillsStep from "@/components/onBoarding/step3/SkillsStep";
 import GoalStep from "@/components/onBoarding/step4/GoalStep";
 import TimeStep from "@/components/onBoarding/step5/TimeStep";
@@ -26,7 +26,7 @@ export default function OnBoarding() {
   const [currentStep, setCurrentStep] = useState(1);
   const router = useRouter();
 
-  const { mutateAsync, isPending } = useCompleteOnboarding();
+  const { mutateAsync } = useCompleteOnboarding();
 
   const [onBoardingData, setOnBoardingData] = useState<OnboardingData>({
     currentStatus: "Student",
@@ -42,8 +42,9 @@ export default function OnBoarding() {
       !onBoardingData.currentStatus?.trim() ||
       !onBoardingData.targetRole?.trim() ||
       !onBoardingData.goalTimeline
-    )
+    ) {
       return;
+    }
 
     try {
       const data = await mutateAsync({
@@ -70,10 +71,10 @@ export default function OnBoarding() {
         {currentStep === 1 && (
           <OccupationStep
             currentStatus={onBoardingData.currentStatus}
-            setOccupation={(occupation) =>
+            setOccupation={(currentStatus) =>
               setOnBoardingData((prev) => ({
                 ...prev,
-                occupation,
+                currentStatus,
               }))
             }
             onNext={() => setCurrentStep(2)}
@@ -81,14 +82,14 @@ export default function OnBoarding() {
         )}
 
         {currentStep === 2 && (
-          <CareerGoalStep
+          <TargetRoleStep
             onNext={() => setCurrentStep(3)}
             onBack={() => setCurrentStep(1)}
             targetRole={onBoardingData.targetRole}
-            setCareerGoal={(careerGoal) =>
+            setTargetRole={(targetRole) =>
               setOnBoardingData((prev) => ({
                 ...prev,
-                careerGoal,
+                targetRole,
               }))
             }
           />
@@ -138,13 +139,13 @@ export default function OnBoarding() {
 
         {currentStep === 6 && (
           <TimelineStep
-            onSubmit={() => submitOnBoardingData()}
+            onSubmit={submitOnBoardingData}
             onBack={() => setCurrentStep(5)}
             goalTimeline={onBoardingData.goalTimeline}
-            setTimeline={(timeline) =>
+            setTimeline={(goalTimeline) =>
               setOnBoardingData((prev) => ({
                 ...prev,
-                timeline,
+                goalTimeline,
               }))
             }
           />
