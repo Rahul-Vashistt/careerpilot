@@ -5,12 +5,12 @@ import { goalOptions } from "./goalOptions";
 import StepHeader from "../StepHeader";
 import StepNavigation from "../StepNavigation";
 
-import type { onBoardingProps } from "@/app/onboarding/page";
+import type { OnboardingData } from "@/app/onboarding/page";
 
 type Props = {
   onNext: () => void;
   onBack: () => void;
-  mainGoal: onBoardingProps["mainGoal"];
+  mainGoal: OnboardingData["mainGoal"];
   setMainGoal: (mainGoal: string) => void;
 };
 

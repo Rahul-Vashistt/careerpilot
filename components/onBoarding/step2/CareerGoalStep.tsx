@@ -5,19 +5,19 @@ import { careerGoalOptions } from "./careerGoalOptions";
 import StepHeader from "../StepHeader";
 import StepNavigation from "../StepNavigation";
 
-import type { onBoardingProps } from "@/app/onboarding/page";
+import type { OnboardingData } from "@/app/onboarding/page";
 
 type Props = {
   onNext: () => void;
   onBack: () => void;
-  careerGoal : onBoardingProps["careerGoal"]
+  targetRole : OnboardingData["targetRole"]
   setCareerGoal : (careerGoal : string) => void
 };
 
 export default function CareerGoalStep({
   onNext,
   onBack,
-  careerGoal,
+  targetRole,
   setCareerGoal,
 }: Props) {
 
@@ -36,7 +36,7 @@ export default function CareerGoalStep({
         <div className="grid w-full grid-cols-1 gap-4 sm:grid-cols-3">
           {careerGoalOptions.map((career) => {
             const Icon = career.icon;
-            const isSelected = careerGoal === career.title;
+            const isSelected = targetRole === career.title;
 
             return (
               <button

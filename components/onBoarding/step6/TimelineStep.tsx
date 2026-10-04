@@ -6,19 +6,19 @@ import StepHeader from "../StepHeader";
 import StepNavigation from "../StepNavigation";
 import { timelineOptions } from "./timelineOptions";
 
-import type { onBoardingProps } from "@/app/onboarding/page";
+import type { OnboardingData } from "@/app/onboarding/page";
 
 type Props = {
   onSubmit: () => void;
   onBack: () => void;
-  timeline: onBoardingProps["timeline"];
+  goalTimeline: OnboardingData["goalTimeline"];
   setTimeline: (timeline: string) => void;
 };
 
 export default function TimelineStep({
   onSubmit,
   onBack,
-  timeline,
+  goalTimeline,
   setTimeline,
 }: Props) {
   return (
@@ -40,7 +40,7 @@ export default function TimelineStep({
         <div className="grid w-full grid-cols-1 gap-4 sm:grid-cols-2">
           {timelineOptions.map((timelineOption) => {
             const Icon = timelineOption.icon;
-            const isSelected = timeline === timelineOption.title;
+            const isSelected = goalTimeline === timelineOption.title;
 
             return (
               <button

@@ -6,12 +6,12 @@ import StepHeader from "../StepHeader";
 import StepNavigation from "../StepNavigation";
 import { timeOptions } from "./timeOptions";
 
-import type { onBoardingProps } from "@/app/onboarding/page";
+import type { OnboardingData } from "@/app/onboarding/page";
 
 type Props = {
   onNext: () => void;
   onBack: () => void;
-  weeklyTime: onBoardingProps["weeklyTime"];
+  weeklyTime: OnboardingData["weeklyTime"];
   setWeeklyTime: (weeklyTime: string) => void;
 };
 

@@ -11,12 +11,12 @@ import { skills } from "./skillsOption";
 import StepHeader from "../StepHeader";
 import StepNavigation from "../StepNavigation";
 
-import type { onBoardingProps } from "@/app/onboarding/page";
+import type { OnboardingData } from "@/app/onboarding/page";
 
 type Props = {
   onNext: () => void;
   onBack: () => void;
-  skills: onBoardingProps["skills"];
+  skills: OnboardingData["skills"];
   setSkills: (skills: string[]) => void;
 };
 

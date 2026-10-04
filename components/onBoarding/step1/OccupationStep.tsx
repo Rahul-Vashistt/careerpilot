@@ -4,19 +4,19 @@ import { PiCheck } from "react-icons/pi";
 import { occupationOptions } from "./occuptationOptions";
 import { FiArrowRight } from "react-icons/fi";
 
-import type { onBoardingProps } from "@/app/onboarding/page";
+import type { OnboardingData } from "@/app/onboarding/page";
 
 import StepHeader from "../StepHeader";
 
 type Props = {
   onNext: () => void;
-  occupation: onBoardingProps["occupation"];
+  currentStatus: OnboardingData["currentStatus"];
   setOccupation: (occupation: string | null) => void;
 };
 
 export default function OccupationStep({
   onNext,
-  occupation,
+  currentStatus,
   setOccupation,
 }: Props) {
   return (
@@ -37,7 +37,7 @@ export default function OccupationStep({
         <div className="grid w-full grid-cols-1 gap-6 sm:grid-cols-2">
           {occupationOptions.map((career) => {
             const Icon = career.icon;
-            const isSelected = occupation === career.title;
+            const isSelected = currentStatus === career.title;
 
             return (
               <button
@@ -83,7 +83,7 @@ export default function OccupationStep({
         <div className="mt-8 flex w-full justify-center gap-8 ">
           <button
             type="button"
-            disabled={!occupation}
+            disabled={!currentStatus}
             onClick={onNext}
             className="group flex w-full items-center justify-center gap-2 rounded-lg bg-primary py-3 text-sm font-semibold text-primary-foreground transition-all duration-300 hover:bg-primary-hover disabled:cursor-not-allowed disabled:bg-disabled disabled:text-disabled-foreground cursor-pointer"
           >

@@ -400,7 +400,8 @@ export const ModelName = {
   User: 'User',
   Session: 'Session',
   Account: 'Account',
-  Verification: 'Verification'
+  Verification: 'Verification',
+  Onboarding: 'Onboarding'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -416,7 +417,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "user" | "session" | "account" | "verification"
+    modelProps: "user" | "session" | "account" | "verification" | "onboarding"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -716,6 +717,80 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
+    Onboarding: {
+      payload: Prisma.$OnboardingPayload<ExtArgs>
+      fields: Prisma.OnboardingFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.OnboardingFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OnboardingPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.OnboardingFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OnboardingPayload>
+        }
+        findFirst: {
+          args: Prisma.OnboardingFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OnboardingPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.OnboardingFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OnboardingPayload>
+        }
+        findMany: {
+          args: Prisma.OnboardingFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OnboardingPayload>[]
+        }
+        create: {
+          args: Prisma.OnboardingCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OnboardingPayload>
+        }
+        createMany: {
+          args: Prisma.OnboardingCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.OnboardingCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OnboardingPayload>[]
+        }
+        delete: {
+          args: Prisma.OnboardingDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OnboardingPayload>
+        }
+        update: {
+          args: Prisma.OnboardingUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OnboardingPayload>
+        }
+        deleteMany: {
+          args: Prisma.OnboardingDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.OnboardingUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.OnboardingUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OnboardingPayload>[]
+        }
+        upsert: {
+          args: Prisma.OnboardingUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OnboardingPayload>
+        }
+        aggregate: {
+          args: Prisma.OnboardingAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateOnboarding>
+        }
+        groupBy: {
+          args: Prisma.OnboardingGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.OnboardingGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.OnboardingCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.OnboardingCountAggregateOutputType> | number
+        }
+      }
+    }
   }
 } & {
   other: {
@@ -761,6 +836,7 @@ export const UserScalarFieldEnum = {
   email: 'email',
   emailVerified: 'emailVerified',
   image: 'image',
+  onboardingCompleted: 'onboardingCompleted',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 } as const
@@ -811,6 +887,22 @@ export const VerificationScalarFieldEnum = {
 } as const
 
 export type VerificationScalarFieldEnum = (typeof VerificationScalarFieldEnum)[keyof typeof VerificationScalarFieldEnum]
+
+
+export const OnboardingScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  currentStatus: 'currentStatus',
+  targetRole: 'targetRole',
+  skills: 'skills',
+  mainGoal: 'mainGoal',
+  weeklyTime: 'weeklyTime',
+  goalTimeLine: 'goalTimeLine',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type OnboardingScalarFieldEnum = (typeof OnboardingScalarFieldEnum)[keyof typeof OnboardingScalarFieldEnum]
 
 
 export const SortOrder = {
@@ -1046,6 +1138,7 @@ export type GlobalOmitConfig = {
   session?: Prisma.SessionOmit
   account?: Prisma.AccountOmit
   verification?: Prisma.VerificationOmit
+  onboarding?: Prisma.OnboardingOmit
 }
 
 /* Types for Logging */

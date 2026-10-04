@@ -11,39 +11,55 @@ import GoalStep from "@/components/onBoarding/step4/GoalStep";
 import TimeStep from "@/components/onBoarding/step5/TimeStep";
 import TimelineStep from "@/components/onBoarding/step6/TimelineStep";
 
-export type onBoardingProps = {
-  occupation: string | null;
-  careerGoal: string | null;
+import { useCompleteOnboarding } from "@/hooks/onboarding/useCompleteOnboarding";
+
+export type OnboardingData = {
+  currentStatus: string | null;
+  targetRole: string | null;
   skills: string[];
   mainGoal: string | null;
   weeklyTime: string | null;
-  timeline: string | null;
+  goalTimeline: string | null;
 };
 
 export default function OnBoarding() {
   const [currentStep, setCurrentStep] = useState(1);
   const router = useRouter();
 
-  const [onBoardingData, setOnBoardingData] = useState<onBoardingProps>({
-    occupation: "Student",
-    careerGoal: "Frontend Developer",
+  const { mutateAsync, isPending } = useCompleteOnboarding();
+
+  const [onBoardingData, setOnBoardingData] = useState<OnboardingData>({
+    currentStatus: "Student",
+    targetRole: "Frontend Developer",
     skills: [],
     mainGoal: null,
     weeklyTime: null,
-    timeline: "I'm flexible",
+    goalTimeline: "I'm flexible",
   });
 
-  const submitOnBoardingData = () => {
+  const submitOnBoardingData = async () => {
     if (
-      !onBoardingData.occupation?.trim() ||
-      !onBoardingData.careerGoal?.trim() ||
-      !onBoardingData.timeline
-    ) {
+      !onBoardingData.currentStatus?.trim() ||
+      !onBoardingData.targetRole?.trim() ||
+      !onBoardingData.goalTimeline
+    )
       return;
+
+    try {
+      const data = await mutateAsync({
+        currentStatus: onBoardingData.currentStatus,
+        targetRole: onBoardingData.targetRole,
+        skills: onBoardingData.skills,
+        mainGoal: onBoardingData.mainGoal ?? undefined,
+        weeklyTime: onBoardingData.weeklyTime ?? undefined,
+        goalTimeline: onBoardingData.goalTimeline,
+      });
+
+      console.log(data);
+      router.push("/dashboard");
+    } catch (error) {
+      console.error("Failed to complete onboarding:", error);
     }
-    console.log("Data submitted");
-    console.log(onBoardingData);
-    router.push("/dashboard");
   };
 
   return (
@@ -53,7 +69,7 @@ export default function OnBoarding() {
       <main className="flex-1">
         {currentStep === 1 && (
           <OccupationStep
-            occupation={onBoardingData.occupation}
+            currentStatus={onBoardingData.currentStatus}
             setOccupation={(occupation) =>
               setOnBoardingData((prev) => ({
                 ...prev,
@@ -68,7 +84,7 @@ export default function OnBoarding() {
           <CareerGoalStep
             onNext={() => setCurrentStep(3)}
             onBack={() => setCurrentStep(1)}
-            careerGoal={onBoardingData.careerGoal}
+            targetRole={onBoardingData.targetRole}
             setCareerGoal={(careerGoal) =>
               setOnBoardingData((prev) => ({
                 ...prev,
@@ -124,7 +140,7 @@ export default function OnBoarding() {
           <TimelineStep
             onSubmit={() => submitOnBoardingData()}
             onBack={() => setCurrentStep(5)}
-            timeline={onBoardingData.timeline}
+            goalTimeline={onBoardingData.goalTimeline}
             setTimeline={(timeline) =>
               setOnBoardingData((prev) => ({
                 ...prev,
