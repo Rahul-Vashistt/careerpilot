@@ -50,9 +50,9 @@ export default function Header() {
             delay: 0.2,
             ease: "easeOut",
           }}
-          className="flex items-center gap-2 font-semibold tracking-tight"
+          className="flex items-center gap-2 font-bold tracking-tighter"
         >
-          <span className="font-geist text-2xl font-bold tracking-tighter">
+          <span className="font-geist text-2xl">
             CareerPilot
           </span>
         </motion.a>

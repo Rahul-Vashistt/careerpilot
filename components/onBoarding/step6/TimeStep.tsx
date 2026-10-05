@@ -9,14 +9,14 @@ import { timeOptions } from "./timeOptions";
 import type { OnboardingData } from "@/app/onboarding/page";
 
 type Props = {
-  onNext: () => void;
+  onSubmit: () => void;
   onBack: () => void;
   weeklyTime: OnboardingData["weeklyTime"];
   setWeeklyTime: (weeklyTime: string) => void;
 };
 
 export default function TimeStep({
-  onNext,
+  onSubmit,
   onBack,
   weeklyTime,
   setWeeklyTime,
@@ -29,7 +29,7 @@ export default function TimeStep({
     <div className="flex min-h-[90vh] items-center justify-center p-8 sm:p-0">
       <div className="flex w-full max-w-4xl flex-col items-center gap-6">
         <StepHeader
-          currentStep={5}
+          currentStep={6}
           title="How much time can you dedicate?"
           description={
             <>
@@ -65,18 +65,13 @@ export default function TimeStep({
                   }`}
                 >
                   {isSelected && (
-                    <PiCheck
-                      size={10}
-                      className="text-primary-foreground"
-                    />
+                    <PiCheck size={10} className="text-primary-foreground" />
                   )}
                 </div>
 
                 <Icon
                   size={26}
-                  className={
-                    isSelected ? "text-text-primary" : "text-muted"
-                  }
+                  className={isSelected ? "text-text-primary" : "text-muted"}
                 />
 
                 <div className="space-y-1">
@@ -95,9 +90,9 @@ export default function TimeStep({
 
         {/* Buttons */}
         <StepNavigation
-          onNext={onNext}
           onBack={onBack}
-          nextLabel={weeklyTime ? "Continue" : "Skip"}
+          onSubmit={onSubmit}
+          nextLabel="Submit"
         />
       </div>
     </div>

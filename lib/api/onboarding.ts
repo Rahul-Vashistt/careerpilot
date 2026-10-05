@@ -4,6 +4,9 @@ type PropsOnboarding = {
   currentStatus: string;
   targetRole: string;
   skills?: string[];
+  experienceTypes: string[];
+  projectCount?: string;
+  relevantExperience?: string;
   mainGoal?: string;
   weeklyTime?: string;
   goalTimeline: string;

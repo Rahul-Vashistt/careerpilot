@@ -28,7 +28,7 @@ export default function GoalStep({
     <div className="flex min-h-[90vh] items-center justify-center p-8 sm:p-0">
       <div className="flex w-full max-w-4xl flex-col items-center gap-6">
         <StepHeader
-          currentStep={4}
+          currentStep={5}
           title="What's your main goal?"
           description={
             <>

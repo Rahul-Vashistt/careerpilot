@@ -7,9 +7,9 @@ import Header from "@/components/onBoarding/Header";
 import OccupationStep from "@/components/onBoarding/step1/OccupationStep";
 import TargetRoleStep from "@/components/onBoarding/step2/TargetRoleStep";
 import SkillsStep from "@/components/onBoarding/step3/SkillsStep";
-import GoalStep from "@/components/onBoarding/step4/GoalStep";
-import TimeStep from "@/components/onBoarding/step5/TimeStep";
-import TimelineStep from "@/components/onBoarding/step6/TimelineStep";
+import ExperienceStep from "@/components/onBoarding/step4/ExperienceStep";
+import GoalStep from "@/components/onBoarding/step5/GoalStep";
+import TimeStep from "@/components/onBoarding/step6/TimeStep";
 
 import { useCompleteOnboarding } from "@/hooks/onboarding/useCompleteOnboarding";
 
@@ -17,6 +17,11 @@ export type OnboardingData = {
   currentStatus: string | null;
   targetRole: string | null;
   skills: string[];
+
+  experienceTypes: string[];
+  projectCount: string | null;
+  relevantExperience: string | null;
+
   mainGoal: string | null;
   weeklyTime: string | null;
   goalTimeline: string | null;
@@ -28,14 +33,20 @@ export default function OnBoarding() {
 
   const { mutateAsync } = useCompleteOnboarding();
 
-  const [onBoardingData, setOnBoardingData] = useState<OnboardingData>({
-    currentStatus: "Student",
-    targetRole: "Frontend Developer",
-    skills: [],
-    mainGoal: null,
-    weeklyTime: null,
-    goalTimeline: "I'm flexible",
-  });
+  const [onBoardingData, setOnBoardingData] =
+    useState<OnboardingData>({
+      currentStatus: "Student",
+      targetRole: "Frontend Developer",
+      skills: [],
+
+      experienceTypes: [],
+      projectCount: null,
+      relevantExperience: null,
+
+      mainGoal: null,
+      weeklyTime: null,
+      goalTimeline: "I'm flexible",
+    });
 
   const submitOnBoardingData = async () => {
     if (
@@ -51,6 +62,13 @@ export default function OnBoarding() {
         currentStatus: onBoardingData.currentStatus,
         targetRole: onBoardingData.targetRole,
         skills: onBoardingData.skills,
+
+        experienceTypes: onBoardingData.experienceTypes,
+        projectCount:
+          onBoardingData.projectCount ?? undefined,
+        relevantExperience:
+          onBoardingData.relevantExperience ?? undefined,
+
         mainGoal: onBoardingData.mainGoal ?? undefined,
         weeklyTime: onBoardingData.weeklyTime ?? undefined,
         goalTimeline: onBoardingData.goalTimeline,
@@ -59,7 +77,10 @@ export default function OnBoarding() {
       console.log(data);
       router.push("/dashboard");
     } catch (error) {
-      console.error("Failed to complete onboarding:", error);
+      console.error(
+        "Failed to complete onboarding:",
+        error
+      );
     }
   };
 
@@ -68,6 +89,7 @@ export default function OnBoarding() {
       <Header currentStep={currentStep} />
 
       <main className="flex-1">
+        {/* Step 1 */}
         {currentStep === 1 && (
           <OccupationStep
             currentStatus={onBoardingData.currentStatus}
@@ -81,6 +103,7 @@ export default function OnBoarding() {
           />
         )}
 
+        {/* Step 2 */}
         {currentStep === 2 && (
           <TargetRoleStep
             onNext={() => setCurrentStep(3)}
@@ -95,6 +118,7 @@ export default function OnBoarding() {
           />
         )}
 
+        {/* Step 3 */}
         {currentStep === 3 && (
           <SkillsStep
             onNext={() => setCurrentStep(4)}
@@ -109,10 +133,42 @@ export default function OnBoarding() {
           />
         )}
 
+        {/* Step 4 - Experience */}
         {currentStep === 4 && (
-          <GoalStep
+          <ExperienceStep
             onNext={() => setCurrentStep(5)}
             onBack={() => setCurrentStep(3)}
+            experienceTypes={onBoardingData.experienceTypes}
+            projectCount={onBoardingData.projectCount}
+            relevantExperience={
+              onBoardingData.relevantExperience
+            }
+            setExperienceTypes={(experienceTypes) =>
+              setOnBoardingData((prev) => ({
+                ...prev,
+                experienceTypes,
+              }))
+            }
+            setProjectCount={(projectCount) =>
+              setOnBoardingData((prev) => ({
+                ...prev,
+                projectCount,
+              }))
+            }
+            setRelevantExperience={(relevantExperience) =>
+              setOnBoardingData((prev) => ({
+                ...prev,
+                relevantExperience,
+              }))
+            }
+          />
+        )}
+
+        {/* Step 5 - Goal */}
+        {currentStep === 5 && (
+          <GoalStep
+            onNext={() => setCurrentStep(6)}
+            onBack={() => setCurrentStep(4)}
             mainGoal={onBoardingData.mainGoal}
             setMainGoal={(mainGoal) =>
               setOnBoardingData((prev) => ({
@@ -123,29 +179,16 @@ export default function OnBoarding() {
           />
         )}
 
-        {currentStep === 5 && (
+        {/* Step 6 - Weekly Time */}
+        {currentStep === 6 && (
           <TimeStep
-            onNext={() => setCurrentStep(6)}
-            onBack={() => setCurrentStep(4)}
+            onSubmit={submitOnBoardingData}
+            onBack={() => setCurrentStep(5)}
             weeklyTime={onBoardingData.weeklyTime}
             setWeeklyTime={(weeklyTime) =>
               setOnBoardingData((prev) => ({
                 ...prev,
                 weeklyTime,
-              }))
-            }
-          />
-        )}
-
-        {currentStep === 6 && (
-          <TimelineStep
-            onSubmit={submitOnBoardingData}
-            onBack={() => setCurrentStep(5)}
-            goalTimeline={onBoardingData.goalTimeline}
-            setTimeline={(goalTimeline) =>
-              setOnBoardingData((prev) => ({
-                ...prev,
-                goalTimeline,
               }))
             }
           />
