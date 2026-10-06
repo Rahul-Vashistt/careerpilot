@@ -27,8 +27,11 @@ export type AggregateOnboarding = {
 export type OnboardingMinAggregateOutputType = {
   id: string | null
   userId: string | null
+  completed: boolean | null
   currentStatus: string | null
   targetRole: string | null
+  projectCount: string | null
+  relevantExperience: string | null
   mainGoal: string | null
   weeklyTime: string | null
   goalTimeLine: string | null
@@ -39,8 +42,11 @@ export type OnboardingMinAggregateOutputType = {
 export type OnboardingMaxAggregateOutputType = {
   id: string | null
   userId: string | null
+  completed: boolean | null
   currentStatus: string | null
   targetRole: string | null
+  projectCount: string | null
+  relevantExperience: string | null
   mainGoal: string | null
   weeklyTime: string | null
   goalTimeLine: string | null
@@ -51,9 +57,13 @@ export type OnboardingMaxAggregateOutputType = {
 export type OnboardingCountAggregateOutputType = {
   id: number
   userId: number
+  completed: number
   currentStatus: number
   targetRole: number
   skills: number
+  experienceTypes: number
+  projectCount: number
+  relevantExperience: number
   mainGoal: number
   weeklyTime: number
   goalTimeLine: number
@@ -66,8 +76,11 @@ export type OnboardingCountAggregateOutputType = {
 export type OnboardingMinAggregateInputType = {
   id?: true
   userId?: true
+  completed?: true
   currentStatus?: true
   targetRole?: true
+  projectCount?: true
+  relevantExperience?: true
   mainGoal?: true
   weeklyTime?: true
   goalTimeLine?: true
@@ -78,8 +91,11 @@ export type OnboardingMinAggregateInputType = {
 export type OnboardingMaxAggregateInputType = {
   id?: true
   userId?: true
+  completed?: true
   currentStatus?: true
   targetRole?: true
+  projectCount?: true
+  relevantExperience?: true
   mainGoal?: true
   weeklyTime?: true
   goalTimeLine?: true
@@ -90,9 +106,13 @@ export type OnboardingMaxAggregateInputType = {
 export type OnboardingCountAggregateInputType = {
   id?: true
   userId?: true
+  completed?: true
   currentStatus?: true
   targetRole?: true
   skills?: true
+  experienceTypes?: true
+  projectCount?: true
+  relevantExperience?: true
   mainGoal?: true
   weeklyTime?: true
   goalTimeLine?: true
@@ -176,12 +196,16 @@ export type OnboardingGroupByArgs<ExtArgs extends runtime.Types.Extensions.Inter
 export type OnboardingGroupByOutputType = {
   id: string
   userId: string
+  completed: boolean
   currentStatus: string
   targetRole: string
   skills: string[]
+  experienceTypes: string[]
+  projectCount: string | null
+  relevantExperience: string | null
   mainGoal: string | null
   weeklyTime: string | null
-  goalTimeLine: string
+  goalTimeLine: string | null
   createdAt: Date
   updatedAt: Date
   _count: OnboardingCountAggregateOutputType | null
@@ -210,12 +234,16 @@ export type OnboardingWhereInput = {
   NOT?: Prisma.OnboardingWhereInput | Prisma.OnboardingWhereInput[]
   id?: Prisma.StringFilter<"Onboarding"> | string
   userId?: Prisma.StringFilter<"Onboarding"> | string
+  completed?: Prisma.BoolFilter<"Onboarding"> | boolean
   currentStatus?: Prisma.StringFilter<"Onboarding"> | string
   targetRole?: Prisma.StringFilter<"Onboarding"> | string
   skills?: Prisma.StringNullableListFilter<"Onboarding">
+  experienceTypes?: Prisma.StringNullableListFilter<"Onboarding">
+  projectCount?: Prisma.StringNullableFilter<"Onboarding"> | string | null
+  relevantExperience?: Prisma.StringNullableFilter<"Onboarding"> | string | null
   mainGoal?: Prisma.StringNullableFilter<"Onboarding"> | string | null
   weeklyTime?: Prisma.StringNullableFilter<"Onboarding"> | string | null
-  goalTimeLine?: Prisma.StringFilter<"Onboarding"> | string
+  goalTimeLine?: Prisma.StringNullableFilter<"Onboarding"> | string | null
   createdAt?: Prisma.DateTimeFilter<"Onboarding"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Onboarding"> | Date | string
   user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
@@ -224,12 +252,16 @@ export type OnboardingWhereInput = {
 export type OnboardingOrderByWithRelationInput = {
   id?: Prisma.SortOrder
   userId?: Prisma.SortOrder
+  completed?: Prisma.SortOrder
   currentStatus?: Prisma.SortOrder
   targetRole?: Prisma.SortOrder
   skills?: Prisma.SortOrder
+  experienceTypes?: Prisma.SortOrder
+  projectCount?: Prisma.SortOrderInput | Prisma.SortOrder
+  relevantExperience?: Prisma.SortOrderInput | Prisma.SortOrder
   mainGoal?: Prisma.SortOrderInput | Prisma.SortOrder
   weeklyTime?: Prisma.SortOrderInput | Prisma.SortOrder
-  goalTimeLine?: Prisma.SortOrder
+  goalTimeLine?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   user?: Prisma.UserOrderByWithRelationInput
@@ -241,12 +273,16 @@ export type OnboardingWhereUniqueInput = Prisma.AtLeast<{
   AND?: Prisma.OnboardingWhereInput | Prisma.OnboardingWhereInput[]
   OR?: Prisma.OnboardingWhereInput[]
   NOT?: Prisma.OnboardingWhereInput | Prisma.OnboardingWhereInput[]
+  completed?: Prisma.BoolFilter<"Onboarding"> | boolean
   currentStatus?: Prisma.StringFilter<"Onboarding"> | string
   targetRole?: Prisma.StringFilter<"Onboarding"> | string
   skills?: Prisma.StringNullableListFilter<"Onboarding">
+  experienceTypes?: Prisma.StringNullableListFilter<"Onboarding">
+  projectCount?: Prisma.StringNullableFilter<"Onboarding"> | string | null
+  relevantExperience?: Prisma.StringNullableFilter<"Onboarding"> | string | null
   mainGoal?: Prisma.StringNullableFilter<"Onboarding"> | string | null
   weeklyTime?: Prisma.StringNullableFilter<"Onboarding"> | string | null
-  goalTimeLine?: Prisma.StringFilter<"Onboarding"> | string
+  goalTimeLine?: Prisma.StringNullableFilter<"Onboarding"> | string | null
   createdAt?: Prisma.DateTimeFilter<"Onboarding"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Onboarding"> | Date | string
   user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
@@ -255,12 +291,16 @@ export type OnboardingWhereUniqueInput = Prisma.AtLeast<{
 export type OnboardingOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
   userId?: Prisma.SortOrder
+  completed?: Prisma.SortOrder
   currentStatus?: Prisma.SortOrder
   targetRole?: Prisma.SortOrder
   skills?: Prisma.SortOrder
+  experienceTypes?: Prisma.SortOrder
+  projectCount?: Prisma.SortOrderInput | Prisma.SortOrder
+  relevantExperience?: Prisma.SortOrderInput | Prisma.SortOrder
   mainGoal?: Prisma.SortOrderInput | Prisma.SortOrder
   weeklyTime?: Prisma.SortOrderInput | Prisma.SortOrder
-  goalTimeLine?: Prisma.SortOrder
+  goalTimeLine?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   _count?: Prisma.OnboardingCountOrderByAggregateInput
@@ -274,50 +314,66 @@ export type OnboardingScalarWhereWithAggregatesInput = {
   NOT?: Prisma.OnboardingScalarWhereWithAggregatesInput | Prisma.OnboardingScalarWhereWithAggregatesInput[]
   id?: Prisma.StringWithAggregatesFilter<"Onboarding"> | string
   userId?: Prisma.StringWithAggregatesFilter<"Onboarding"> | string
+  completed?: Prisma.BoolWithAggregatesFilter<"Onboarding"> | boolean
   currentStatus?: Prisma.StringWithAggregatesFilter<"Onboarding"> | string
   targetRole?: Prisma.StringWithAggregatesFilter<"Onboarding"> | string
   skills?: Prisma.StringNullableListFilter<"Onboarding">
+  experienceTypes?: Prisma.StringNullableListFilter<"Onboarding">
+  projectCount?: Prisma.StringNullableWithAggregatesFilter<"Onboarding"> | string | null
+  relevantExperience?: Prisma.StringNullableWithAggregatesFilter<"Onboarding"> | string | null
   mainGoal?: Prisma.StringNullableWithAggregatesFilter<"Onboarding"> | string | null
   weeklyTime?: Prisma.StringNullableWithAggregatesFilter<"Onboarding"> | string | null
-  goalTimeLine?: Prisma.StringWithAggregatesFilter<"Onboarding"> | string
+  goalTimeLine?: Prisma.StringNullableWithAggregatesFilter<"Onboarding"> | string | null
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"Onboarding"> | Date | string
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"Onboarding"> | Date | string
 }
 
 export type OnboardingCreateInput = {
-  id: string
+  id?: string
+  completed?: boolean
   currentStatus: string
   targetRole: string
   skills?: Prisma.OnboardingCreateskillsInput | string[]
+  experienceTypes?: Prisma.OnboardingCreateexperienceTypesInput | string[]
+  projectCount?: string | null
+  relevantExperience?: string | null
   mainGoal?: string | null
   weeklyTime?: string | null
-  goalTimeLine: string
+  goalTimeLine?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   user: Prisma.UserCreateNestedOneWithoutOnboardingInput
 }
 
 export type OnboardingUncheckedCreateInput = {
-  id: string
+  id?: string
   userId: string
+  completed?: boolean
   currentStatus: string
   targetRole: string
   skills?: Prisma.OnboardingCreateskillsInput | string[]
+  experienceTypes?: Prisma.OnboardingCreateexperienceTypesInput | string[]
+  projectCount?: string | null
+  relevantExperience?: string | null
   mainGoal?: string | null
   weeklyTime?: string | null
-  goalTimeLine: string
+  goalTimeLine?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
 }
 
 export type OnboardingUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  completed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   currentStatus?: Prisma.StringFieldUpdateOperationsInput | string
   targetRole?: Prisma.StringFieldUpdateOperationsInput | string
   skills?: Prisma.OnboardingUpdateskillsInput | string[]
+  experienceTypes?: Prisma.OnboardingUpdateexperienceTypesInput | string[]
+  projectCount?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  relevantExperience?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   mainGoal?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   weeklyTime?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  goalTimeLine?: Prisma.StringFieldUpdateOperationsInput | string
+  goalTimeLine?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   user?: Prisma.UserUpdateOneRequiredWithoutOnboardingNestedInput
@@ -326,37 +382,49 @@ export type OnboardingUpdateInput = {
 export type OnboardingUncheckedUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   userId?: Prisma.StringFieldUpdateOperationsInput | string
+  completed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   currentStatus?: Prisma.StringFieldUpdateOperationsInput | string
   targetRole?: Prisma.StringFieldUpdateOperationsInput | string
   skills?: Prisma.OnboardingUpdateskillsInput | string[]
+  experienceTypes?: Prisma.OnboardingUpdateexperienceTypesInput | string[]
+  projectCount?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  relevantExperience?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   mainGoal?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   weeklyTime?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  goalTimeLine?: Prisma.StringFieldUpdateOperationsInput | string
+  goalTimeLine?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type OnboardingCreateManyInput = {
-  id: string
+  id?: string
   userId: string
+  completed?: boolean
   currentStatus: string
   targetRole: string
   skills?: Prisma.OnboardingCreateskillsInput | string[]
+  experienceTypes?: Prisma.OnboardingCreateexperienceTypesInput | string[]
+  projectCount?: string | null
+  relevantExperience?: string | null
   mainGoal?: string | null
   weeklyTime?: string | null
-  goalTimeLine: string
+  goalTimeLine?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
 }
 
 export type OnboardingUpdateManyMutationInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  completed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   currentStatus?: Prisma.StringFieldUpdateOperationsInput | string
   targetRole?: Prisma.StringFieldUpdateOperationsInput | string
   skills?: Prisma.OnboardingUpdateskillsInput | string[]
+  experienceTypes?: Prisma.OnboardingUpdateexperienceTypesInput | string[]
+  projectCount?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  relevantExperience?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   mainGoal?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   weeklyTime?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  goalTimeLine?: Prisma.StringFieldUpdateOperationsInput | string
+  goalTimeLine?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -364,12 +432,16 @@ export type OnboardingUpdateManyMutationInput = {
 export type OnboardingUncheckedUpdateManyInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   userId?: Prisma.StringFieldUpdateOperationsInput | string
+  completed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   currentStatus?: Prisma.StringFieldUpdateOperationsInput | string
   targetRole?: Prisma.StringFieldUpdateOperationsInput | string
   skills?: Prisma.OnboardingUpdateskillsInput | string[]
+  experienceTypes?: Prisma.OnboardingUpdateexperienceTypesInput | string[]
+  projectCount?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  relevantExperience?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   mainGoal?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   weeklyTime?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  goalTimeLine?: Prisma.StringFieldUpdateOperationsInput | string
+  goalTimeLine?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -390,9 +462,13 @@ export type StringNullableListFilter<$PrismaModel = never> = {
 export type OnboardingCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
   userId?: Prisma.SortOrder
+  completed?: Prisma.SortOrder
   currentStatus?: Prisma.SortOrder
   targetRole?: Prisma.SortOrder
   skills?: Prisma.SortOrder
+  experienceTypes?: Prisma.SortOrder
+  projectCount?: Prisma.SortOrder
+  relevantExperience?: Prisma.SortOrder
   mainGoal?: Prisma.SortOrder
   weeklyTime?: Prisma.SortOrder
   goalTimeLine?: Prisma.SortOrder
@@ -403,8 +479,11 @@ export type OnboardingCountOrderByAggregateInput = {
 export type OnboardingMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
   userId?: Prisma.SortOrder
+  completed?: Prisma.SortOrder
   currentStatus?: Prisma.SortOrder
   targetRole?: Prisma.SortOrder
+  projectCount?: Prisma.SortOrder
+  relevantExperience?: Prisma.SortOrder
   mainGoal?: Prisma.SortOrder
   weeklyTime?: Prisma.SortOrder
   goalTimeLine?: Prisma.SortOrder
@@ -415,8 +494,11 @@ export type OnboardingMaxOrderByAggregateInput = {
 export type OnboardingMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
   userId?: Prisma.SortOrder
+  completed?: Prisma.SortOrder
   currentStatus?: Prisma.SortOrder
   targetRole?: Prisma.SortOrder
+  projectCount?: Prisma.SortOrder
+  relevantExperience?: Prisma.SortOrder
   mainGoal?: Prisma.SortOrder
   weeklyTime?: Prisma.SortOrder
   goalTimeLine?: Prisma.SortOrder
@@ -460,31 +542,48 @@ export type OnboardingCreateskillsInput = {
   set: string[]
 }
 
+export type OnboardingCreateexperienceTypesInput = {
+  set: string[]
+}
+
 export type OnboardingUpdateskillsInput = {
   set?: string[]
   push?: string | string[]
 }
 
+export type OnboardingUpdateexperienceTypesInput = {
+  set?: string[]
+  push?: string | string[]
+}
+
 export type OnboardingCreateWithoutUserInput = {
-  id: string
+  id?: string
+  completed?: boolean
   currentStatus: string
   targetRole: string
   skills?: Prisma.OnboardingCreateskillsInput | string[]
+  experienceTypes?: Prisma.OnboardingCreateexperienceTypesInput | string[]
+  projectCount?: string | null
+  relevantExperience?: string | null
   mainGoal?: string | null
   weeklyTime?: string | null
-  goalTimeLine: string
+  goalTimeLine?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
 }
 
 export type OnboardingUncheckedCreateWithoutUserInput = {
-  id: string
+  id?: string
+  completed?: boolean
   currentStatus: string
   targetRole: string
   skills?: Prisma.OnboardingCreateskillsInput | string[]
+  experienceTypes?: Prisma.OnboardingCreateexperienceTypesInput | string[]
+  projectCount?: string | null
+  relevantExperience?: string | null
   mainGoal?: string | null
   weeklyTime?: string | null
-  goalTimeLine: string
+  goalTimeLine?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -507,24 +606,32 @@ export type OnboardingUpdateToOneWithWhereWithoutUserInput = {
 
 export type OnboardingUpdateWithoutUserInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  completed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   currentStatus?: Prisma.StringFieldUpdateOperationsInput | string
   targetRole?: Prisma.StringFieldUpdateOperationsInput | string
   skills?: Prisma.OnboardingUpdateskillsInput | string[]
+  experienceTypes?: Prisma.OnboardingUpdateexperienceTypesInput | string[]
+  projectCount?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  relevantExperience?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   mainGoal?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   weeklyTime?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  goalTimeLine?: Prisma.StringFieldUpdateOperationsInput | string
+  goalTimeLine?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type OnboardingUncheckedUpdateWithoutUserInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  completed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   currentStatus?: Prisma.StringFieldUpdateOperationsInput | string
   targetRole?: Prisma.StringFieldUpdateOperationsInput | string
   skills?: Prisma.OnboardingUpdateskillsInput | string[]
+  experienceTypes?: Prisma.OnboardingUpdateexperienceTypesInput | string[]
+  projectCount?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  relevantExperience?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   mainGoal?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   weeklyTime?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  goalTimeLine?: Prisma.StringFieldUpdateOperationsInput | string
+  goalTimeLine?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -534,9 +641,13 @@ export type OnboardingUncheckedUpdateWithoutUserInput = {
 export type OnboardingSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   userId?: boolean
+  completed?: boolean
   currentStatus?: boolean
   targetRole?: boolean
   skills?: boolean
+  experienceTypes?: boolean
+  projectCount?: boolean
+  relevantExperience?: boolean
   mainGoal?: boolean
   weeklyTime?: boolean
   goalTimeLine?: boolean
@@ -548,9 +659,13 @@ export type OnboardingSelect<ExtArgs extends runtime.Types.Extensions.InternalAr
 export type OnboardingSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   userId?: boolean
+  completed?: boolean
   currentStatus?: boolean
   targetRole?: boolean
   skills?: boolean
+  experienceTypes?: boolean
+  projectCount?: boolean
+  relevantExperience?: boolean
   mainGoal?: boolean
   weeklyTime?: boolean
   goalTimeLine?: boolean
@@ -562,9 +677,13 @@ export type OnboardingSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Ex
 export type OnboardingSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   userId?: boolean
+  completed?: boolean
   currentStatus?: boolean
   targetRole?: boolean
   skills?: boolean
+  experienceTypes?: boolean
+  projectCount?: boolean
+  relevantExperience?: boolean
   mainGoal?: boolean
   weeklyTime?: boolean
   goalTimeLine?: boolean
@@ -576,9 +695,13 @@ export type OnboardingSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Ex
 export type OnboardingSelectScalar = {
   id?: boolean
   userId?: boolean
+  completed?: boolean
   currentStatus?: boolean
   targetRole?: boolean
   skills?: boolean
+  experienceTypes?: boolean
+  projectCount?: boolean
+  relevantExperience?: boolean
   mainGoal?: boolean
   weeklyTime?: boolean
   goalTimeLine?: boolean
@@ -586,7 +709,7 @@ export type OnboardingSelectScalar = {
   updatedAt?: boolean
 }
 
-export type OnboardingOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "userId" | "currentStatus" | "targetRole" | "skills" | "mainGoal" | "weeklyTime" | "goalTimeLine" | "createdAt" | "updatedAt", ExtArgs["result"]["onboarding"]>
+export type OnboardingOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "userId" | "completed" | "currentStatus" | "targetRole" | "skills" | "experienceTypes" | "projectCount" | "relevantExperience" | "mainGoal" | "weeklyTime" | "goalTimeLine" | "createdAt" | "updatedAt", ExtArgs["result"]["onboarding"]>
 export type OnboardingInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
 }
@@ -605,12 +728,16 @@ export type $OnboardingPayload<ExtArgs extends runtime.Types.Extensions.Internal
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
     userId: string
+    completed: boolean
     currentStatus: string
     targetRole: string
     skills: string[]
+    experienceTypes: string[]
+    projectCount: string | null
+    relevantExperience: string | null
     mainGoal: string | null
     weeklyTime: string | null
-    goalTimeLine: string
+    goalTimeLine: string | null
     createdAt: Date
     updatedAt: Date
   }, ExtArgs["result"]["onboarding"]>
@@ -1039,9 +1166,13 @@ export interface Prisma__OnboardingClient<T, Null = never, ExtArgs extends runti
 export interface OnboardingFieldRefs {
   readonly id: Prisma.FieldRef<"Onboarding", 'String'>
   readonly userId: Prisma.FieldRef<"Onboarding", 'String'>
+  readonly completed: Prisma.FieldRef<"Onboarding", 'Boolean'>
   readonly currentStatus: Prisma.FieldRef<"Onboarding", 'String'>
   readonly targetRole: Prisma.FieldRef<"Onboarding", 'String'>
   readonly skills: Prisma.FieldRef<"Onboarding", 'String[]'>
+  readonly experienceTypes: Prisma.FieldRef<"Onboarding", 'String[]'>
+  readonly projectCount: Prisma.FieldRef<"Onboarding", 'String'>
+  readonly relevantExperience: Prisma.FieldRef<"Onboarding", 'String'>
   readonly mainGoal: Prisma.FieldRef<"Onboarding", 'String'>
   readonly weeklyTime: Prisma.FieldRef<"Onboarding", 'String'>
   readonly goalTimeLine: Prisma.FieldRef<"Onboarding", 'String'>

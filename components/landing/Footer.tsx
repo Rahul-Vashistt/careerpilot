@@ -24,6 +24,7 @@ export default function Footer() {
               {/* GitHub */}
               <a
                 href="https://github.com/Rahul-Vashistt"
+                data-cursor="link"
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="GitHub"
@@ -38,6 +39,7 @@ export default function Footer() {
               {/* LinkedIn */}
               <a
                 href="#"
+                data-cursor="link"
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="LinkedIn"
@@ -101,6 +103,7 @@ export default function Footer() {
 
             <a
               target="_blank"
+              data-cursor="link"
               rel="noopener noreferrer"
               href="https://github.com/Rahul-Vashistt"
               className="group mt-5 inline-flex items-center text-sm font-semibold text-foreground"

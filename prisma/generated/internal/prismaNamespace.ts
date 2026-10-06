@@ -892,9 +892,13 @@ export type VerificationScalarFieldEnum = (typeof VerificationScalarFieldEnum)[k
 export const OnboardingScalarFieldEnum = {
   id: 'id',
   userId: 'userId',
+  completed: 'completed',
   currentStatus: 'currentStatus',
   targetRole: 'targetRole',
   skills: 'skills',
+  experienceTypes: 'experienceTypes',
+  projectCount: 'projectCount',
+  relevantExperience: 'relevantExperience',
   mainGoal: 'mainGoal',
   weeklyTime: 'weeklyTime',
   goalTimeLine: 'goalTimeLine',

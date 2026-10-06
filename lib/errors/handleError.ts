@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 import AppError from "./AppError";
 
-export default function handleError(error: unknown) {
+export default function handleError(error: unknown, message: string = "Internal server error") {
   if (error instanceof AppError) {
     return NextResponse.json(
       { message: error.message },
@@ -12,7 +12,7 @@ export default function handleError(error: unknown) {
   console.error(error);
 
   return NextResponse.json(
-    { message: "Internal server error" },
+    { message },
     { status: 500 },
   );
 }

@@ -1,3 +1,8 @@
+"use client"
+
+import Magnetic from "@/components/cursor/Magnetic";
+import Link from "next/link";
+
 export default function CTA() {
   return (
     <section
@@ -31,12 +36,15 @@ export default function CTA() {
 
             {/* CTA */}
             <div className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">
-              <a
-                href="/sign-up"
-                className="inline-flex w-full items-center justify-center rounded-lg bg-primary px-6 py-3.5 text-sm font-semibold text-primary-foreground transition-colors hover:bg-primary-hover sm:w-auto"
-              >
-                Get started for free
-              </a>
+              <Magnetic>
+                <Link
+                  href="/sign-up"
+                  data-cursor="magnetic"
+                  className="inline-flex w-full items-center justify-center rounded-lg bg-primary px-6 py-3.5 text-sm font-semibold text-primary-foreground transition-colors hover:bg-primary-hover sm:w-auto"
+                >
+                  Get started for free
+                </Link>
+              </Magnetic>
             </div>
 
             <p className="mt-5 text-xs text-muted-foreground">

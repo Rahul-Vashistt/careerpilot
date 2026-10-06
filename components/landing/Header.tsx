@@ -3,6 +3,7 @@
 import { motion } from "motion/react";
 
 import Link from "next/link";
+import Magnetic from "../cursor/Magnetic";
 
 const navItems = [
   { label: "Problem", href: "#problem" },
@@ -35,6 +36,7 @@ export default function Header() {
         {/* Logo */}
         <motion.a
           href="#"
+          data-cursor="link"
           initial={{
             opacity: 0,
             filter: "blur(6px)",
@@ -63,6 +65,7 @@ export default function Header() {
             <motion.a
               key={item.href}
               href={item.href}
+              data-cursor="link"
               initial={{
                 opacity: 0,
                 filter: "blur(6px)",
@@ -104,19 +107,25 @@ export default function Header() {
           }}
           className="flex items-center gap-3"
         >
-          <Link
-            href="/sign-in"
-            className="hidden px-3 py-2 text-sm font-medium text-muted transition hover:text-foreground sm:block"
-          >
-            Sign in
-          </Link>
+          <Magnetic>
+            <Link
+              href="/sign-in"
+              data-cursor="magnetic"
+              className="hidden px-3 py-2 text-sm font-medium text-muted transition hover:text-foreground sm:block"
+            >
+              Sign in
+            </Link>
+          </Magnetic>
 
-          <Link
-            href="/sign-up"
-            className="rounded-lg bg-primary px-4 py-2 text-sm font-semibold text-primary-foreground shadow-sm transition hover:bg-primary-hover"
-          >
-            Get started
-          </Link>
+          <Magnetic>
+            <Link
+              href="/sign-up"
+              data-cursor="magnetic"
+              className="rounded-lg bg-primary px-4 py-2 text-sm font-semibold text-primary-foreground shadow-sm transition hover:bg-primary-hover"
+            >
+              Get started
+            </Link>
+          </Magnetic>
         </motion.div>
       </div>
     </motion.header>

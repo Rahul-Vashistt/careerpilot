@@ -1,4 +1,4 @@
-import { completeOnboarding } from "@/lib/api/onboarding";
+import { completeOnboarding } from "@/features/onboarding/api/onboarding";
 import { useMutation } from "@tanstack/react-query";
 
 export function useCompleteOnboarding() {

@@ -3,15 +3,15 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 
-import Header from "@/components/onBoarding/Header";
-import OccupationStep from "@/components/onBoarding/step1/OccupationStep";
-import TargetRoleStep from "@/components/onBoarding/step2/TargetRoleStep";
-import SkillsStep from "@/components/onBoarding/step3/SkillsStep";
-import ExperienceStep from "@/components/onBoarding/step4/ExperienceStep";
-import GoalStep from "@/components/onBoarding/step5/GoalStep";
-import TimeStep from "@/components/onBoarding/step6/TimeStep";
+import Header from "@/features/onboarding/components/Header";
+import OccupationStep from "@/features/onboarding/components/step1/OccupationStep";
+import TargetRoleStep from "@/features/onboarding/components/step2/TargetRoleStep";
+import SkillsStep from "@/features/onboarding/components/step3/SkillsStep";
+import ExperienceStep from "@/features/onboarding/components/step4/ExperienceStep";
+import GoalStep from "@/features/onboarding/components/step5/GoalStep";
+import TimeStep from "@/features/onboarding/components/step6/TimeStep";
 
-import { useCompleteOnboarding } from "@/hooks/onboarding/useCompleteOnboarding";
+import { useCompleteOnboarding } from "@/features/onboarding/hooks/useCompleteOnboarding";
 
 export type OnboardingData = {
   currentStatus: string | null;
@@ -24,7 +24,6 @@ export type OnboardingData = {
 
   mainGoal: string | null;
   weeklyTime: string | null;
-  goalTimeline: string | null;
 };
 
 export default function OnBoarding() {
@@ -33,26 +32,23 @@ export default function OnBoarding() {
 
   const { mutateAsync } = useCompleteOnboarding();
 
-  const [onBoardingData, setOnBoardingData] =
-    useState<OnboardingData>({
-      currentStatus: "Student",
-      targetRole: "Frontend Developer",
-      skills: [],
+  const [onBoardingData, setOnBoardingData] = useState<OnboardingData>({
+    currentStatus: "Student",
+    targetRole: "Frontend Developer",
+    skills: [],
 
-      experienceTypes: [],
-      projectCount: null,
-      relevantExperience: null,
+    experienceTypes: [],
+    projectCount: null,
+    relevantExperience: null,
 
-      mainGoal: null,
-      weeklyTime: null,
-      goalTimeline: "I'm flexible",
-    });
+    mainGoal: null,
+    weeklyTime: null,
+  });
 
   const submitOnBoardingData = async () => {
     if (
       !onBoardingData.currentStatus?.trim() ||
-      !onBoardingData.targetRole?.trim() ||
-      !onBoardingData.goalTimeline
+      !onBoardingData.targetRole?.trim()
     ) {
       return;
     }
@@ -64,23 +60,17 @@ export default function OnBoarding() {
         skills: onBoardingData.skills,
 
         experienceTypes: onBoardingData.experienceTypes,
-        projectCount:
-          onBoardingData.projectCount ?? undefined,
-        relevantExperience:
-          onBoardingData.relevantExperience ?? undefined,
+        projectCount: onBoardingData.projectCount ?? undefined,
+        relevantExperience: onBoardingData.relevantExperience ?? undefined,
 
         mainGoal: onBoardingData.mainGoal ?? undefined,
         weeklyTime: onBoardingData.weeklyTime ?? undefined,
-        goalTimeline: onBoardingData.goalTimeline,
       });
 
       console.log(data);
       router.push("/dashboard");
     } catch (error) {
-      console.error(
-        "Failed to complete onboarding:",
-        error
-      );
+      console.error("Failed to complete onboarding:", error);
     }
   };
 
@@ -140,9 +130,7 @@ export default function OnBoarding() {
             onBack={() => setCurrentStep(3)}
             experienceTypes={onBoardingData.experienceTypes}
             projectCount={onBoardingData.projectCount}
-            relevantExperience={
-              onBoardingData.relevantExperience
-            }
+            relevantExperience={onBoardingData.relevantExperience}
             setExperienceTypes={(experienceTypes) =>
               setOnBoardingData((prev) => ({
                 ...prev,

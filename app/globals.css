@@ -317,3 +317,14 @@ input:-webkit-autofill:active {
   animation: none;
   mix-blend-mode: normal;
 }
+
+/* =========================================================
+    Custom Cursor
+   ========================================================= */
+
+@media (hover: hover) and (pointer: fine) {
+  .custom-cursor-page,
+  .custom-cursor-page * {
+    cursor: none !important;
+  }
+}

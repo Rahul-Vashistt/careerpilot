@@ -4,6 +4,8 @@ import { PiCheck } from "react-icons/pi";
 import StepHeader from "../StepHeader";
 import StepNavigation from "../StepNavigation";
 
+import { experienceOptions, projectCountOptions, relevantExperienceOptions } from "./experienceOptions";
+
 type Props = {
   onNext: () => void;
   onBack: () => void;
@@ -14,26 +16,6 @@ type Props = {
   setProjectCount: (projectCount: string | null) => void;
   setRelevantExperience: (relevantExperience: string | null) => void;
 };
-
-const experienceOptions = [
-  "Personal projects",
-  "Academic projects",
-  "Freelance work",
-  "Internship",
-  "Professional work",
-  "Open-source contributions",
-  "Nothing yet",
-];
-
-const projectCountOptions = ["1", "2-3", "4-5", "6+"];
-
-const relevantExperienceOptions = [
-  "Less than 6 months",
-  "6-12 months",
-  "1-2 years",
-  "2-5 years",
-  "5+ years",
-];
 
 export default function ExperienceStep({
   onNext,

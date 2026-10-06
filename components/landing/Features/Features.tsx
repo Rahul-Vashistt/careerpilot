@@ -1,6 +1,6 @@
 "use client";
 
-import { features } from "./features";
+import { features } from "./featuresList";
 import { motion, type Variants } from "motion/react";
 
 const containerVariants: Variants = {

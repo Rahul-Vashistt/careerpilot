@@ -21,7 +21,7 @@ export default function OccupationStep({
 }: Props) {
   return (
     <div className="flex min-h-[90vh] items-center justify-center p-8 sm:p-0">
-      <div className="flex w-full max-w-2xl flex-col items-center gap-6">
+      <div className="flex w-full max-w-4xl flex-col items-center gap-6">
         <StepHeader
           currentStep={1}
           title="First, tell us about yourself"
@@ -34,7 +34,7 @@ export default function OccupationStep({
         />
 
         {/* Occupation Map */}
-        <div className="grid w-full grid-cols-1 gap-6 sm:grid-cols-2">
+        <div className="grid w-full grid-cols-1 gap-6 sm:grid-cols-3">
           {occupationOptions.map((career) => {
             const Icon = career.icon;
             const isSelected = currentStatus === career.title;

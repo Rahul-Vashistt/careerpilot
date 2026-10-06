@@ -9,6 +9,7 @@ import { FaGithub } from "react-icons/fa";
 
 import Link from "next/link";
 import MagneticText from "@/components/Animation/TextAnimation";
+import Magnetic from "@/components/cursor/Magnetic";
 
 export default function Hero() {
   return (
@@ -133,27 +134,31 @@ export default function Hero() {
             }}
             className="mt-9 flex flex-col flex-wrap items-center gap-3 lg:flex-row"
           >
-            <Link
-              href="/sign-up"
-              className="group inline-flex w-full items-center justify-center gap-1.5 rounded-md bg-primary px-5 py-3 text-center text-sm font-semibold text-primary-foreground shadow-sm transition-colors duration-300 hover:bg-primary-hover lg:w-auto lg:rounded-lg lg:py-3.5"
-            >
-              Get Started
-              <span className="relative flex h-5 w-0 items-center overflow-hidden transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:w-5">
-                <GoArrowRight
-                  className="
-                    absolute left-0 h-5 w-5
-                    -translate-x-3 opacity-0
-                    transition-all duration-500
-                    ease-[cubic-bezier(0.16,1,0.3,1)]
-                    group-hover:translate-x-0
-                    group-hover:opacity-100
-                  "
-                />
-              </span>
-            </Link>
+            <Magnetic>
+              <Link
+                href="/sign-up"
+                data-cursor="magnetic"
+                className="group inline-flex w-full items-center justify-center gap-1.5 rounded-md bg-primary px-5 py-3 text-center text-sm font-semibold text-primary-foreground shadow-sm transition-colors duration-300 hover:bg-primary-hover lg:w-auto lg:rounded-lg lg:py-3.5"
+              >
+                Get Started
+                <span className="relative flex h-5 w-0 items-center overflow-hidden transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:w-5">
+                  <GoArrowRight
+                    className="
+                      absolute left-0 h-5 w-5
+                      -translate-x-3 opacity-0
+                      transition-all duration-500
+                      ease-[cubic-bezier(0.16,1,0.3,1)]
+                      group-hover:translate-x-0
+                      group-hover:opacity-100
+                    "
+                  />
+                </span>
+              </Link>
+            </Magnetic>
 
             <a
               href="https://github.com/Rahul-Vashistt/careerpilot"
+              data-cursor="link"
               target="_blank"
               rel="noopener noreferrer"
               className="group inline-flex w-full items-center justify-center rounded-md border border-border bg-surface px-5 py-3 text-center text-sm font-semibold text-foreground transition hover:border-border-hover hover:bg-surface-hover lg:w-auto lg:rounded-lg lg:py-3.5"

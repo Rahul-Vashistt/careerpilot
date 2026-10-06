@@ -65,6 +65,7 @@ export default function ThemeToggle() {
   return (
     <button
       type="button"
+      data-cursor="link"
       onClick={toggleTheme}
       aria-label={`Switch to ${
         resolvedTheme === "dark" ? "light" : "dark"
@@ -81,6 +82,7 @@ export default function ThemeToggle() {
         focus:outline-none
         focus:ring-2
         focus:ring-primary/30
+        cursor-none
       "
     >
       {resolvedTheme === "dark" ? (
