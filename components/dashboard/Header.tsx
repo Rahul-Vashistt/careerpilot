@@ -1,10 +1,10 @@
-import { FaSearch } from "react-icons/fa";
 import { IoNotificationsOutline } from "react-icons/io5";
 import { FiChevronDown } from "react-icons/fi";
+import { LuArrowUpRight } from "react-icons/lu";
 
 const user = {
-  name: "Rahul Vashist",
-  initials: "RV",
+  name: "Guest",
+  initials: "G",
   plan: "Free plan",
 };
 
@@ -15,85 +15,58 @@ export default function Header() {
         sticky top-0 z-30
         h-16
         border-b border-border/40
-        bg-surface/80
+        bg-surface/90
         backdrop-blur-xl
-        supports-backdrop-filter:bg-surface/70
       "
     >
-      <div className="flex h-full items-center justify-between gap-4 px-4 sm:px-8">
-        {/* Search */}
-        <div className="group relative w-full max-w-146.25">
-          <FaSearch
-            size={13}
-            className="
-              pointer-events-none
-              absolute left-4 top-1/2
-              -translate-y-1/2
-              text-muted-foreground
-              transition-colors duration-200
-              group-focus-within:text-text-primary
-            "
-          />
+      <div className="flex h-full items-center justify-between px-4 sm:px-8">
+        <div className="flex items-center gap-4">
+          <h1 className="text-[17px] font-semibold tracking-tight text-text-primary">
+            Dashboard
+          </h1>
 
-          <input
-            type="text"
-            placeholder="Search jobs, skills, or anything"
-            className="
-              h-10 w-full
-              rounded-xl
-              border border-border/60
-              bg-surface-muted/60
-              pl-11 pr-16
-              text-[13px] tracking-[-0.005em]
-              text-text-primary
-              placeholder:text-muted-foreground
-              outline-none
-              transition-all duration-200
-              hover:border-border-hover
-              hover:bg-surface-muted
-              focus:border-primary/40
-              focus:bg-surface
-              focus:shadow-sm
-              focus:ring-4 focus:ring-primary/10
-            "
-          />
+          <div className="h-5 w-px bg-border/70" />
 
-          <kbd
+          <button
             className="
-              pointer-events-none
-              absolute right-3 top-1/2
-              hidden -translate-y-1/2
-              items-center gap-0.5
-              rounded-md
-              border border-border/70
-              bg-surface
-              px-1.5 py-0.5
-              text-[10px] font-medium
-              text-muted
-              transition-opacity duration-200
-              group-focus-within:opacity-0
-              sm:flex
+              group flex items-center gap-2.5
+              rounded-lg
+              px-2.5 py-1.5
+              text-left
+              transition-colors duration-150
+              hover:bg-surface-hover cursor-pointer
             "
           >
-            <span className="text-[11px]">⌘</span>
-            <span>K</span>
-          </kbd>
+            <div className="relative h-1.5 w-16 overflow-hidden rounded-full bg-surface-muted">
+              <div className="h-full w-[68%] rounded-full bg-text-primary" />
+            </div>
+
+            <span className="text-[11px] font-medium text-text-secondary">
+              68% ready
+            </span>
+
+            <LuArrowUpRight
+              size={13}
+              className="
+                text-muted-foreground
+                transition-transform duration-150
+                group-hover:-translate-y-0.5
+                group-hover:translate-x-0.5
+              "
+            />
+          </button>
         </div>
 
-        {/* Right Section */}
         <div className="flex shrink-0 items-center gap-1">
-          {/* Notifications */}
           <button
             aria-label="Notifications"
             className="
-              relative
-              flex h-10 w-10
-              cursor-pointer
-              items-center justify-center
+              relative flex h-10 w-10
+              cursor-pointer items-center justify-center
               rounded-xl
               text-text-secondary
               outline-none
-              transition-all duration-200
+              transition-all duration-150
               hover:bg-surface-hover
               hover:text-text-primary
               focus-visible:ring-2 focus-visible:ring-primary/30
@@ -112,32 +85,26 @@ export default function Header() {
             />
           </button>
 
-          {/* Divider */}
           <div className="mx-2 h-6 w-px bg-border/60" />
 
-          {/* User */}
           <button
             className="
-              group
-              flex cursor-pointer
-              items-center gap-3
+              group flex cursor-pointer items-center gap-3
               rounded-xl
               py-1.5 pl-1.5 pr-2.5
               outline-none
-              transition-all duration-200
+              transition-all duration-150
               hover:bg-surface-hover
               focus-visible:ring-2 focus-visible:ring-primary/30
             "
           >
-            {/* Avatar */}
             <div
               className="
                 flex h-9 w-9
                 items-center justify-center
                 rounded-full
-                bg-linear-to-br from-primary to-primary/70
-                text-[11px]
-                font-semibold
+                bg-primary
+                text-[11px] font-semibold
                 tracking-wide
                 text-primary-foreground
                 ring-1 ring-border/60
@@ -147,7 +114,6 @@ export default function Header() {
               {user.initials}
             </div>
 
-            {/* Name */}
             <div className="hidden text-left sm:block">
               <p className="text-[13px] font-medium leading-tight text-text-primary">
                 {user.name}
@@ -161,7 +127,7 @@ export default function Header() {
               size={14}
               className="
                 hidden text-muted-foreground
-                transition-transform duration-200
+                transition-transform duration-150
                 group-hover:translate-y-px
                 sm:block
               "
