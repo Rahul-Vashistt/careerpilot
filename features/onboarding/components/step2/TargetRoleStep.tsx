@@ -6,7 +6,7 @@ import { targetRoleOptions } from "./targetRoleOptions";
 import StepHeader from "../StepHeader";
 import StepNavigation from "../StepNavigation";
 
-import type { OnboardingData } from "@/app/onboarding/page";
+import type { OnboardingData } from "@/app/(onboarding)/onboarding/page";
 
 type Props = {
   onNext: () => void;

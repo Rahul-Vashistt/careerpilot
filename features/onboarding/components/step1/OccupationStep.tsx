@@ -4,7 +4,7 @@ import { PiCheck } from "react-icons/pi";
 import { occupationOptions } from "./occuptationOptions";
 import { FiArrowRight } from "react-icons/fi";
 
-import type { OnboardingData } from "@/app/onboarding/page";
+import type { OnboardingData } from "@/app/(onboarding)/onboarding/page";
 
 import StepHeader from "../StepHeader";
 

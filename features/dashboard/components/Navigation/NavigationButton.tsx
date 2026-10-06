@@ -15,18 +15,17 @@ export function NavigationButton({
 }: PropsNavigation) {
   return (
     <button
+      type="button"
       onClick={onClick}
-      className={`group flex w-full items-center gap-3.5 rounded-xl px-4 py-3 text-sm font-medium transition-all duration-200 cursor-pointer ${
+      className={`group flex w-full cursor-pointer items-center gap-3.5 rounded-xl px-4 py-3 text-sm font-medium transition-all duration-200 ${
         active
-          ? "bg-background text-primary shadow-sm"
-          : "text-background/70 hover:bg-background/8 hover:text-background"
+          ? "bg-white text-[#111111] shadow-sm"
+          : "text-white/70 hover:bg-white/8 hover:text-white"
       }`}
     >
       <Icon
         className={`shrink-0 text-[19px] transition-colors duration-200 ${
-          active
-            ? "text-primary"
-            : "text-background/60 group-hover:text-background"
+          active ? "text-[#111111]" : "text-white/60 group-hover:text-white"
         }`}
       />
 

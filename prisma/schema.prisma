@@ -13,7 +13,6 @@ model User {
   email               String
   emailVerified       Boolean     @default(false)
   image               String?
-  onboardingCompleted Boolean     @default(false)
   createdAt           DateTime    @default(now())
   updatedAt           DateTime    @updatedAt
   sessions            Session[]
@@ -86,7 +85,6 @@ model Onboarding {
 
   mainGoal     String?
   weeklyTime   String?
-  goalTimeLine String?
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
