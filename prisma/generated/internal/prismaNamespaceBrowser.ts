@@ -80,7 +80,6 @@ export const UserScalarFieldEnum = {
   email: 'email',
   emailVerified: 'emailVerified',
   image: 'image',
-  onboardingCompleted: 'onboardingCompleted',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 } as const
@@ -145,7 +144,6 @@ export const OnboardingScalarFieldEnum = {
   relevantExperience: 'relevantExperience',
   mainGoal: 'mainGoal',
   weeklyTime: 'weeklyTime',
-  goalTimeLine: 'goalTimeLine',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 } as const

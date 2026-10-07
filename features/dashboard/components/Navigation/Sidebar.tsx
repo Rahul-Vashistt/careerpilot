@@ -2,16 +2,17 @@
 
 import Image from "next/image";
 import { FaHome } from "react-icons/fa";
-import { MdWorkOutline } from "react-icons/md";
 import {
+  LuRoute,
+  LuChartNoAxesCombined,
+  LuMap,
+  LuSearch,
   LuClipboardCheck,
   LuFileText,
   LuMessagesSquare,
   LuSettings,
 } from "react-icons/lu";
-import { GiJourney, GiRoad, GiSkills } from "react-icons/gi";
 import { NavigationButton } from "./NavigationButton";
-import { authClient } from "@/lib/auth/auth-client";
 
 type SidebarProps = {
   user: {
@@ -21,13 +22,13 @@ type SidebarProps = {
 };
 
 const careerNavigation = [
-  { title: "Career Path", icon: GiJourney, value: "careerPath" },
-  { title: "Skill Gap", icon: GiSkills, value: "skillGap" },
-  { title: "Roadmap", icon: GiRoad, value: "roadmap" },
+  { title: "Career Path", icon: LuRoute, value: "careerPath" },
+  { title: "Skill Gap", icon: LuChartNoAxesCombined, value: "skillGap" },
+  { title: "Roadmap", icon: LuMap, value: "roadmap" },
 ];
 
 const jobsNavigation = [
-  { title: "Job Search", icon: MdWorkOutline, value: "jobSearch" },
+  { title: "Job Search", icon: LuSearch, value: "jobSearch" },
   { title: "Applications", icon: LuClipboardCheck, value: "applications" },
 ];
 
