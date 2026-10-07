@@ -1,53 +1,47 @@
-"use client"
+"use client";
 
 import { IoNotificationsOutline } from "react-icons/io5";
 import { FiChevronDown } from "react-icons/fi";
 import { LuArrowUpRight } from "react-icons/lu";
-import Image from "next/image";
 
-type UserDetails = {
+type HeaderProps = {
   name: string;
-  email: string;
   image?: string | null;
 };
 
-type Props = {
-  userDetails: UserDetails;
+type SessionProps = {
+  user: HeaderProps;
 };
 
-function getInitials(name: string) {
-  return name
-    .trim()
-    .split(/\s+/)
-    .slice(0, 2)
-    .map((part) => part[0])
-    .join("")
-    .toUpperCase();
-}
-
-export default function Header({ userDetails }: Props) {
-  const initials = getInitials(userDetails.name);
+export default function Header({ user }: SessionProps) {
+  const initials =
+    user.name
+      ?.split(" ")
+      .map((word) => word[0])
+      .join("")
+      .slice(0, 2)
+      .toUpperCase() || "G";
 
   return (
     <header
       className="
         sticky top-0 z-30
         h-16
-        border-b border-border/40
-        bg-surface/90
-        backdrop-blur-xl
+        border-b border-border
+        bg-surface/95
+        backdrop-blur-md
       "
     >
       <div className="flex h-full items-center justify-between px-4 sm:px-8">
+        {/* Left */}
         <div className="flex items-center gap-4">
           <h1 className="text-[17px] font-semibold tracking-tight text-text-primary">
             Dashboard
           </h1>
 
-          <div className="h-5 w-px bg-border/70" />
+          <div className="h-5 w-px bg-border" />
 
           <button
-            type="button"
             className="
               group flex cursor-pointer items-center gap-2.5
               rounded-lg px-2.5 py-1.5 text-left
@@ -55,8 +49,8 @@ export default function Header({ userDetails }: Props) {
               hover:bg-surface-hover
             "
           >
-            <div className="relative h-1.5 w-16 overflow-hidden rounded-full bg-surface-muted">
-              <div className="h-full w-[68%] rounded-full bg-text-primary" />
+            <div className="h-1.5 w-16 overflow-hidden rounded-full bg-surface-muted">
+              <div className="h-full w-[68%] rounded-full bg-primary" />
             </div>
 
             <span className="text-[11px] font-medium text-text-secondary">
@@ -75,18 +69,18 @@ export default function Header({ userDetails }: Props) {
           </button>
         </div>
 
+        {/* Right */}
         <div className="flex shrink-0 items-center gap-1">
+          {/* Notifications */}
           <button
-            type="button"
             aria-label="Notifications"
             className="
-              relative flex h-10 w-10 cursor-pointer items-center
-              justify-center rounded-xl
+              relative flex h-10 w-10 cursor-pointer
+              items-center justify-center rounded-xl
               text-text-secondary outline-none
-              transition-all duration-150
+              transition-colors duration-150
               hover:bg-surface-hover
               hover:text-text-primary
-              focus-visible:ring-2 focus-visible:ring-primary/30
             "
           >
             <IoNotificationsOutline size={19} />
@@ -100,50 +94,42 @@ export default function Header({ userDetails }: Props) {
             />
           </button>
 
-          <div className="mx-2 h-6 w-px bg-border/60" />
+          <div className="mx-2 h-6 w-px bg-border" />
 
+          {/* User */}
           <button
-            type="button"
             className="
               group flex cursor-pointer items-center gap-3
               rounded-xl py-1.5 pl-1.5 pr-2.5
-              outline-none transition-all duration-150
+              outline-none transition-colors duration-150
               hover:bg-surface-hover
-              focus-visible:ring-2 focus-visible:ring-primary/30
             "
           >
-            {userDetails.image ? (
-              <Image
-                width={36}
-                height={36}
-                priority
-                src={userDetails.image}
-                alt={userDetails.name}
-                className="
-                  h-9 w-9 rounded-full object-cover
-                  ring-1 ring-border/60
-                  ring-offset-2 ring-offset-surface
-                "
-              />
-            ) : (
-              <div
-                className="
-                  flex h-9 w-9 items-center justify-center
-                  rounded-full
-                  bg-primary
-                  text-[11px] font-semibold
-                  tracking-wide text-primary-foreground
-                  ring-1 ring-border/60
-                  ring-offset-2 ring-offset-surface
-                "
-              >
-                {initials}
-              </div>
-            )}
+            {/* Avatar */}
+            <div
+              className="
+                flex h-9 w-9 items-center justify-center
+                overflow-hidden rounded-full
+                bg-primary text-[11px] font-semibold
+                tracking-wide text-primary-foreground
+                ring-1 ring-border
+              "
+            >
+              {user.image ? (
+                <img
+                  src={user.image}
+                  alt={user.name}
+                  className="h-full w-full object-cover"
+                />
+              ) : (
+                initials
+              )}
+            </div>
 
+            {/* User */}
             <div className="hidden text-left sm:block">
               <p className="text-[13px] font-medium leading-tight text-text-primary">
-                {userDetails.name}
+                {user.name || "Guest"}
               </p>
 
               <p className="mt-0.5 text-[11px] leading-tight text-muted-foreground">
