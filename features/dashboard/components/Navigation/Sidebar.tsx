@@ -55,7 +55,7 @@ export default function Sidebar({ user }: SidebarProps) {
   const initials = user ? getInitials(user.name) : "G";
 
   return (
-    <aside className="hidden min-h-screen w-72 shrink-0 bg-[#111111] border-r border-border lg:block">
+    <aside className="hidden sticky top-0 h-screen w-72 shrink-0 bg-[#111111] border-r border-border lg:block">
       <div className="flex min-h-screen flex-col gap-8 p-5">
         <h1 className="mt-3 mb-3 px-1 font-geist text-2xl font-bold tracking-tighter text-white">
           CareerPilot
